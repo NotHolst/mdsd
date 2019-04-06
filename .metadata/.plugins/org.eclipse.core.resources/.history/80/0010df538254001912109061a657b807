@@ -1,0 +1,9 @@
+grammar dk.sdu.mdsd.ArduinoDSL with org.eclipse.xtext.common.Terminals
+
+generate arduinoDSL "http://www.sdu.dk/mdsd/ArduinoDSL"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
