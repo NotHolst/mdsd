@@ -301,13 +301,87 @@ public interface ArduinoDSLPackage extends EPackage
   int DELTA = 8;
 
   /**
+   * The feature id for the '<em><b>Attr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DELTA__ATTR = VALUE_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Delta</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DELTA_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+  int DELTA_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link dk.sdu.mdsd.arduinoDSL.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see dk.sdu.mdsd.arduinoDSL.impl.NumberLiteralImpl
+   * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getNumberLiteral()
+   * @generated
+   */
+  int NUMBER_LITERAL = 9;
+
+  /**
+   * The feature id for the '<em><b>Float</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_LITERAL__FLOAT = VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Int</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_LITERAL__INT = VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Number Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_LITERAL_FEATURE_COUNT = VALUE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link dk.sdu.mdsd.arduinoDSL.impl.StateImpl <em>State</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see dk.sdu.mdsd.arduinoDSL.impl.StateImpl
+   * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getState()
+   * @generated
+   */
+  int STATE = 10;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__VALUE = VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>State</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link dk.sdu.mdsd.arduinoDSL.impl.RuleBodyImpl <em>Rule Body</em>}' class.
@@ -317,7 +391,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getRuleBody()
    * @generated
    */
-  int RULE_BODY = 9;
+  int RULE_BODY = 11;
 
   /**
    * The feature id for the '<em><b>Assignment</b></em>' containment reference list.
@@ -345,7 +419,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 10;
+  int ASSIGNMENT = 12;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' containment reference.
@@ -382,7 +456,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getNode()
    * @generated
    */
-  int NODE = 11;
+  int NODE = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -419,7 +493,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getComponent()
    * @generated
    */
-  int COMPONENT = 12;
+  int COMPONENT = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -456,7 +530,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getComponentBody()
    * @generated
    */
-  int COMPONENT_BODY = 13;
+  int COMPONENT_BODY = 15;
 
   /**
    * The feature id for the '<em><b>Io</b></em>' attribute.
@@ -529,7 +603,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getMap()
    * @generated
    */
-  int MAP = 14;
+  int MAP = 16;
 
   /**
    * The feature id for the '<em><b>In</b></em>' containment reference.
@@ -566,7 +640,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getRange()
    * @generated
    */
-  int RANGE = 15;
+  int RANGE = 17;
 
   /**
    * The feature id for the '<em><b>Low</b></em>' attribute.
@@ -603,7 +677,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getRate()
    * @generated
    */
-  int RATE = 16;
+  int RATE = 18;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -631,7 +705,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getSmoothing()
    * @generated
    */
-  int SMOOTHING = 17;
+  int SMOOTHING = 19;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -659,7 +733,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getExp()
    * @generated
    */
-  int EXP = 18;
+  int EXP = 20;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -705,7 +779,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getFactor()
    * @generated
    */
-  int FACTOR = 19;
+  int FACTOR = 21;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -751,7 +825,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 20;
+  int PLUS = 22;
 
   /**
    * The number of structural features of the '<em>Plus</em>' class.
@@ -770,7 +844,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getMinus()
    * @generated
    */
-  int MINUS = 21;
+  int MINUS = 23;
 
   /**
    * The number of structural features of the '<em>Minus</em>' class.
@@ -789,7 +863,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getMult()
    * @generated
    */
-  int MULT = 22;
+  int MULT = 24;
 
   /**
    * The number of structural features of the '<em>Mult</em>' class.
@@ -808,7 +882,7 @@ public interface ArduinoDSLPackage extends EPackage
    * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getDiv()
    * @generated
    */
-  int DIV = 23;
+  int DIV = 25;
 
   /**
    * The number of structural features of the '<em>Div</em>' class.
@@ -1008,6 +1082,70 @@ public interface ArduinoDSLPackage extends EPackage
    * @generated
    */
   EClass getDelta();
+
+  /**
+   * Returns the meta object for the containment reference '{@link dk.sdu.mdsd.arduinoDSL.Delta#getAttr <em>Attr</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Attr</em>'.
+   * @see dk.sdu.mdsd.arduinoDSL.Delta#getAttr()
+   * @see #getDelta()
+   * @generated
+   */
+  EReference getDelta_Attr();
+
+  /**
+   * Returns the meta object for class '{@link dk.sdu.mdsd.arduinoDSL.NumberLiteral <em>Number Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Number Literal</em>'.
+   * @see dk.sdu.mdsd.arduinoDSL.NumberLiteral
+   * @generated
+   */
+  EClass getNumberLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link dk.sdu.mdsd.arduinoDSL.NumberLiteral#getFloat <em>Float</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Float</em>'.
+   * @see dk.sdu.mdsd.arduinoDSL.NumberLiteral#getFloat()
+   * @see #getNumberLiteral()
+   * @generated
+   */
+  EAttribute getNumberLiteral_Float();
+
+  /**
+   * Returns the meta object for the attribute '{@link dk.sdu.mdsd.arduinoDSL.NumberLiteral#getInt <em>Int</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Int</em>'.
+   * @see dk.sdu.mdsd.arduinoDSL.NumberLiteral#getInt()
+   * @see #getNumberLiteral()
+   * @generated
+   */
+  EAttribute getNumberLiteral_Int();
+
+  /**
+   * Returns the meta object for class '{@link dk.sdu.mdsd.arduinoDSL.State <em>State</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>State</em>'.
+   * @see dk.sdu.mdsd.arduinoDSL.State
+   * @generated
+   */
+  EClass getState();
+
+  /**
+   * Returns the meta object for the attribute '{@link dk.sdu.mdsd.arduinoDSL.State#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see dk.sdu.mdsd.arduinoDSL.State#getValue()
+   * @see #getState()
+   * @generated
+   */
+  EAttribute getState_Value();
 
   /**
    * Returns the meta object for class '{@link dk.sdu.mdsd.arduinoDSL.RuleBody <em>Rule Body</em>}'.
@@ -1618,6 +1756,58 @@ public interface ArduinoDSLPackage extends EPackage
      * @generated
      */
     EClass DELTA = eINSTANCE.getDelta();
+
+    /**
+     * The meta object literal for the '<em><b>Attr</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DELTA__ATTR = eINSTANCE.getDelta_Attr();
+
+    /**
+     * The meta object literal for the '{@link dk.sdu.mdsd.arduinoDSL.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see dk.sdu.mdsd.arduinoDSL.impl.NumberLiteralImpl
+     * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getNumberLiteral()
+     * @generated
+     */
+    EClass NUMBER_LITERAL = eINSTANCE.getNumberLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Float</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NUMBER_LITERAL__FLOAT = eINSTANCE.getNumberLiteral_Float();
+
+    /**
+     * The meta object literal for the '<em><b>Int</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NUMBER_LITERAL__INT = eINSTANCE.getNumberLiteral_Int();
+
+    /**
+     * The meta object literal for the '{@link dk.sdu.mdsd.arduinoDSL.impl.StateImpl <em>State</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see dk.sdu.mdsd.arduinoDSL.impl.StateImpl
+     * @see dk.sdu.mdsd.arduinoDSL.impl.ArduinoDSLPackageImpl#getState()
+     * @generated
+     */
+    EClass STATE = eINSTANCE.getState();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STATE__VALUE = eINSTANCE.getState_Value();
 
     /**
      * The meta object literal for the '{@link dk.sdu.mdsd.arduinoDSL.impl.RuleBodyImpl <em>Rule Body</em>}' class.

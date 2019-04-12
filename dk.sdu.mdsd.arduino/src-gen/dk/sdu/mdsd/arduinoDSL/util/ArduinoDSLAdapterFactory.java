@@ -121,6 +121,16 @@ public class ArduinoDSLAdapterFactory extends AdapterFactoryImpl
         return createDeltaAdapter();
       }
       @Override
+      public Adapter caseNumberLiteral(NumberLiteral object)
+      {
+        return createNumberLiteralAdapter();
+      }
+      @Override
+      public Adapter caseState(State object)
+      {
+        return createStateAdapter();
+      }
+      @Override
       public Adapter caseRuleBody(RuleBody object)
       {
         return createRuleBodyAdapter();
@@ -348,6 +358,36 @@ public class ArduinoDSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDeltaAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dk.sdu.mdsd.arduinoDSL.NumberLiteral <em>Number Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dk.sdu.mdsd.arduinoDSL.NumberLiteral
+   * @generated
+   */
+  public Adapter createNumberLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dk.sdu.mdsd.arduinoDSL.State <em>State</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dk.sdu.mdsd.arduinoDSL.State
+   * @generated
+   */
+  public Adapter createStateAdapter()
   {
     return null;
   }

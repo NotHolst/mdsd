@@ -19,15 +19,17 @@ public class InternalArduinoDSLLexer extends Lexer {
     public static final int RULE_IO=8;
     public static final int T__15=15;
     public static final int T__16=16;
-    public static final int RULE_STATE=5;
     public static final int T__17=17;
     public static final int T__18=18;
+    public static final int T__33=33;
     public static final int EOF=-1;
     public static final int T__30=30;
     public static final int T__31=31;
-    public static final int RULE_ID=6;
+    public static final int T__32=32;
+    public static final int RULE_ID=5;
     public static final int RULE_WS=13;
     public static final int RULE_ANY_OTHER=14;
+    public static final int RULE_DECIMAL=6;
     public static final int T__26=26;
     public static final int RULE_TYPE=9;
     public static final int T__27=27;
@@ -263,10 +265,11 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:21:7: ( '=' )
-            // InternalArduinoDSL.g:21:9: '='
+            // InternalArduinoDSL.g:21:7: ( 'on' )
+            // InternalArduinoDSL.g:21:9: 'on'
             {
-            match('='); 
+            match("on"); 
+
 
             }
 
@@ -283,10 +286,10 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:22:7: ( 'pin' )
-            // InternalArduinoDSL.g:22:9: 'pin'
+            // InternalArduinoDSL.g:22:7: ( 'off' )
+            // InternalArduinoDSL.g:22:9: 'off'
             {
-            match("pin"); 
+            match("off"); 
 
 
             }
@@ -304,11 +307,10 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:23:7: ( 'map' )
-            // InternalArduinoDSL.g:23:9: 'map'
+            // InternalArduinoDSL.g:23:7: ( '=' )
+            // InternalArduinoDSL.g:23:9: '='
             {
-            match("map"); 
-
+            match('='); 
 
             }
 
@@ -325,10 +327,10 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:24:7: ( '=>' )
-            // InternalArduinoDSL.g:24:9: '=>'
+            // InternalArduinoDSL.g:24:7: ( 'pin' )
+            // InternalArduinoDSL.g:24:9: 'pin'
             {
-            match("=>"); 
+            match("pin"); 
 
 
             }
@@ -346,10 +348,11 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:25:7: ( ':' )
-            // InternalArduinoDSL.g:25:9: ':'
+            // InternalArduinoDSL.g:25:7: ( 'map' )
+            // InternalArduinoDSL.g:25:9: 'map'
             {
-            match(':'); 
+            match("map"); 
+
 
             }
 
@@ -366,10 +369,10 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:26:7: ( 'rate' )
-            // InternalArduinoDSL.g:26:9: 'rate'
+            // InternalArduinoDSL.g:26:7: ( '=>' )
+            // InternalArduinoDSL.g:26:9: '=>'
             {
-            match("rate"); 
+            match("=>"); 
 
 
             }
@@ -387,8 +390,49 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:27:7: ( 'smoothing' )
-            // InternalArduinoDSL.g:27:9: 'smoothing'
+            // InternalArduinoDSL.g:27:7: ( ':' )
+            // InternalArduinoDSL.g:27:9: ':'
+            {
+            match(':'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__31"
+
+    // $ANTLR start "T__32"
+    public final void mT__32() throws RecognitionException {
+        try {
+            int _type = T__32;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalArduinoDSL.g:28:7: ( 'rate' )
+            // InternalArduinoDSL.g:28:9: 'rate'
+            {
+            match("rate"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__32"
+
+    // $ANTLR start "T__33"
+    public final void mT__33() throws RecognitionException {
+        try {
+            int _type = T__33;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalArduinoDSL.g:29:7: ( 'smoothing' )
+            // InternalArduinoDSL.g:29:9: 'smoothing'
             {
             match("smoothing"); 
 
@@ -401,17 +445,17 @@ public class InternalArduinoDSLLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__31"
+    // $ANTLR end "T__33"
 
     // $ANTLR start "RULE_BOOLEAN_OPERATOR"
     public final void mRULE_BOOLEAN_OPERATOR() throws RecognitionException {
         try {
             int _type = RULE_BOOLEAN_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1267:23: ( ( '<' | '>' | '>=' | '<=' | '==' | '!=' ) )
-            // InternalArduinoDSL.g:1267:25: ( '<' | '>' | '>=' | '<=' | '==' | '!=' )
+            // InternalArduinoDSL.g:1365:23: ( ( '<' | '>' | '>=' | '<=' | '==' | '!=' ) )
+            // InternalArduinoDSL.g:1365:25: ( '<' | '>' | '>=' | '<=' | '==' | '!=' )
             {
-            // InternalArduinoDSL.g:1267:25: ( '<' | '>' | '>=' | '<=' | '==' | '!=' )
+            // InternalArduinoDSL.g:1365:25: ( '<' | '>' | '>=' | '<=' | '==' | '!=' )
             int alt1=6;
             switch ( input.LA(1) ) {
             case '<':
@@ -455,21 +499,21 @@ public class InternalArduinoDSLLexer extends Lexer {
 
             switch (alt1) {
                 case 1 :
-                    // InternalArduinoDSL.g:1267:26: '<'
+                    // InternalArduinoDSL.g:1365:26: '<'
                     {
                     match('<'); 
 
                     }
                     break;
                 case 2 :
-                    // InternalArduinoDSL.g:1267:30: '>'
+                    // InternalArduinoDSL.g:1365:30: '>'
                     {
                     match('>'); 
 
                     }
                     break;
                 case 3 :
-                    // InternalArduinoDSL.g:1267:34: '>='
+                    // InternalArduinoDSL.g:1365:34: '>='
                     {
                     match(">="); 
 
@@ -477,7 +521,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // InternalArduinoDSL.g:1267:39: '<='
+                    // InternalArduinoDSL.g:1365:39: '<='
                     {
                     match("<="); 
 
@@ -485,7 +529,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // InternalArduinoDSL.g:1267:44: '=='
+                    // InternalArduinoDSL.g:1365:44: '=='
                     {
                     match("=="); 
 
@@ -493,7 +537,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // InternalArduinoDSL.g:1267:49: '!='
+                    // InternalArduinoDSL.g:1365:49: '!='
                     {
                     match("!="); 
 
@@ -514,60 +558,17 @@ public class InternalArduinoDSLLexer extends Lexer {
     }
     // $ANTLR end "RULE_BOOLEAN_OPERATOR"
 
-    // $ANTLR start "RULE_STATE"
-    public final void mRULE_STATE() throws RecognitionException {
+    // $ANTLR start "RULE_DECIMAL"
+    public final void mRULE_DECIMAL() throws RecognitionException {
         try {
-            int _type = RULE_STATE;
+            int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1269:12: ( ( 'on' | 'off' ) )
-            // InternalArduinoDSL.g:1269:14: ( 'on' | 'off' )
+            // InternalArduinoDSL.g:1367:14: ( RULE_INT '.' RULE_INT )
+            // InternalArduinoDSL.g:1367:16: RULE_INT '.' RULE_INT
             {
-            // InternalArduinoDSL.g:1269:14: ( 'on' | 'off' )
-            int alt2=2;
-            int LA2_0 = input.LA(1);
-
-            if ( (LA2_0=='o') ) {
-                int LA2_1 = input.LA(2);
-
-                if ( (LA2_1=='n') ) {
-                    alt2=1;
-                }
-                else if ( (LA2_1=='f') ) {
-                    alt2=2;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 2, 1, input);
-
-                    throw nvae;
-                }
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 2, 0, input);
-
-                throw nvae;
-            }
-            switch (alt2) {
-                case 1 :
-                    // InternalArduinoDSL.g:1269:15: 'on'
-                    {
-                    match("on"); 
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalArduinoDSL.g:1269:20: 'off'
-                    {
-                    match("off"); 
-
-
-                    }
-                    break;
-
-            }
-
+            mRULE_INT(); 
+            match('.'); 
+            mRULE_INT(); 
 
             }
 
@@ -577,35 +578,35 @@ public class InternalArduinoDSLLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "RULE_STATE"
+    // $ANTLR end "RULE_DECIMAL"
 
     // $ANTLR start "RULE_IO"
     public final void mRULE_IO() throws RecognitionException {
         try {
             int _type = RULE_IO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1271:9: ( ( 'input' | 'output' ) )
-            // InternalArduinoDSL.g:1271:11: ( 'input' | 'output' )
+            // InternalArduinoDSL.g:1369:9: ( ( 'input' | 'output' ) )
+            // InternalArduinoDSL.g:1369:11: ( 'input' | 'output' )
             {
-            // InternalArduinoDSL.g:1271:11: ( 'input' | 'output' )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
+            // InternalArduinoDSL.g:1369:11: ( 'input' | 'output' )
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            if ( (LA3_0=='i') ) {
-                alt3=1;
+            if ( (LA2_0=='i') ) {
+                alt2=1;
             }
-            else if ( (LA3_0=='o') ) {
-                alt3=2;
+            else if ( (LA2_0=='o') ) {
+                alt2=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 3, 0, input);
+                    new NoViableAltException("", 2, 0, input);
 
                 throw nvae;
             }
-            switch (alt3) {
+            switch (alt2) {
                 case 1 :
-                    // InternalArduinoDSL.g:1271:12: 'input'
+                    // InternalArduinoDSL.g:1369:12: 'input'
                     {
                     match("input"); 
 
@@ -613,7 +614,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalArduinoDSL.g:1271:20: 'output'
+                    // InternalArduinoDSL.g:1369:20: 'output'
                     {
                     match("output"); 
 
@@ -639,28 +640,28 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = RULE_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1273:11: ( ( 'analog' | 'digital' ) )
-            // InternalArduinoDSL.g:1273:13: ( 'analog' | 'digital' )
+            // InternalArduinoDSL.g:1371:11: ( ( 'analog' | 'digital' ) )
+            // InternalArduinoDSL.g:1371:13: ( 'analog' | 'digital' )
             {
-            // InternalArduinoDSL.g:1273:13: ( 'analog' | 'digital' )
-            int alt4=2;
-            int LA4_0 = input.LA(1);
+            // InternalArduinoDSL.g:1371:13: ( 'analog' | 'digital' )
+            int alt3=2;
+            int LA3_0 = input.LA(1);
 
-            if ( (LA4_0=='a') ) {
-                alt4=1;
+            if ( (LA3_0=='a') ) {
+                alt3=1;
             }
-            else if ( (LA4_0=='d') ) {
-                alt4=2;
+            else if ( (LA3_0=='d') ) {
+                alt3=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 4, 0, input);
+                    new NoViableAltException("", 3, 0, input);
 
                 throw nvae;
             }
-            switch (alt4) {
+            switch (alt3) {
                 case 1 :
-                    // InternalArduinoDSL.g:1273:14: 'analog'
+                    // InternalArduinoDSL.g:1371:14: 'analog'
                     {
                     match("analog"); 
 
@@ -668,7 +669,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalArduinoDSL.g:1273:23: 'digital'
+                    // InternalArduinoDSL.g:1371:23: 'digital'
                     {
                     match("digital"); 
 
@@ -694,19 +695,19 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1275:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalArduinoDSL.g:1275:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalArduinoDSL.g:1373:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalArduinoDSL.g:1373:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalArduinoDSL.g:1275:11: ( '^' )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // InternalArduinoDSL.g:1373:11: ( '^' )?
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            if ( (LA5_0=='^') ) {
-                alt5=1;
+            if ( (LA4_0=='^') ) {
+                alt4=1;
             }
-            switch (alt5) {
+            switch (alt4) {
                 case 1 :
-                    // InternalArduinoDSL.g:1275:11: '^'
+                    // InternalArduinoDSL.g:1373:11: '^'
                     {
                     match('^'); 
 
@@ -724,18 +725,18 @@ public class InternalArduinoDSLLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalArduinoDSL.g:1275:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
-            loop6:
+            // InternalArduinoDSL.g:1373:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            loop5:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt5=2;
+                int LA5_0 = input.LA(1);
 
-                if ( ((LA6_0>='0' && LA6_0<='9')||(LA6_0>='A' && LA6_0<='Z')||LA6_0=='_'||(LA6_0>='a' && LA6_0<='z')) ) {
-                    alt6=1;
+                if ( ((LA5_0>='0' && LA5_0<='9')||(LA5_0>='A' && LA5_0<='Z')||LA5_0=='_'||(LA5_0>='a' && LA5_0<='z')) ) {
+                    alt5=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt5) {
             	case 1 :
             	    // InternalArduinoDSL.g:
             	    {
@@ -753,7 +754,7 @@ public class InternalArduinoDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop6;
+            	    break loop5;
                 }
             } while (true);
 
@@ -773,24 +774,24 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1277:10: ( ( '0' .. '9' )+ )
-            // InternalArduinoDSL.g:1277:12: ( '0' .. '9' )+
+            // InternalArduinoDSL.g:1375:10: ( ( '0' .. '9' )+ )
+            // InternalArduinoDSL.g:1375:12: ( '0' .. '9' )+
             {
-            // InternalArduinoDSL.g:1277:12: ( '0' .. '9' )+
-            int cnt7=0;
-            loop7:
+            // InternalArduinoDSL.g:1375:12: ( '0' .. '9' )+
+            int cnt6=0;
+            loop6:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt6=2;
+                int LA6_0 = input.LA(1);
 
-                if ( ((LA7_0>='0' && LA7_0<='9')) ) {
-                    alt7=1;
+                if ( ((LA6_0>='0' && LA6_0<='9')) ) {
+                    alt6=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt6) {
             	case 1 :
-            	    // InternalArduinoDSL.g:1277:13: '0' .. '9'
+            	    // InternalArduinoDSL.g:1375:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -798,12 +799,12 @@ public class InternalArduinoDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt7 >= 1 ) break loop7;
+            	    if ( cnt6 >= 1 ) break loop6;
                         EarlyExitException eee =
-                            new EarlyExitException(7, input);
+                            new EarlyExitException(6, input);
                         throw eee;
                 }
-                cnt7++;
+                cnt6++;
             } while (true);
 
 
@@ -822,47 +823,47 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1279:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalArduinoDSL.g:1279:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalArduinoDSL.g:1377:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalArduinoDSL.g:1377:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalArduinoDSL.g:1279:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            // InternalArduinoDSL.g:1377:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            int alt9=2;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA10_0=='\"') ) {
-                alt10=1;
+            if ( (LA9_0=='\"') ) {
+                alt9=1;
             }
-            else if ( (LA10_0=='\'') ) {
-                alt10=2;
+            else if ( (LA9_0=='\'') ) {
+                alt9=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 10, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
             }
-            switch (alt10) {
+            switch (alt9) {
                 case 1 :
-                    // InternalArduinoDSL.g:1279:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalArduinoDSL.g:1377:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalArduinoDSL.g:1279:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
-                    loop8:
+                    // InternalArduinoDSL.g:1377:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    loop7:
                     do {
-                        int alt8=3;
-                        int LA8_0 = input.LA(1);
+                        int alt7=3;
+                        int LA7_0 = input.LA(1);
 
-                        if ( (LA8_0=='\\') ) {
-                            alt8=1;
+                        if ( (LA7_0=='\\') ) {
+                            alt7=1;
                         }
-                        else if ( ((LA8_0>='\u0000' && LA8_0<='!')||(LA8_0>='#' && LA8_0<='[')||(LA8_0>=']' && LA8_0<='\uFFFF')) ) {
-                            alt8=2;
+                        else if ( ((LA7_0>='\u0000' && LA7_0<='!')||(LA7_0>='#' && LA7_0<='[')||(LA7_0>=']' && LA7_0<='\uFFFF')) ) {
+                            alt7=2;
                         }
 
 
-                        switch (alt8) {
+                        switch (alt7) {
                     	case 1 :
-                    	    // InternalArduinoDSL.g:1279:21: '\\\\' .
+                    	    // InternalArduinoDSL.g:1377:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -870,7 +871,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalArduinoDSL.g:1279:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalArduinoDSL.g:1377:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -886,7 +887,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop8;
+                    	    break loop7;
                         }
                     } while (true);
 
@@ -895,26 +896,26 @@ public class InternalArduinoDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalArduinoDSL.g:1279:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalArduinoDSL.g:1377:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalArduinoDSL.g:1279:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
-                    loop9:
+                    // InternalArduinoDSL.g:1377:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    loop8:
                     do {
-                        int alt9=3;
-                        int LA9_0 = input.LA(1);
+                        int alt8=3;
+                        int LA8_0 = input.LA(1);
 
-                        if ( (LA9_0=='\\') ) {
-                            alt9=1;
+                        if ( (LA8_0=='\\') ) {
+                            alt8=1;
                         }
-                        else if ( ((LA9_0>='\u0000' && LA9_0<='&')||(LA9_0>='(' && LA9_0<='[')||(LA9_0>=']' && LA9_0<='\uFFFF')) ) {
-                            alt9=2;
+                        else if ( ((LA8_0>='\u0000' && LA8_0<='&')||(LA8_0>='(' && LA8_0<='[')||(LA8_0>=']' && LA8_0<='\uFFFF')) ) {
+                            alt8=2;
                         }
 
 
-                        switch (alt9) {
+                        switch (alt8) {
                     	case 1 :
-                    	    // InternalArduinoDSL.g:1279:54: '\\\\' .
+                    	    // InternalArduinoDSL.g:1377:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -922,7 +923,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalArduinoDSL.g:1279:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalArduinoDSL.g:1377:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -938,7 +939,7 @@ public class InternalArduinoDSLLexer extends Lexer {
                     	    break;
 
                     	default :
-                    	    break loop9;
+                    	    break loop8;
                         }
                     } while (true);
 
@@ -965,37 +966,37 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1281:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalArduinoDSL.g:1281:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalArduinoDSL.g:1379:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalArduinoDSL.g:1379:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalArduinoDSL.g:1281:24: ( options {greedy=false; } : . )*
-            loop11:
+            // InternalArduinoDSL.g:1379:24: ( options {greedy=false; } : . )*
+            loop10:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt10=2;
+                int LA10_0 = input.LA(1);
 
-                if ( (LA11_0=='*') ) {
-                    int LA11_1 = input.LA(2);
+                if ( (LA10_0=='*') ) {
+                    int LA10_1 = input.LA(2);
 
-                    if ( (LA11_1=='/') ) {
-                        alt11=2;
+                    if ( (LA10_1=='/') ) {
+                        alt10=2;
                     }
-                    else if ( ((LA11_1>='\u0000' && LA11_1<='.')||(LA11_1>='0' && LA11_1<='\uFFFF')) ) {
-                        alt11=1;
+                    else if ( ((LA10_1>='\u0000' && LA10_1<='.')||(LA10_1>='0' && LA10_1<='\uFFFF')) ) {
+                        alt10=1;
                     }
 
 
                 }
-                else if ( ((LA11_0>='\u0000' && LA11_0<=')')||(LA11_0>='+' && LA11_0<='\uFFFF')) ) {
-                    alt11=1;
+                else if ( ((LA10_0>='\u0000' && LA10_0<=')')||(LA10_0>='+' && LA10_0<='\uFFFF')) ) {
+                    alt10=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt10) {
             	case 1 :
-            	    // InternalArduinoDSL.g:1281:52: .
+            	    // InternalArduinoDSL.g:1379:52: .
             	    {
             	    matchAny(); 
 
@@ -1003,7 +1004,7 @@ public class InternalArduinoDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop11;
+            	    break loop10;
                 }
             } while (true);
 
@@ -1025,25 +1026,25 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1283:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalArduinoDSL.g:1283:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalArduinoDSL.g:1381:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalArduinoDSL.g:1381:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalArduinoDSL.g:1283:24: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop12:
+            // InternalArduinoDSL.g:1381:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            loop11:
             do {
-                int alt12=2;
-                int LA12_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( ((LA12_0>='\u0000' && LA12_0<='\t')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\uFFFF')) ) {
-                    alt12=1;
+                if ( ((LA11_0>='\u0000' && LA11_0<='\t')||(LA11_0>='\u000B' && LA11_0<='\f')||(LA11_0>='\u000E' && LA11_0<='\uFFFF')) ) {
+                    alt11=1;
                 }
 
 
-                switch (alt12) {
+                switch (alt11) {
             	case 1 :
-            	    // InternalArduinoDSL.g:1283:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalArduinoDSL.g:1381:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1059,31 +1060,31 @@ public class InternalArduinoDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop12;
+            	    break loop11;
                 }
             } while (true);
 
-            // InternalArduinoDSL.g:1283:40: ( ( '\\r' )? '\\n' )?
-            int alt14=2;
-            int LA14_0 = input.LA(1);
+            // InternalArduinoDSL.g:1381:40: ( ( '\\r' )? '\\n' )?
+            int alt13=2;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA14_0=='\n'||LA14_0=='\r') ) {
-                alt14=1;
+            if ( (LA13_0=='\n'||LA13_0=='\r') ) {
+                alt13=1;
             }
-            switch (alt14) {
+            switch (alt13) {
                 case 1 :
-                    // InternalArduinoDSL.g:1283:41: ( '\\r' )? '\\n'
+                    // InternalArduinoDSL.g:1381:41: ( '\\r' )? '\\n'
                     {
-                    // InternalArduinoDSL.g:1283:41: ( '\\r' )?
-                    int alt13=2;
-                    int LA13_0 = input.LA(1);
+                    // InternalArduinoDSL.g:1381:41: ( '\\r' )?
+                    int alt12=2;
+                    int LA12_0 = input.LA(1);
 
-                    if ( (LA13_0=='\r') ) {
-                        alt13=1;
+                    if ( (LA12_0=='\r') ) {
+                        alt12=1;
                     }
-                    switch (alt13) {
+                    switch (alt12) {
                         case 1 :
-                            // InternalArduinoDSL.g:1283:41: '\\r'
+                            // InternalArduinoDSL.g:1381:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1115,22 +1116,22 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1285:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalArduinoDSL.g:1285:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalArduinoDSL.g:1383:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalArduinoDSL.g:1383:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalArduinoDSL.g:1285:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt15=0;
-            loop15:
+            // InternalArduinoDSL.g:1383:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            int cnt14=0;
+            loop14:
             do {
-                int alt15=2;
-                int LA15_0 = input.LA(1);
+                int alt14=2;
+                int LA14_0 = input.LA(1);
 
-                if ( ((LA15_0>='\t' && LA15_0<='\n')||LA15_0=='\r'||LA15_0==' ') ) {
-                    alt15=1;
+                if ( ((LA14_0>='\t' && LA14_0<='\n')||LA14_0=='\r'||LA14_0==' ') ) {
+                    alt14=1;
                 }
 
 
-                switch (alt15) {
+                switch (alt14) {
             	case 1 :
             	    // InternalArduinoDSL.g:
             	    {
@@ -1148,12 +1149,12 @@ public class InternalArduinoDSLLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt15 >= 1 ) break loop15;
+            	    if ( cnt14 >= 1 ) break loop14;
                         EarlyExitException eee =
-                            new EarlyExitException(15, input);
+                            new EarlyExitException(14, input);
                         throw eee;
                 }
-                cnt15++;
+                cnt14++;
             } while (true);
 
 
@@ -1172,8 +1173,8 @@ public class InternalArduinoDSLLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalArduinoDSL.g:1287:16: ( . )
-            // InternalArduinoDSL.g:1287:18: .
+            // InternalArduinoDSL.g:1385:16: ( . )
+            // InternalArduinoDSL.g:1385:18: .
             {
             matchAny(); 
 
@@ -1188,10 +1189,10 @@ public class InternalArduinoDSLLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalArduinoDSL.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | RULE_BOOLEAN_OPERATOR | RULE_STATE | RULE_IO | RULE_TYPE | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt16=28;
-        alt16 = dfa16.predict(input);
-        switch (alt16) {
+        // InternalArduinoDSL.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | RULE_BOOLEAN_OPERATOR | RULE_DECIMAL | RULE_IO | RULE_TYPE | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt15=30;
+        alt15 = dfa15.predict(input);
+        switch (alt15) {
             case 1 :
                 // InternalArduinoDSL.g:1:10: T__15
                 {
@@ -1312,77 +1313,91 @@ public class InternalArduinoDSLLexer extends Lexer {
                 }
                 break;
             case 18 :
-                // InternalArduinoDSL.g:1:112: RULE_BOOLEAN_OPERATOR
+                // InternalArduinoDSL.g:1:112: T__32
+                {
+                mT__32(); 
+
+                }
+                break;
+            case 19 :
+                // InternalArduinoDSL.g:1:118: T__33
+                {
+                mT__33(); 
+
+                }
+                break;
+            case 20 :
+                // InternalArduinoDSL.g:1:124: RULE_BOOLEAN_OPERATOR
                 {
                 mRULE_BOOLEAN_OPERATOR(); 
 
                 }
                 break;
-            case 19 :
-                // InternalArduinoDSL.g:1:134: RULE_STATE
+            case 21 :
+                // InternalArduinoDSL.g:1:146: RULE_DECIMAL
                 {
-                mRULE_STATE(); 
+                mRULE_DECIMAL(); 
 
                 }
                 break;
-            case 20 :
-                // InternalArduinoDSL.g:1:145: RULE_IO
+            case 22 :
+                // InternalArduinoDSL.g:1:159: RULE_IO
                 {
                 mRULE_IO(); 
 
                 }
                 break;
-            case 21 :
-                // InternalArduinoDSL.g:1:153: RULE_TYPE
+            case 23 :
+                // InternalArduinoDSL.g:1:167: RULE_TYPE
                 {
                 mRULE_TYPE(); 
 
                 }
                 break;
-            case 22 :
-                // InternalArduinoDSL.g:1:163: RULE_ID
+            case 24 :
+                // InternalArduinoDSL.g:1:177: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 23 :
-                // InternalArduinoDSL.g:1:171: RULE_INT
+            case 25 :
+                // InternalArduinoDSL.g:1:185: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 24 :
-                // InternalArduinoDSL.g:1:180: RULE_STRING
+            case 26 :
+                // InternalArduinoDSL.g:1:194: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 25 :
-                // InternalArduinoDSL.g:1:192: RULE_ML_COMMENT
+            case 27 :
+                // InternalArduinoDSL.g:1:206: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 26 :
-                // InternalArduinoDSL.g:1:208: RULE_SL_COMMENT
+            case 28 :
+                // InternalArduinoDSL.g:1:222: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 27 :
-                // InternalArduinoDSL.g:1:224: RULE_WS
+            case 29 :
+                // InternalArduinoDSL.g:1:238: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 28 :
-                // InternalArduinoDSL.g:1:232: RULE_ANY_OTHER
+            case 30 :
+                // InternalArduinoDSL.g:1:246: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1394,21 +1409,21 @@ public class InternalArduinoDSLLexer extends Lexer {
     }
 
 
-    protected DFA16 dfa16 = new DFA16(this);
-    static final String DFA16_eotS =
-        "\1\uffff\2\36\5\uffff\1\51\1\36\1\uffff\1\57\2\36\1\uffff\2\36\2\uffff\1\34\2\36\1\34\2\uffff\2\34\2\uffff\1\36\1\uffff\1\74\2\36\10\uffff\2\36\4\uffff\2\36\1\uffff\4\36\3\uffff\2\36\1\uffff\1\74\3\36\1\114\1\115\4\36\1\122\1\123\3\36\2\uffff\1\127\3\36\2\uffff\1\36\1\134\1\36\1\uffff\1\36\1\137\1\36\1\137\1\uffff\2\36\1\uffff\2\143\1\36\1\uffff\1\36\1\146\1\uffff";
-    static final String DFA16_eofS =
-        "\147\uffff";
-    static final String DFA16_minS =
-        "\1\0\1\150\1\146\5\uffff\1\52\1\145\1\uffff\1\75\1\151\1\141\1\uffff\1\141\1\155\2\uffff\1\75\2\156\1\101\2\uffff\2\0\2\uffff\1\145\1\uffff\1\60\1\146\1\164\10\uffff\1\154\1\147\4\uffff\1\156\1\160\1\uffff\1\164\1\157\1\160\1\141\3\uffff\1\156\1\145\1\uffff\1\60\1\160\1\164\1\151\2\60\1\145\1\157\1\165\1\154\2\60\1\165\1\141\1\164\2\uffff\1\60\2\164\1\157\2\uffff\1\164\1\60\1\141\1\uffff\1\150\1\60\1\147\1\60\1\uffff\1\154\1\151\1\uffff\2\60\1\156\1\uffff\1\147\1\60\1\uffff";
-    static final String DFA16_maxS =
-        "\1\uffff\1\150\1\165\5\uffff\1\57\1\151\1\uffff\1\76\1\151\1\141\1\uffff\1\141\1\155\2\uffff\1\75\2\156\1\172\2\uffff\2\uffff\2\uffff\1\145\1\uffff\1\172\1\146\1\164\10\uffff\1\154\1\147\4\uffff\1\156\1\160\1\uffff\1\164\1\157\1\160\1\141\3\uffff\1\156\1\145\1\uffff\1\172\1\160\1\164\1\151\2\172\1\145\1\157\1\165\1\154\2\172\1\165\1\141\1\164\2\uffff\1\172\2\164\1\157\2\uffff\1\164\1\172\1\141\1\uffff\1\150\1\172\1\147\1\172\1\uffff\1\154\1\151\1\uffff\2\172\1\156\1\uffff\1\147\1\172\1\uffff";
-    static final String DFA16_acceptS =
-        "\3\uffff\1\3\1\4\1\5\1\6\1\7\2\uffff\1\12\3\uffff\1\17\2\uffff\2\22\4\uffff\1\26\1\27\2\uffff\1\33\1\34\1\uffff\1\26\3\uffff\1\3\1\4\1\5\1\6\1\7\1\31\1\32\1\10\2\uffff\1\12\1\16\1\22\1\13\2\uffff\1\17\4\uffff\1\27\1\30\1\33\2\uffff\1\23\17\uffff\1\14\1\15\4\uffff\1\1\1\2\3\uffff\1\20\4\uffff\1\11\2\uffff\1\24\3\uffff\1\25\2\uffff\1\21";
-    static final String DFA16_specialS =
-        "\1\2\30\uffff\1\0\1\1\114\uffff}>";
-    static final String[] DFA16_transitionS = {
-            "\11\34\2\33\2\34\1\33\22\34\1\33\1\23\1\31\4\34\1\32\2\34\1\7\1\5\1\34\1\6\1\12\1\10\12\30\1\16\1\34\1\21\1\13\1\22\2\34\32\27\3\34\1\26\1\27\1\34\1\25\2\27\1\11\4\27\1\24\3\27\1\15\1\27\1\2\1\14\1\27\1\17\1\20\3\27\1\1\3\27\1\3\1\34\1\4\uff82\34",
+    protected DFA15 dfa15 = new DFA15(this);
+    static final String DFA15_eotS =
+        "\1\uffff\2\36\5\uffff\1\51\1\36\1\uffff\1\57\2\36\1\uffff\2\36\2\uffff\1\34\1\65\2\36\1\34\1\uffff\2\34\2\uffff\1\36\1\uffff\1\76\2\36\10\uffff\2\36\4\uffff\2\36\1\uffff\2\36\2\uffff\1\65\2\36\2\uffff\2\36\1\uffff\1\113\3\36\1\117\1\120\4\36\1\125\1\126\1\uffff\3\36\2\uffff\1\132\3\36\2\uffff\1\36\1\137\1\36\1\uffff\1\36\1\142\1\36\1\142\1\uffff\2\36\1\uffff\2\146\1\36\1\uffff\1\36\1\151\1\uffff";
+    static final String DFA15_eofS =
+        "\152\uffff";
+    static final String DFA15_minS =
+        "\1\0\1\150\1\146\5\uffff\1\52\1\145\1\uffff\1\75\1\151\1\141\1\uffff\1\141\1\155\2\uffff\1\75\1\56\2\156\1\101\1\uffff\2\0\2\uffff\1\145\1\uffff\1\60\1\146\1\164\10\uffff\1\154\1\147\4\uffff\1\156\1\160\1\uffff\1\164\1\157\2\uffff\1\56\1\160\1\141\2\uffff\1\156\1\145\1\uffff\1\60\1\160\1\164\1\151\2\60\1\145\1\157\1\165\1\154\2\60\1\uffff\1\165\1\141\1\164\2\uffff\1\60\2\164\1\157\2\uffff\1\164\1\60\1\141\1\uffff\1\150\1\60\1\147\1\60\1\uffff\1\154\1\151\1\uffff\2\60\1\156\1\uffff\1\147\1\60\1\uffff";
+    static final String DFA15_maxS =
+        "\1\uffff\1\150\1\165\5\uffff\1\57\1\151\1\uffff\1\76\1\151\1\141\1\uffff\1\141\1\155\2\uffff\1\75\1\71\2\156\1\172\1\uffff\2\uffff\2\uffff\1\145\1\uffff\1\172\1\146\1\164\10\uffff\1\154\1\147\4\uffff\1\156\1\160\1\uffff\1\164\1\157\2\uffff\1\71\1\160\1\141\2\uffff\1\156\1\145\1\uffff\1\172\1\160\1\164\1\151\2\172\1\145\1\157\1\165\1\154\2\172\1\uffff\1\165\1\141\1\164\2\uffff\1\172\2\164\1\157\2\uffff\1\164\1\172\1\141\1\uffff\1\150\1\172\1\147\1\172\1\uffff\1\154\1\151\1\uffff\2\172\1\156\1\uffff\1\147\1\172\1\uffff";
+    static final String DFA15_acceptS =
+        "\3\uffff\1\3\1\4\1\5\1\6\1\7\2\uffff\1\12\3\uffff\1\21\2\uffff\2\24\5\uffff\1\30\2\uffff\1\35\1\36\1\uffff\1\30\3\uffff\1\3\1\4\1\5\1\6\1\7\1\33\1\34\1\10\2\uffff\1\12\1\20\1\24\1\15\2\uffff\1\21\2\uffff\1\31\1\25\3\uffff\1\32\1\35\2\uffff\1\13\14\uffff\1\14\3\uffff\1\16\1\17\4\uffff\1\1\1\2\3\uffff\1\22\4\uffff\1\11\2\uffff\1\26\3\uffff\1\27\2\uffff\1\23";
+    static final String DFA15_specialS =
+        "\1\0\30\uffff\1\2\1\1\117\uffff}>";
+    static final String[] DFA15_transitionS = {
+            "\11\34\2\33\2\34\1\33\22\34\1\33\1\23\1\31\4\34\1\32\2\34\1\7\1\5\1\34\1\6\1\12\1\10\12\24\1\16\1\34\1\21\1\13\1\22\2\34\32\30\3\34\1\27\1\30\1\34\1\26\2\30\1\11\4\30\1\25\3\30\1\15\1\30\1\2\1\14\1\30\1\17\1\20\3\30\1\1\3\30\1\3\1\34\1\4\uff82\34",
             "\1\35",
             "\1\40\7\uffff\1\37\6\uffff\1\41",
             "",
@@ -1428,30 +1443,24 @@ public class InternalArduinoDSLLexer extends Lexer {
             "",
             "",
             "\1\56",
-            "\1\65",
-            "\1\66",
+            "\1\66\1\uffff\12\67",
+            "\1\70",
+            "\1\71",
             "\32\36\4\uffff\1\36\1\uffff\32\36",
             "",
-            "",
-            "\0\70",
-            "\0\70",
-            "",
-            "",
-            "\1\72",
-            "",
-            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\2\36\1\73\27\36",
-            "\1\75",
-            "\1\76",
+            "\0\72",
+            "\0\72",
             "",
             "",
+            "\1\74",
             "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\2\36\1\75\27\36",
             "\1\77",
             "\1\100",
+            "",
+            "",
+            "",
+            "",
             "",
             "",
             "",
@@ -1459,181 +1468,190 @@ public class InternalArduinoDSLLexer extends Lexer {
             "\1\101",
             "\1\102",
             "",
+            "",
+            "",
+            "",
             "\1\103",
             "\1\104",
+            "",
             "\1\105",
             "\1\106",
             "",
             "",
-            "",
+            "\1\66\1\uffff\12\67",
             "\1\107",
             "\1\110",
             "",
-            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "",
             "\1\111",
             "\1\112",
-            "\1\113",
+            "",
             "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
-            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\114",
+            "\1\115",
             "\1\116",
-            "\1\117",
-            "\1\120",
+            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\121",
-            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
-            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\122",
+            "\1\123",
             "\1\124",
-            "\1\125",
-            "\1\126",
-            "",
-            "",
             "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "",
+            "\1\127",
             "\1\130",
             "\1\131",
-            "\1\132",
             "",
             "",
-            "\1\133",
             "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\133",
+            "\1\134",
             "\1\135",
+            "",
             "",
             "\1\136",
             "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\140",
-            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "",
             "\1\141",
-            "\1\142",
+            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\143",
+            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "",
-            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
-            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             "\1\144",
-            "",
             "\1\145",
+            "",
+            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
+            "\1\147",
+            "",
+            "\1\150",
             "\12\36\7\uffff\32\36\4\uffff\1\36\1\uffff\32\36",
             ""
     };
 
-    static final short[] DFA16_eot = DFA.unpackEncodedString(DFA16_eotS);
-    static final short[] DFA16_eof = DFA.unpackEncodedString(DFA16_eofS);
-    static final char[] DFA16_min = DFA.unpackEncodedStringToUnsignedChars(DFA16_minS);
-    static final char[] DFA16_max = DFA.unpackEncodedStringToUnsignedChars(DFA16_maxS);
-    static final short[] DFA16_accept = DFA.unpackEncodedString(DFA16_acceptS);
-    static final short[] DFA16_special = DFA.unpackEncodedString(DFA16_specialS);
-    static final short[][] DFA16_transition;
+    static final short[] DFA15_eot = DFA.unpackEncodedString(DFA15_eotS);
+    static final short[] DFA15_eof = DFA.unpackEncodedString(DFA15_eofS);
+    static final char[] DFA15_min = DFA.unpackEncodedStringToUnsignedChars(DFA15_minS);
+    static final char[] DFA15_max = DFA.unpackEncodedStringToUnsignedChars(DFA15_maxS);
+    static final short[] DFA15_accept = DFA.unpackEncodedString(DFA15_acceptS);
+    static final short[] DFA15_special = DFA.unpackEncodedString(DFA15_specialS);
+    static final short[][] DFA15_transition;
 
     static {
-        int numStates = DFA16_transitionS.length;
-        DFA16_transition = new short[numStates][];
+        int numStates = DFA15_transitionS.length;
+        DFA15_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA16_transition[i] = DFA.unpackEncodedString(DFA16_transitionS[i]);
+            DFA15_transition[i] = DFA.unpackEncodedString(DFA15_transitionS[i]);
         }
     }
 
-    class DFA16 extends DFA {
+    class DFA15 extends DFA {
 
-        public DFA16(BaseRecognizer recognizer) {
+        public DFA15(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 16;
-            this.eot = DFA16_eot;
-            this.eof = DFA16_eof;
-            this.min = DFA16_min;
-            this.max = DFA16_max;
-            this.accept = DFA16_accept;
-            this.special = DFA16_special;
-            this.transition = DFA16_transition;
+            this.decisionNumber = 15;
+            this.eot = DFA15_eot;
+            this.eof = DFA15_eof;
+            this.min = DFA15_min;
+            this.max = DFA15_max;
+            this.accept = DFA15_accept;
+            this.special = DFA15_special;
+            this.transition = DFA15_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | RULE_BOOLEAN_OPERATOR | RULE_STATE | RULE_IO | RULE_TYPE | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | RULE_BOOLEAN_OPERATOR | RULE_DECIMAL | RULE_IO | RULE_TYPE | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA16_25 = input.LA(1);
+                        int LA15_0 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA16_25>='\u0000' && LA16_25<='\uFFFF')) ) {s = 56;}
+                        if ( (LA15_0=='w') ) {s = 1;}
 
-                        else s = 28;
+                        else if ( (LA15_0=='o') ) {s = 2;}
+
+                        else if ( (LA15_0=='{') ) {s = 3;}
+
+                        else if ( (LA15_0=='}') ) {s = 4;}
+
+                        else if ( (LA15_0=='+') ) {s = 5;}
+
+                        else if ( (LA15_0=='-') ) {s = 6;}
+
+                        else if ( (LA15_0=='*') ) {s = 7;}
+
+                        else if ( (LA15_0=='/') ) {s = 8;}
+
+                        else if ( (LA15_0=='d') ) {s = 9;}
+
+                        else if ( (LA15_0=='.') ) {s = 10;}
+
+                        else if ( (LA15_0=='=') ) {s = 11;}
+
+                        else if ( (LA15_0=='p') ) {s = 12;}
+
+                        else if ( (LA15_0=='m') ) {s = 13;}
+
+                        else if ( (LA15_0==':') ) {s = 14;}
+
+                        else if ( (LA15_0=='r') ) {s = 15;}
+
+                        else if ( (LA15_0=='s') ) {s = 16;}
+
+                        else if ( (LA15_0=='<') ) {s = 17;}
+
+                        else if ( (LA15_0=='>') ) {s = 18;}
+
+                        else if ( (LA15_0=='!') ) {s = 19;}
+
+                        else if ( ((LA15_0>='0' && LA15_0<='9')) ) {s = 20;}
+
+                        else if ( (LA15_0=='i') ) {s = 21;}
+
+                        else if ( (LA15_0=='a') ) {s = 22;}
+
+                        else if ( (LA15_0=='^') ) {s = 23;}
+
+                        else if ( ((LA15_0>='A' && LA15_0<='Z')||LA15_0=='_'||(LA15_0>='b' && LA15_0<='c')||(LA15_0>='e' && LA15_0<='h')||(LA15_0>='j' && LA15_0<='l')||LA15_0=='n'||LA15_0=='q'||(LA15_0>='t' && LA15_0<='v')||(LA15_0>='x' && LA15_0<='z')) ) {s = 24;}
+
+                        else if ( (LA15_0=='\"') ) {s = 25;}
+
+                        else if ( (LA15_0=='\'') ) {s = 26;}
+
+                        else if ( ((LA15_0>='\t' && LA15_0<='\n')||LA15_0=='\r'||LA15_0==' ') ) {s = 27;}
+
+                        else if ( ((LA15_0>='\u0000' && LA15_0<='\b')||(LA15_0>='\u000B' && LA15_0<='\f')||(LA15_0>='\u000E' && LA15_0<='\u001F')||(LA15_0>='#' && LA15_0<='&')||(LA15_0>='(' && LA15_0<=')')||LA15_0==','||LA15_0==';'||(LA15_0>='?' && LA15_0<='@')||(LA15_0>='[' && LA15_0<=']')||LA15_0=='`'||LA15_0=='|'||(LA15_0>='~' && LA15_0<='\uFFFF')) ) {s = 28;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA16_26 = input.LA(1);
+                        int LA15_26 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA16_26>='\u0000' && LA16_26<='\uFFFF')) ) {s = 56;}
+                        if ( ((LA15_26>='\u0000' && LA15_26<='\uFFFF')) ) {s = 58;}
 
                         else s = 28;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA16_0 = input.LA(1);
+                        int LA15_25 = input.LA(1);
 
                         s = -1;
-                        if ( (LA16_0=='w') ) {s = 1;}
+                        if ( ((LA15_25>='\u0000' && LA15_25<='\uFFFF')) ) {s = 58;}
 
-                        else if ( (LA16_0=='o') ) {s = 2;}
-
-                        else if ( (LA16_0=='{') ) {s = 3;}
-
-                        else if ( (LA16_0=='}') ) {s = 4;}
-
-                        else if ( (LA16_0=='+') ) {s = 5;}
-
-                        else if ( (LA16_0=='-') ) {s = 6;}
-
-                        else if ( (LA16_0=='*') ) {s = 7;}
-
-                        else if ( (LA16_0=='/') ) {s = 8;}
-
-                        else if ( (LA16_0=='d') ) {s = 9;}
-
-                        else if ( (LA16_0=='.') ) {s = 10;}
-
-                        else if ( (LA16_0=='=') ) {s = 11;}
-
-                        else if ( (LA16_0=='p') ) {s = 12;}
-
-                        else if ( (LA16_0=='m') ) {s = 13;}
-
-                        else if ( (LA16_0==':') ) {s = 14;}
-
-                        else if ( (LA16_0=='r') ) {s = 15;}
-
-                        else if ( (LA16_0=='s') ) {s = 16;}
-
-                        else if ( (LA16_0=='<') ) {s = 17;}
-
-                        else if ( (LA16_0=='>') ) {s = 18;}
-
-                        else if ( (LA16_0=='!') ) {s = 19;}
-
-                        else if ( (LA16_0=='i') ) {s = 20;}
-
-                        else if ( (LA16_0=='a') ) {s = 21;}
-
-                        else if ( (LA16_0=='^') ) {s = 22;}
-
-                        else if ( ((LA16_0>='A' && LA16_0<='Z')||LA16_0=='_'||(LA16_0>='b' && LA16_0<='c')||(LA16_0>='e' && LA16_0<='h')||(LA16_0>='j' && LA16_0<='l')||LA16_0=='n'||LA16_0=='q'||(LA16_0>='t' && LA16_0<='v')||(LA16_0>='x' && LA16_0<='z')) ) {s = 23;}
-
-                        else if ( ((LA16_0>='0' && LA16_0<='9')) ) {s = 24;}
-
-                        else if ( (LA16_0=='\"') ) {s = 25;}
-
-                        else if ( (LA16_0=='\'') ) {s = 26;}
-
-                        else if ( ((LA16_0>='\t' && LA16_0<='\n')||LA16_0=='\r'||LA16_0==' ') ) {s = 27;}
-
-                        else if ( ((LA16_0>='\u0000' && LA16_0<='\b')||(LA16_0>='\u000B' && LA16_0<='\f')||(LA16_0>='\u000E' && LA16_0<='\u001F')||(LA16_0>='#' && LA16_0<='&')||(LA16_0>='(' && LA16_0<=')')||LA16_0==','||LA16_0==';'||(LA16_0>='?' && LA16_0<='@')||(LA16_0>='[' && LA16_0<=']')||LA16_0=='`'||LA16_0=='|'||(LA16_0>='~' && LA16_0<='\uFFFF')) ) {s = 28;}
+                        else s = 28;
 
                         if ( s>=0 ) return s;
                         break;
             }
             NoViableAltException nvae =
-                new NoViableAltException(getDescription(), 16, _s, input);
+                new NoViableAltException(getDescription(), 15, _s, input);
             error(nvae);
             throw nvae;
         }

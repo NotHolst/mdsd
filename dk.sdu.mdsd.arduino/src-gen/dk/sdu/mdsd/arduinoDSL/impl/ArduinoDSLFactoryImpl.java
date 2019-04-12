@@ -74,6 +74,8 @@ public class ArduinoDSLFactoryImpl extends EFactoryImpl implements ArduinoDSLFac
       case ArduinoDSLPackage.VALUE: return createValue();
       case ArduinoDSLPackage.ATTRIBUTE: return createAttribute();
       case ArduinoDSLPackage.DELTA: return createDelta();
+      case ArduinoDSLPackage.NUMBER_LITERAL: return createNumberLiteral();
+      case ArduinoDSLPackage.STATE: return createState();
       case ArduinoDSLPackage.RULE_BODY: return createRuleBody();
       case ArduinoDSLPackage.ASSIGNMENT: return createAssignment();
       case ArduinoDSLPackage.NODE: return createNode();
@@ -200,6 +202,30 @@ public class ArduinoDSLFactoryImpl extends EFactoryImpl implements ArduinoDSLFac
   {
     DeltaImpl delta = new DeltaImpl();
     return delta;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NumberLiteral createNumberLiteral()
+  {
+    NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
+    return numberLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public State createState()
+  {
+    StateImpl state = new StateImpl();
+    return state;
   }
 
   /**

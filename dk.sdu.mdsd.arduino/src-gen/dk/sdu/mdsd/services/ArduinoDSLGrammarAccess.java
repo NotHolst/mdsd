@@ -284,30 +284,20 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 	public class ValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.Value");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cValueAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final RuleCall cNUMBERParserRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final RuleCall cNumberLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cAttributeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cDeltaParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
-		private final Action cValueAction_3_0 = (Action)cGroup_3.eContents().get(0);
-		private final RuleCall cSTATETerminalRuleCall_3_1 = (RuleCall)cGroup_3.eContents().get(1);
+		private final RuleCall cStateParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//Value:
-		//	{Value} NUMBER | Attribute | Delta | {Value} STATE;
+		//	NumberLiteral | Attribute | Delta | State;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Value} NUMBER | Attribute | Delta | {Value} STATE
+		//NumberLiteral | Attribute | Delta | State
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//{Value} NUMBER
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//{Value}
-		public Action getValueAction_0_0() { return cValueAction_0_0; }
-		
-		//NUMBER
-		public RuleCall getNUMBERParserRuleCall_0_1() { return cNUMBERParserRuleCall_0_1; }
+		//NumberLiteral
+		public RuleCall getNumberLiteralParserRuleCall_0() { return cNumberLiteralParserRuleCall_0; }
 		
 		//Attribute
 		public RuleCall getAttributeParserRuleCall_1() { return cAttributeParserRuleCall_1; }
@@ -315,14 +305,8 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 		//Delta
 		public RuleCall getDeltaParserRuleCall_2() { return cDeltaParserRuleCall_2; }
 		
-		//{Value} STATE
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//{Value}
-		public Action getValueAction_3_0() { return cValueAction_3_0; }
-		
-		//STATE
-		public RuleCall getSTATETerminalRuleCall_3_1() { return cSTATETerminalRuleCall_3_1; }
+		//State
+		public RuleCall getStateParserRuleCall_3() { return cStateParserRuleCall_3; }
 	}
 	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.Attribute");
@@ -362,21 +346,52 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 	public class DeltaElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.Delta");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cAttributeParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Assignment cAttrAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cAttrAttributeParserRuleCall_0_0 = (RuleCall)cAttrAssignment_0.eContents().get(0);
 		private final Keyword cDeltaKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Delta:
-		//	Attribute 'delta';
+		//	attr=Attribute 'delta';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Attribute 'delta'
+		//attr=Attribute 'delta'
 		public Group getGroup() { return cGroup; }
 		
+		//attr=Attribute
+		public Assignment getAttrAssignment_0() { return cAttrAssignment_0; }
+		
 		//Attribute
-		public RuleCall getAttributeParserRuleCall_0() { return cAttributeParserRuleCall_0; }
+		public RuleCall getAttrAttributeParserRuleCall_0_0() { return cAttrAttributeParserRuleCall_0_0; }
 		
 		//'delta'
 		public Keyword getDeltaKeyword_1() { return cDeltaKeyword_1; }
+	}
+	public class NumberLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.NumberLiteral");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Assignment cFloatAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
+		private final RuleCall cFloatDECIMALTerminalRuleCall_0_0 = (RuleCall)cFloatAssignment_0.eContents().get(0);
+		private final Assignment cIntAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cIntINTTerminalRuleCall_1_0 = (RuleCall)cIntAssignment_1.eContents().get(0);
+		
+		//NumberLiteral:
+		//	float=DECIMAL | int=INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//float=DECIMAL | int=INT
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//float=DECIMAL
+		public Assignment getFloatAssignment_0() { return cFloatAssignment_0; }
+		
+		//DECIMAL
+		public RuleCall getFloatDECIMALTerminalRuleCall_0_0() { return cFloatDECIMALTerminalRuleCall_0_0; }
+		
+		//int=INT
+		public Assignment getIntAssignment_1() { return cIntAssignment_1; }
+		
+		//INT
+		public RuleCall getIntINTTerminalRuleCall_1_0() { return cIntINTTerminalRuleCall_1_0; }
 	}
 	public class NUMBERElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.NUMBER");
@@ -404,6 +419,29 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//INT
 		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
+	}
+	public class StateElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.State");
+		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
+		private final Alternatives cValueAlternatives_0 = (Alternatives)cValueAssignment.eContents().get(0);
+		private final Keyword cValueOnKeyword_0_0 = (Keyword)cValueAlternatives_0.eContents().get(0);
+		private final Keyword cValueOffKeyword_0_1 = (Keyword)cValueAlternatives_0.eContents().get(1);
+		
+		//State:
+		//	value=('on' | 'off');
+		@Override public ParserRule getRule() { return rule; }
+		
+		//value=('on' | 'off')
+		public Assignment getValueAssignment() { return cValueAssignment; }
+		
+		//('on' | 'off')
+		public Alternatives getValueAlternatives_0() { return cValueAlternatives_0; }
+		
+		//'on'
+		public Keyword getValueOnKeyword_0_0() { return cValueOnKeyword_0_0; }
+		
+		//'off'
+		public Keyword getValueOffKeyword_0_1() { return cValueOffKeyword_0_1; }
 	}
 	public class RuleBodyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.RuleBody");
@@ -701,8 +739,10 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 	private final ValueElements pValue;
 	private final AttributeElements pAttribute;
 	private final DeltaElements pDelta;
+	private final NumberLiteralElements pNumberLiteral;
+	private final TerminalRule tDECIMAL;
 	private final NUMBERElements pNUMBER;
-	private final TerminalRule tSTATE;
+	private final StateElements pState;
 	private final RuleBodyElements pRuleBody;
 	private final AssignmentElements pAssignment;
 	private final NodeElements pNode;
@@ -735,8 +775,10 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pValue = new ValueElements();
 		this.pAttribute = new AttributeElements();
 		this.pDelta = new DeltaElements();
+		this.pNumberLiteral = new NumberLiteralElements();
+		this.tDECIMAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.DECIMAL");
 		this.pNUMBER = new NUMBERElements();
-		this.tSTATE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.mdsd.ArduinoDSL.STATE");
+		this.pState = new StateElements();
 		this.pRuleBody = new RuleBodyElements();
 		this.pAssignment = new AssignmentElements();
 		this.pNode = new NodeElements();
@@ -854,7 +896,7 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Value:
-	//	{Value} NUMBER | Attribute | Delta | {Value} STATE;
+	//	NumberLiteral | Attribute | Delta | State;
 	public ValueElements getValueAccess() {
 		return pValue;
 	}
@@ -874,13 +916,29 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Delta:
-	//	Attribute 'delta';
+	//	attr=Attribute 'delta';
 	public DeltaElements getDeltaAccess() {
 		return pDelta;
 	}
 	
 	public ParserRule getDeltaRule() {
 		return getDeltaAccess().getRule();
+	}
+	
+	//NumberLiteral:
+	//	float=DECIMAL | int=INT;
+	public NumberLiteralElements getNumberLiteralAccess() {
+		return pNumberLiteral;
+	}
+	
+	public ParserRule getNumberLiteralRule() {
+		return getNumberLiteralAccess().getRule();
+	}
+	
+	//terminal DECIMAL:
+	//	INT '.' INT;
+	public TerminalRule getDECIMALRule() {
+		return tDECIMAL;
 	}
 	
 	//NUMBER ecore::EFloat:
@@ -893,10 +951,14 @@ public class ArduinoDSLGrammarAccess extends AbstractGrammarElementFinder {
 		return getNUMBERAccess().getRule();
 	}
 	
-	//terminal STATE:
-	//	'on' | 'off';
-	public TerminalRule getSTATERule() {
-		return tSTATE;
+	//State:
+	//	value=('on' | 'off');
+	public StateElements getStateAccess() {
+		return pState;
+	}
+	
+	public ParserRule getStateRule() {
+		return getStateAccess().getRule();
 	}
 	
 	//RuleBody:

@@ -127,7 +127,6 @@ public class ArduinoDSLSwitch<T> extends Switch<T>
       {
         Attribute attribute = (Attribute)theEObject;
         T result = caseAttribute(attribute);
-        if (result == null) result = caseDelta(attribute);
         if (result == null) result = caseValue(attribute);
         if (result == null) result = caseExpression(attribute);
         if (result == null) result = defaultCase(theEObject);
@@ -139,6 +138,24 @@ public class ArduinoDSLSwitch<T> extends Switch<T>
         T result = caseDelta(delta);
         if (result == null) result = caseValue(delta);
         if (result == null) result = caseExpression(delta);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArduinoDSLPackage.NUMBER_LITERAL:
+      {
+        NumberLiteral numberLiteral = (NumberLiteral)theEObject;
+        T result = caseNumberLiteral(numberLiteral);
+        if (result == null) result = caseValue(numberLiteral);
+        if (result == null) result = caseExpression(numberLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ArduinoDSLPackage.STATE:
+      {
+        State state = (State)theEObject;
+        T result = caseState(state);
+        if (result == null) result = caseValue(state);
+        if (result == null) result = caseExpression(state);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -397,6 +414,38 @@ public class ArduinoDSLSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDelta(Delta object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Number Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Number Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNumberLiteral(NumberLiteral object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>State</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>State</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseState(State object)
   {
     return null;
   }

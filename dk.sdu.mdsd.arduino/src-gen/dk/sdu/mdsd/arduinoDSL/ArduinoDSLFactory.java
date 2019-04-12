@@ -105,6 +105,24 @@ public interface ArduinoDSLFactory extends EFactory
   Delta createDelta();
 
   /**
+   * Returns a new object of class '<em>Number Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Number Literal</em>'.
+   * @generated
+   */
+  NumberLiteral createNumberLiteral();
+
+  /**
+   * Returns a new object of class '<em>State</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>State</em>'.
+   * @generated
+   */
+  State createState();
+
+  /**
    * Returns a new object of class '<em>Rule Body</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

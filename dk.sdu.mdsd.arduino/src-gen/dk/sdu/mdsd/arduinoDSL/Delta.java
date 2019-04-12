@@ -9,6 +9,12 @@ package dk.sdu.mdsd.arduinoDSL;
  * A representation of the model object '<em><b>Delta</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link dk.sdu.mdsd.arduinoDSL.Delta#getAttr <em>Attr</em>}</li>
+ * </ul>
  *
  * @see dk.sdu.mdsd.arduinoDSL.ArduinoDSLPackage#getDelta()
  * @model
@@ -16,4 +22,26 @@ package dk.sdu.mdsd.arduinoDSL;
  */
 public interface Delta extends Value
 {
+  /**
+   * Returns the value of the '<em><b>Attr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Attr</em>' containment reference.
+   * @see #setAttr(Attribute)
+   * @see dk.sdu.mdsd.arduinoDSL.ArduinoDSLPackage#getDelta_Attr()
+   * @model containment="true"
+   * @generated
+   */
+  Attribute getAttr();
+
+  /**
+   * Sets the value of the '{@link dk.sdu.mdsd.arduinoDSL.Delta#getAttr <em>Attr</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Attr</em>' containment reference.
+   * @see #getAttr()
+   * @generated
+   */
+  void setAttr(Attribute value);
+
 } // Delta

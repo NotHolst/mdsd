@@ -21,6 +21,7 @@ import dk.sdu.mdsd.arduinoDSL.Map;
 import dk.sdu.mdsd.arduinoDSL.Minus;
 import dk.sdu.mdsd.arduinoDSL.Mult;
 import dk.sdu.mdsd.arduinoDSL.Node;
+import dk.sdu.mdsd.arduinoDSL.NumberLiteral;
 import dk.sdu.mdsd.arduinoDSL.Plus;
 import dk.sdu.mdsd.arduinoDSL.Program;
 import dk.sdu.mdsd.arduinoDSL.Range;
@@ -28,6 +29,7 @@ import dk.sdu.mdsd.arduinoDSL.Rate;
 import dk.sdu.mdsd.arduinoDSL.Rule;
 import dk.sdu.mdsd.arduinoDSL.RuleBody;
 import dk.sdu.mdsd.arduinoDSL.Smoothing;
+import dk.sdu.mdsd.arduinoDSL.State;
 import dk.sdu.mdsd.arduinoDSL.Value;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -107,6 +109,20 @@ public class ArduinoDSLPackageImpl extends EPackageImpl implements ArduinoDSLPac
    * @generated
    */
   private EClass deltaEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass numberLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stateEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -472,6 +488,72 @@ public class ArduinoDSLPackageImpl extends EPackageImpl implements ArduinoDSLPac
   public EClass getDelta()
   {
     return deltaEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getDelta_Attr()
+  {
+    return (EReference)deltaEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getNumberLiteral()
+  {
+    return numberLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getNumberLiteral_Float()
+  {
+    return (EAttribute)numberLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getNumberLiteral_Int()
+  {
+    return (EAttribute)numberLiteralEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getState()
+  {
+    return stateEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getState_Value()
+  {
+    return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -971,6 +1053,14 @@ public class ArduinoDSLPackageImpl extends EPackageImpl implements ArduinoDSLPac
     createEReference(attributeEClass, ATTRIBUTE__COMPONENT);
 
     deltaEClass = createEClass(DELTA);
+    createEReference(deltaEClass, DELTA__ATTR);
+
+    numberLiteralEClass = createEClass(NUMBER_LITERAL);
+    createEAttribute(numberLiteralEClass, NUMBER_LITERAL__FLOAT);
+    createEAttribute(numberLiteralEClass, NUMBER_LITERAL__INT);
+
+    stateEClass = createEClass(STATE);
+    createEAttribute(stateEClass, STATE__VALUE);
 
     ruleBodyEClass = createEClass(RULE_BODY);
     createEReference(ruleBodyEClass, RULE_BODY__ASSIGNMENT);
@@ -1059,8 +1149,9 @@ public class ArduinoDSLPackageImpl extends EPackageImpl implements ArduinoDSLPac
     // Add supertypes to classes
     valueEClass.getESuperTypes().add(this.getExpression());
     attributeEClass.getESuperTypes().add(this.getValue());
-    attributeEClass.getESuperTypes().add(this.getDelta());
     deltaEClass.getESuperTypes().add(this.getValue());
+    numberLiteralEClass.getESuperTypes().add(this.getValue());
+    stateEClass.getESuperTypes().add(this.getValue());
     expEClass.getESuperTypes().add(this.getExpression());
     factorEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpWeakOp());
@@ -1095,6 +1186,14 @@ public class ArduinoDSLPackageImpl extends EPackageImpl implements ArduinoDSLPac
     initEReference(getAttribute_Component(), this.getComponent(), null, "component", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(deltaEClass, Delta.class, "Delta", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDelta_Attr(), this.getAttribute(), null, "attr", null, 0, 1, Delta.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNumberLiteral_Float(), ecorePackage.getEString(), "float", null, 0, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getNumberLiteral_Int(), ecorePackage.getEInt(), "int", null, 0, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getState_Value(), ecorePackage.getEString(), "value", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ruleBodyEClass, RuleBody.class, "RuleBody", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRuleBody_Assignment(), this.getAssignment(), null, "assignment", null, 0, -1, RuleBody.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

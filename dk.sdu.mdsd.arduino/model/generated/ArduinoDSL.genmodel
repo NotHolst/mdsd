@@ -27,7 +27,16 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Attribute/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Attribute/component"/>
     </genClasses>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Delta"/>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//Delta">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Delta/attr"/>
+    </genClasses>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//NumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//NumberLiteral/float"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//NumberLiteral/int"/>
+    </genClasses>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//State/value"/>
+    </genClasses>
     <genClasses ecoreClass="ArduinoDSL.ecore#//RuleBody">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//RuleBody/assignment"/>
     </genClasses>

@@ -36,6 +36,8 @@ public class ArduinoDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getExpWeakOpAccess().getAlternatives(), "rule__ExpWeakOp__Alternatives");
 			builder.put(grammarAccess.getExpStrongOpAccess().getAlternatives(), "rule__ExpStrongOp__Alternatives");
 			builder.put(grammarAccess.getValueAccess().getAlternatives(), "rule__Value__Alternatives");
+			builder.put(grammarAccess.getNumberLiteralAccess().getAlternatives(), "rule__NumberLiteral__Alternatives");
+			builder.put(grammarAccess.getStateAccess().getValueAlternatives_0(), "rule__State__ValueAlternatives_0");
 			builder.put(grammarAccess.getRuleAccess().getGroup(), "rule__Rule__Group__0");
 			builder.put(grammarAccess.getConditionAccess().getGroup(), "rule__Condition__Group__0");
 			builder.put(grammarAccess.getExpAccess().getGroup(), "rule__Exp__Group__0");
@@ -46,8 +48,6 @@ public class ArduinoDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getExpWeakOpAccess().getGroup_1(), "rule__ExpWeakOp__Group_1__0");
 			builder.put(grammarAccess.getExpStrongOpAccess().getGroup_0(), "rule__ExpStrongOp__Group_0__0");
 			builder.put(grammarAccess.getExpStrongOpAccess().getGroup_1(), "rule__ExpStrongOp__Group_1__0");
-			builder.put(grammarAccess.getValueAccess().getGroup_0(), "rule__Value__Group_0__0");
-			builder.put(grammarAccess.getValueAccess().getGroup_3(), "rule__Value__Group_3__0");
 			builder.put(grammarAccess.getAttributeAccess().getGroup(), "rule__Attribute__Group__0");
 			builder.put(grammarAccess.getDeltaAccess().getGroup(), "rule__Delta__Group__0");
 			builder.put(grammarAccess.getNUMBERAccess().getGroup(), "rule__NUMBER__Group__0");
@@ -73,6 +73,10 @@ public class ArduinoDSLParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFactorAccess().getRightAssignment_1_2(), "rule__Factor__RightAssignment_1_2");
 			builder.put(grammarAccess.getAttributeAccess().getNameAssignment_0(), "rule__Attribute__NameAssignment_0");
 			builder.put(grammarAccess.getAttributeAccess().getComponentAssignment_1(), "rule__Attribute__ComponentAssignment_1");
+			builder.put(grammarAccess.getDeltaAccess().getAttrAssignment_0(), "rule__Delta__AttrAssignment_0");
+			builder.put(grammarAccess.getNumberLiteralAccess().getFloatAssignment_0(), "rule__NumberLiteral__FloatAssignment_0");
+			builder.put(grammarAccess.getNumberLiteralAccess().getIntAssignment_1(), "rule__NumberLiteral__IntAssignment_1");
+			builder.put(grammarAccess.getStateAccess().getValueAssignment(), "rule__State__ValueAssignment");
 			builder.put(grammarAccess.getRuleBodyAccess().getAssignmentAssignment(), "rule__RuleBody__AssignmentAssignment");
 			builder.put(grammarAccess.getAssignmentAccess().getAttributeAssignment_0(), "rule__Assignment__AttributeAssignment_0");
 			builder.put(grammarAccess.getAssignmentAccess().getValueAssignment_2(), "rule__Assignment__ValueAssignment_2");

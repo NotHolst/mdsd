@@ -537,54 +537,41 @@ ruleValue returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getValueAccess().getValueAction_0_0(),
-						$current);
-				}
-			)
-			{
-				newCompositeNode(grammarAccess.getValueAccess().getNUMBERParserRuleCall_0_1());
-			}
-			ruleNUMBER
-			{
-				afterParserOrEnumRuleCall();
-			}
-		)
+		{
+			newCompositeNode(grammarAccess.getValueAccess().getNumberLiteralParserRuleCall_0());
+		}
+		this_NumberLiteral_0=ruleNumberLiteral
+		{
+			$current = $this_NumberLiteral_0.current;
+			afterParserOrEnumRuleCall();
+		}
 		    |
 		{
 			newCompositeNode(grammarAccess.getValueAccess().getAttributeParserRuleCall_1());
 		}
-		this_Attribute_2=ruleAttribute
+		this_Attribute_1=ruleAttribute
 		{
-			$current = $this_Attribute_2.current;
+			$current = $this_Attribute_1.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
 			newCompositeNode(grammarAccess.getValueAccess().getDeltaParserRuleCall_2());
 		}
-		this_Delta_3=ruleDelta
+		this_Delta_2=ruleDelta
 		{
-			$current = $this_Delta_3.current;
+			$current = $this_Delta_2.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
-		(
-			(
-				{
-					$current = forceCreateModelElement(
-						grammarAccess.getValueAccess().getValueAction_3_0(),
-						$current);
-				}
-			)
-			this_STATE_5=RULE_STATE
-			{
-				newLeafNode(this_STATE_5, grammarAccess.getValueAccess().getSTATETerminalRuleCall_3_1());
-			}
-		)
+		{
+			newCompositeNode(grammarAccess.getValueAccess().getStateParserRuleCall_3());
+		}
+		this_State_3=ruleState
+		{
+			$current = $this_State_3.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -649,18 +636,85 @@ ruleDelta returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		{
-			newCompositeNode(grammarAccess.getDeltaAccess().getAttributeParserRuleCall_0());
-		}
-		this_Attribute_0=ruleAttribute
-		{
-			$current = $this_Attribute_0.current;
-			afterParserOrEnumRuleCall();
-		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDeltaAccess().getAttrAttributeParserRuleCall_0_0());
+				}
+				lv_attr_0_0=ruleAttribute
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDeltaRule());
+					}
+					set(
+						$current,
+						"attr",
+						lv_attr_0_0,
+						"dk.sdu.mdsd.ArduinoDSL.Attribute");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 		otherlv_1='delta'
 		{
 			newLeafNode(otherlv_1, grammarAccess.getDeltaAccess().getDeltaKeyword_1());
 		}
+	)
+;
+
+// Entry rule entryRuleNumberLiteral
+entryRuleNumberLiteral returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getNumberLiteralRule()); }
+	iv_ruleNumberLiteral=ruleNumberLiteral
+	{ $current=$iv_ruleNumberLiteral.current; }
+	EOF;
+
+// Rule NumberLiteral
+ruleNumberLiteral returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_float_0_0=RULE_DECIMAL
+				{
+					newLeafNode(lv_float_0_0, grammarAccess.getNumberLiteralAccess().getFloatDECIMALTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getNumberLiteralRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"float",
+						lv_float_0_0,
+						"dk.sdu.mdsd.ArduinoDSL.DECIMAL");
+				}
+			)
+		)
+		    |
+		(
+			(
+				lv_int_1_0=RULE_INT
+				{
+					newLeafNode(lv_int_1_0, grammarAccess.getNumberLiteralAccess().getIntINTTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getNumberLiteralRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"int",
+						lv_int_1_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
 	)
 ;
 
@@ -701,6 +755,50 @@ ruleNUMBER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 				newLeafNode(this_INT_2, grammarAccess.getNUMBERAccess().getINTTerminalRuleCall_1_1());
 			}
 		)?
+	)
+;
+
+// Entry rule entryRuleState
+entryRuleState returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getStateRule()); }
+	iv_ruleState=ruleState
+	{ $current=$iv_ruleState.current; }
+	EOF;
+
+// Rule State
+ruleState returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_value_0_1='on'
+				{
+					newLeafNode(lv_value_0_1, grammarAccess.getStateAccess().getValueOnKeyword_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getStateRule());
+					}
+					setWithLastConsumed($current, "value", lv_value_0_1, null);
+				}
+				    |
+				lv_value_0_2='off'
+				{
+					newLeafNode(lv_value_0_2, grammarAccess.getStateAccess().getValueOffKeyword_0_1());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getStateRule());
+					}
+					setWithLastConsumed($current, "value", lv_value_0_2, null);
+				}
+			)
+		)
 	)
 ;
 
@@ -1266,7 +1364,7 @@ ruleSmoothing returns [EObject current=null]
 
 RULE_BOOLEAN_OPERATOR : ('<'|'>'|'>='|'<='|'=='|'!=');
 
-RULE_STATE : ('on'|'off');
+RULE_DECIMAL : RULE_INT '.' RULE_INT;
 
 RULE_IO : ('input'|'output');
 

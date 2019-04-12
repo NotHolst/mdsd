@@ -21,7 +21,7 @@ package dk.sdu.mdsd.arduinoDSL;
  * @model
  * @generated
  */
-public interface Attribute extends Value, Delta
+public interface Attribute extends Value
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' reference.

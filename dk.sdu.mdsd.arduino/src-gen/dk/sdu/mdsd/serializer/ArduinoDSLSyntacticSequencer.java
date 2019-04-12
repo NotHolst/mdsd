@@ -11,9 +11,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
@@ -21,42 +18,17 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class ArduinoDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected ArduinoDSLGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Value_NUMBERParserRuleCall_0_1_or_STATETerminalRuleCall_3_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ArduinoDSLGrammarAccess) access;
-		match_Value_NUMBERParserRuleCall_0_1_or_STATETerminalRuleCall_3_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getValueAccess().getNUMBERParserRuleCall_0_1()), new TokenAlias(false, false, grammarAccess.getValueAccess().getSTATETerminalRuleCall_3_1()));
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getNUMBERRule())
-			return getNUMBERToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getSTATERule())
-			return getSTATEToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	/**
-	 * NUMBER returns ecore::EFloat: INT ('.' INT)?;
-	 */
-	protected String getNUMBERToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "";
-	}
-	
-	/**
-	 * terminal STATE:
-	 *     'on' | 'off'
-	 * ;
-	 */
-	protected String getSTATEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "on";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -64,21 +36,8 @@ public class ArduinoDSLSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Value_NUMBERParserRuleCall_0_1_or_STATETerminalRuleCall_3_1.equals(syntax))
-				emit_Value_NUMBERParserRuleCall_0_1_or_STATETerminalRuleCall_3_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else acceptNodes(getLastNavigableState(), syntaxNodes);
+			acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
-	/**
-	 * Ambiguous syntax:
-	 *     NUMBER | STATE
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) (rule start)
-	 */
-	protected void emit_Value_NUMBERParserRuleCall_0_1_or_STATETerminalRuleCall_3_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
 }

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_BOOLEAN_OPERATOR", "RULE_STATE", "RULE_ID", "RULE_INT", "RULE_IO", "RULE_TYPE", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'when'", "'once'", "'{'", "'}'", "'+'", "'-'", "'*'", "'/'", "'delta'", "'.'", "'='", "'pin'", "'map'", "'=>'", "':'", "'rate'", "'smoothing'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_BOOLEAN_OPERATOR", "RULE_ID", "RULE_DECIMAL", "RULE_INT", "RULE_IO", "RULE_TYPE", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'when'", "'once'", "'{'", "'}'", "'+'", "'-'", "'*'", "'/'", "'delta'", "'.'", "'on'", "'off'", "'='", "'pin'", "'map'", "'=>'", "':'", "'rate'", "'smoothing'"
     };
     public static final int RULE_BOOLEAN_OPERATOR=4;
     public static final int RULE_STRING=10;
@@ -30,15 +30,17 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
     public static final int RULE_IO=8;
     public static final int T__15=15;
     public static final int T__16=16;
-    public static final int RULE_STATE=5;
     public static final int T__17=17;
     public static final int T__18=18;
+    public static final int T__33=33;
     public static final int EOF=-1;
     public static final int T__30=30;
     public static final int T__31=31;
-    public static final int RULE_ID=6;
+    public static final int T__32=32;
+    public static final int RULE_ID=5;
     public static final int RULE_WS=13;
     public static final int RULE_ANY_OTHER=14;
+    public static final int RULE_DECIMAL=6;
     public static final int T__26=26;
     public static final int RULE_TYPE=9;
     public static final int T__27=27;
@@ -1350,26 +1352,30 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleValue"
-    // InternalArduinoDSL.g:532:1: ruleValue returns [EObject current=null] : ( ( () ruleNUMBER ) | this_Attribute_2= ruleAttribute | this_Delta_3= ruleDelta | ( () this_STATE_5= RULE_STATE ) ) ;
+    // InternalArduinoDSL.g:532:1: ruleValue returns [EObject current=null] : (this_NumberLiteral_0= ruleNumberLiteral | this_Attribute_1= ruleAttribute | this_Delta_2= ruleDelta | this_State_3= ruleState ) ;
     public final EObject ruleValue() throws RecognitionException {
         EObject current = null;
 
-        Token this_STATE_5=null;
-        EObject this_Attribute_2 = null;
+        EObject this_NumberLiteral_0 = null;
 
-        EObject this_Delta_3 = null;
+        EObject this_Attribute_1 = null;
+
+        EObject this_Delta_2 = null;
+
+        EObject this_State_3 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:538:2: ( ( ( () ruleNUMBER ) | this_Attribute_2= ruleAttribute | this_Delta_3= ruleDelta | ( () this_STATE_5= RULE_STATE ) ) )
-            // InternalArduinoDSL.g:539:2: ( ( () ruleNUMBER ) | this_Attribute_2= ruleAttribute | this_Delta_3= ruleDelta | ( () this_STATE_5= RULE_STATE ) )
+            // InternalArduinoDSL.g:538:2: ( (this_NumberLiteral_0= ruleNumberLiteral | this_Attribute_1= ruleAttribute | this_Delta_2= ruleDelta | this_State_3= ruleState ) )
+            // InternalArduinoDSL.g:539:2: (this_NumberLiteral_0= ruleNumberLiteral | this_Attribute_1= ruleAttribute | this_Delta_2= ruleDelta | this_State_3= ruleState )
             {
-            // InternalArduinoDSL.g:539:2: ( ( () ruleNUMBER ) | this_Attribute_2= ruleAttribute | this_Delta_3= ruleDelta | ( () this_STATE_5= RULE_STATE ) )
+            // InternalArduinoDSL.g:539:2: (this_NumberLiteral_0= ruleNumberLiteral | this_Attribute_1= ruleAttribute | this_Delta_2= ruleDelta | this_State_3= ruleState )
             int alt8=4;
             switch ( input.LA(1) ) {
+            case RULE_DECIMAL:
             case RULE_INT:
                 {
                 alt8=1;
@@ -1382,7 +1388,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
                 if ( (LA8_2==RULE_ID) ) {
                     int LA8_4 = input.LA(3);
 
-                    if ( (LA8_4==EOF||LA8_4==RULE_BOOLEAN_OPERATOR||LA8_4==RULE_ID||(LA8_4>=17 && LA8_4<=22)) ) {
+                    if ( (LA8_4==EOF||(LA8_4>=RULE_BOOLEAN_OPERATOR && LA8_4<=RULE_ID)||(LA8_4>=17 && LA8_4<=22)) ) {
                         alt8=2;
                     }
                     else if ( (LA8_4==23) ) {
@@ -1403,7 +1409,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
                 }
                 }
                 break;
-            case RULE_STATE:
+            case 25:
+            case 26:
                 {
                 alt8=4;
                 }
@@ -1417,99 +1424,74 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             switch (alt8) {
                 case 1 :
-                    // InternalArduinoDSL.g:540:3: ( () ruleNUMBER )
-                    {
-                    // InternalArduinoDSL.g:540:3: ( () ruleNUMBER )
-                    // InternalArduinoDSL.g:541:4: () ruleNUMBER
-                    {
-                    // InternalArduinoDSL.g:541:4: ()
-                    // InternalArduinoDSL.g:542:5: 
+                    // InternalArduinoDSL.g:540:3: this_NumberLiteral_0= ruleNumberLiteral
                     {
 
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getValueAccess().getValueAction_0_0(),
-                    						current);
-                    				
-
-                    }
-
-
-                    				newCompositeNode(grammarAccess.getValueAccess().getNUMBERParserRuleCall_0_1());
-                    			
+                    			newCompositeNode(grammarAccess.getValueAccess().getNumberLiteralParserRuleCall_0());
+                    		
                     pushFollow(FOLLOW_2);
-                    ruleNUMBER();
+                    this_NumberLiteral_0=ruleNumberLiteral();
 
                     state._fsp--;
 
 
-                    				afterParserOrEnumRuleCall();
-                    			
-
-                    }
-
+                    			current = this_NumberLiteral_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalArduinoDSL.g:557:3: this_Attribute_2= ruleAttribute
+                    // InternalArduinoDSL.g:549:3: this_Attribute_1= ruleAttribute
                     {
 
                     			newCompositeNode(grammarAccess.getValueAccess().getAttributeParserRuleCall_1());
                     		
                     pushFollow(FOLLOW_2);
-                    this_Attribute_2=ruleAttribute();
+                    this_Attribute_1=ruleAttribute();
 
                     state._fsp--;
 
 
-                    			current = this_Attribute_2;
+                    			current = this_Attribute_1;
                     			afterParserOrEnumRuleCall();
                     		
 
                     }
                     break;
                 case 3 :
-                    // InternalArduinoDSL.g:566:3: this_Delta_3= ruleDelta
+                    // InternalArduinoDSL.g:558:3: this_Delta_2= ruleDelta
                     {
 
                     			newCompositeNode(grammarAccess.getValueAccess().getDeltaParserRuleCall_2());
                     		
                     pushFollow(FOLLOW_2);
-                    this_Delta_3=ruleDelta();
+                    this_Delta_2=ruleDelta();
 
                     state._fsp--;
 
 
-                    			current = this_Delta_3;
+                    			current = this_Delta_2;
                     			afterParserOrEnumRuleCall();
                     		
 
                     }
                     break;
                 case 4 :
-                    // InternalArduinoDSL.g:575:3: ( () this_STATE_5= RULE_STATE )
-                    {
-                    // InternalArduinoDSL.g:575:3: ( () this_STATE_5= RULE_STATE )
-                    // InternalArduinoDSL.g:576:4: () this_STATE_5= RULE_STATE
-                    {
-                    // InternalArduinoDSL.g:576:4: ()
-                    // InternalArduinoDSL.g:577:5: 
+                    // InternalArduinoDSL.g:567:3: this_State_3= ruleState
                     {
 
-                    					current = forceCreateModelElement(
-                    						grammarAccess.getValueAccess().getValueAction_3_0(),
-                    						current);
-                    				
+                    			newCompositeNode(grammarAccess.getValueAccess().getStateParserRuleCall_3());
+                    		
+                    pushFollow(FOLLOW_2);
+                    this_State_3=ruleState();
 
-                    }
+                    state._fsp--;
 
-                    this_STATE_5=(Token)match(input,RULE_STATE,FOLLOW_2); 
 
-                    				newLeafNode(this_STATE_5, grammarAccess.getValueAccess().getSTATETerminalRuleCall_3_1());
-                    			
-
-                    }
-
+                    			current = this_State_3;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -1536,7 +1518,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAttribute"
-    // InternalArduinoDSL.g:592:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
+    // InternalArduinoDSL.g:579:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
     public final EObject entryRuleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1544,8 +1526,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:592:50: (iv_ruleAttribute= ruleAttribute EOF )
-            // InternalArduinoDSL.g:593:2: iv_ruleAttribute= ruleAttribute EOF
+            // InternalArduinoDSL.g:579:50: (iv_ruleAttribute= ruleAttribute EOF )
+            // InternalArduinoDSL.g:580:2: iv_ruleAttribute= ruleAttribute EOF
             {
              newCompositeNode(grammarAccess.getAttributeRule()); 
             pushFollow(FOLLOW_1);
@@ -1572,7 +1554,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAttribute"
-    // InternalArduinoDSL.g:599:1: ruleAttribute returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) ) ) ;
+    // InternalArduinoDSL.g:586:1: ruleAttribute returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) ) ) ;
     public final EObject ruleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1583,17 +1565,17 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:605:2: ( ( ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) ) ) )
-            // InternalArduinoDSL.g:606:2: ( ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) ) )
+            // InternalArduinoDSL.g:592:2: ( ( ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) ) ) )
+            // InternalArduinoDSL.g:593:2: ( ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) ) )
             {
-            // InternalArduinoDSL.g:606:2: ( ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) ) )
-            // InternalArduinoDSL.g:607:3: ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )
+            // InternalArduinoDSL.g:593:2: ( ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) ) )
+            // InternalArduinoDSL.g:594:3: ( (otherlv_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )
             {
-            // InternalArduinoDSL.g:607:3: ( (otherlv_0= RULE_ID ) )
-            // InternalArduinoDSL.g:608:4: (otherlv_0= RULE_ID )
+            // InternalArduinoDSL.g:594:3: ( (otherlv_0= RULE_ID ) )
+            // InternalArduinoDSL.g:595:4: (otherlv_0= RULE_ID )
             {
-            // InternalArduinoDSL.g:608:4: (otherlv_0= RULE_ID )
-            // InternalArduinoDSL.g:609:5: otherlv_0= RULE_ID
+            // InternalArduinoDSL.g:595:4: (otherlv_0= RULE_ID )
+            // InternalArduinoDSL.g:596:5: otherlv_0= RULE_ID
             {
 
             					if (current==null) {
@@ -1610,11 +1592,11 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalArduinoDSL.g:620:3: ( (otherlv_1= RULE_ID ) )
-            // InternalArduinoDSL.g:621:4: (otherlv_1= RULE_ID )
+            // InternalArduinoDSL.g:607:3: ( (otherlv_1= RULE_ID ) )
+            // InternalArduinoDSL.g:608:4: (otherlv_1= RULE_ID )
             {
-            // InternalArduinoDSL.g:621:4: (otherlv_1= RULE_ID )
-            // InternalArduinoDSL.g:622:5: otherlv_1= RULE_ID
+            // InternalArduinoDSL.g:608:4: (otherlv_1= RULE_ID )
+            // InternalArduinoDSL.g:609:5: otherlv_1= RULE_ID
             {
 
             					if (current==null) {
@@ -1654,7 +1636,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDelta"
-    // InternalArduinoDSL.g:637:1: entryRuleDelta returns [EObject current=null] : iv_ruleDelta= ruleDelta EOF ;
+    // InternalArduinoDSL.g:624:1: entryRuleDelta returns [EObject current=null] : iv_ruleDelta= ruleDelta EOF ;
     public final EObject entryRuleDelta() throws RecognitionException {
         EObject current = null;
 
@@ -1662,8 +1644,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:637:46: (iv_ruleDelta= ruleDelta EOF )
-            // InternalArduinoDSL.g:638:2: iv_ruleDelta= ruleDelta EOF
+            // InternalArduinoDSL.g:624:46: (iv_ruleDelta= ruleDelta EOF )
+            // InternalArduinoDSL.g:625:2: iv_ruleDelta= ruleDelta EOF
             {
              newCompositeNode(grammarAccess.getDeltaRule()); 
             pushFollow(FOLLOW_1);
@@ -1690,36 +1672,55 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDelta"
-    // InternalArduinoDSL.g:644:1: ruleDelta returns [EObject current=null] : (this_Attribute_0= ruleAttribute otherlv_1= 'delta' ) ;
+    // InternalArduinoDSL.g:631:1: ruleDelta returns [EObject current=null] : ( ( (lv_attr_0_0= ruleAttribute ) ) otherlv_1= 'delta' ) ;
     public final EObject ruleDelta() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
-        EObject this_Attribute_0 = null;
+        EObject lv_attr_0_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:650:2: ( (this_Attribute_0= ruleAttribute otherlv_1= 'delta' ) )
-            // InternalArduinoDSL.g:651:2: (this_Attribute_0= ruleAttribute otherlv_1= 'delta' )
+            // InternalArduinoDSL.g:637:2: ( ( ( (lv_attr_0_0= ruleAttribute ) ) otherlv_1= 'delta' ) )
+            // InternalArduinoDSL.g:638:2: ( ( (lv_attr_0_0= ruleAttribute ) ) otherlv_1= 'delta' )
             {
-            // InternalArduinoDSL.g:651:2: (this_Attribute_0= ruleAttribute otherlv_1= 'delta' )
-            // InternalArduinoDSL.g:652:3: this_Attribute_0= ruleAttribute otherlv_1= 'delta'
+            // InternalArduinoDSL.g:638:2: ( ( (lv_attr_0_0= ruleAttribute ) ) otherlv_1= 'delta' )
+            // InternalArduinoDSL.g:639:3: ( (lv_attr_0_0= ruleAttribute ) ) otherlv_1= 'delta'
+            {
+            // InternalArduinoDSL.g:639:3: ( (lv_attr_0_0= ruleAttribute ) )
+            // InternalArduinoDSL.g:640:4: (lv_attr_0_0= ruleAttribute )
+            {
+            // InternalArduinoDSL.g:640:4: (lv_attr_0_0= ruleAttribute )
+            // InternalArduinoDSL.g:641:5: lv_attr_0_0= ruleAttribute
             {
 
-            			newCompositeNode(grammarAccess.getDeltaAccess().getAttributeParserRuleCall_0());
-            		
+            					newCompositeNode(grammarAccess.getDeltaAccess().getAttrAttributeParserRuleCall_0_0());
+            				
             pushFollow(FOLLOW_11);
-            this_Attribute_0=ruleAttribute();
+            lv_attr_0_0=ruleAttribute();
 
             state._fsp--;
 
 
-            			current = this_Attribute_0;
-            			afterParserOrEnumRuleCall();
-            		
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getDeltaRule());
+            					}
+            					set(
+            						current,
+            						"attr",
+            						lv_attr_0_0,
+            						"dk.sdu.mdsd.ArduinoDSL.Attribute");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
             otherlv_1=(Token)match(input,23,FOLLOW_2); 
 
             			newLeafNode(otherlv_1, grammarAccess.getDeltaAccess().getDeltaKeyword_1());
@@ -1746,8 +1747,162 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleDelta"
 
 
+    // $ANTLR start "entryRuleNumberLiteral"
+    // InternalArduinoDSL.g:666:1: entryRuleNumberLiteral returns [EObject current=null] : iv_ruleNumberLiteral= ruleNumberLiteral EOF ;
+    public final EObject entryRuleNumberLiteral() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleNumberLiteral = null;
+
+
+        try {
+            // InternalArduinoDSL.g:666:54: (iv_ruleNumberLiteral= ruleNumberLiteral EOF )
+            // InternalArduinoDSL.g:667:2: iv_ruleNumberLiteral= ruleNumberLiteral EOF
+            {
+             newCompositeNode(grammarAccess.getNumberLiteralRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleNumberLiteral=ruleNumberLiteral();
+
+            state._fsp--;
+
+             current =iv_ruleNumberLiteral; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleNumberLiteral"
+
+
+    // $ANTLR start "ruleNumberLiteral"
+    // InternalArduinoDSL.g:673:1: ruleNumberLiteral returns [EObject current=null] : ( ( (lv_float_0_0= RULE_DECIMAL ) ) | ( (lv_int_1_0= RULE_INT ) ) ) ;
+    public final EObject ruleNumberLiteral() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_float_0_0=null;
+        Token lv_int_1_0=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalArduinoDSL.g:679:2: ( ( ( (lv_float_0_0= RULE_DECIMAL ) ) | ( (lv_int_1_0= RULE_INT ) ) ) )
+            // InternalArduinoDSL.g:680:2: ( ( (lv_float_0_0= RULE_DECIMAL ) ) | ( (lv_int_1_0= RULE_INT ) ) )
+            {
+            // InternalArduinoDSL.g:680:2: ( ( (lv_float_0_0= RULE_DECIMAL ) ) | ( (lv_int_1_0= RULE_INT ) ) )
+            int alt9=2;
+            int LA9_0 = input.LA(1);
+
+            if ( (LA9_0==RULE_DECIMAL) ) {
+                alt9=1;
+            }
+            else if ( (LA9_0==RULE_INT) ) {
+                alt9=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 9, 0, input);
+
+                throw nvae;
+            }
+            switch (alt9) {
+                case 1 :
+                    // InternalArduinoDSL.g:681:3: ( (lv_float_0_0= RULE_DECIMAL ) )
+                    {
+                    // InternalArduinoDSL.g:681:3: ( (lv_float_0_0= RULE_DECIMAL ) )
+                    // InternalArduinoDSL.g:682:4: (lv_float_0_0= RULE_DECIMAL )
+                    {
+                    // InternalArduinoDSL.g:682:4: (lv_float_0_0= RULE_DECIMAL )
+                    // InternalArduinoDSL.g:683:5: lv_float_0_0= RULE_DECIMAL
+                    {
+                    lv_float_0_0=(Token)match(input,RULE_DECIMAL,FOLLOW_2); 
+
+                    					newLeafNode(lv_float_0_0, grammarAccess.getNumberLiteralAccess().getFloatDECIMALTerminalRuleCall_0_0());
+                    				
+
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getNumberLiteralRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"float",
+                    						lv_float_0_0,
+                    						"dk.sdu.mdsd.ArduinoDSL.DECIMAL");
+                    				
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalArduinoDSL.g:700:3: ( (lv_int_1_0= RULE_INT ) )
+                    {
+                    // InternalArduinoDSL.g:700:3: ( (lv_int_1_0= RULE_INT ) )
+                    // InternalArduinoDSL.g:701:4: (lv_int_1_0= RULE_INT )
+                    {
+                    // InternalArduinoDSL.g:701:4: (lv_int_1_0= RULE_INT )
+                    // InternalArduinoDSL.g:702:5: lv_int_1_0= RULE_INT
+                    {
+                    lv_int_1_0=(Token)match(input,RULE_INT,FOLLOW_2); 
+
+                    					newLeafNode(lv_int_1_0, grammarAccess.getNumberLiteralAccess().getIntINTTerminalRuleCall_1_0());
+                    				
+
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getNumberLiteralRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"int",
+                    						lv_int_1_0,
+                    						"org.eclipse.xtext.common.Terminals.INT");
+                    				
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleNumberLiteral"
+
+
     // $ANTLR start "entryRuleNUMBER"
-    // InternalArduinoDSL.g:668:1: entryRuleNUMBER returns [String current=null] : iv_ruleNUMBER= ruleNUMBER EOF ;
+    // InternalArduinoDSL.g:722:1: entryRuleNUMBER returns [String current=null] : iv_ruleNUMBER= ruleNUMBER EOF ;
     public final String entryRuleNUMBER() throws RecognitionException {
         String current = null;
 
@@ -1755,8 +1910,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:668:46: (iv_ruleNUMBER= ruleNUMBER EOF )
-            // InternalArduinoDSL.g:669:2: iv_ruleNUMBER= ruleNUMBER EOF
+            // InternalArduinoDSL.g:722:46: (iv_ruleNUMBER= ruleNUMBER EOF )
+            // InternalArduinoDSL.g:723:2: iv_ruleNUMBER= ruleNUMBER EOF
             {
              newCompositeNode(grammarAccess.getNUMBERRule()); 
             pushFollow(FOLLOW_1);
@@ -1783,7 +1938,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNUMBER"
-    // InternalArduinoDSL.g:675:1: ruleNUMBER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ) ;
+    // InternalArduinoDSL.g:729:1: ruleNUMBER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ) ;
     public final AntlrDatatypeRuleToken ruleNUMBER() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1795,11 +1950,11 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:681:2: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ) )
-            // InternalArduinoDSL.g:682:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? )
+            // InternalArduinoDSL.g:735:2: ( (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? ) )
+            // InternalArduinoDSL.g:736:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? )
             {
-            // InternalArduinoDSL.g:682:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? )
-            // InternalArduinoDSL.g:683:3: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )?
+            // InternalArduinoDSL.g:736:2: (this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )? )
+            // InternalArduinoDSL.g:737:3: this_INT_0= RULE_INT (kw= '.' this_INT_2= RULE_INT )?
             {
             this_INT_0=(Token)match(input,RULE_INT,FOLLOW_12); 
 
@@ -1808,16 +1963,16 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_INT_0, grammarAccess.getNUMBERAccess().getINTTerminalRuleCall_0());
             		
-            // InternalArduinoDSL.g:690:3: (kw= '.' this_INT_2= RULE_INT )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // InternalArduinoDSL.g:744:3: (kw= '.' this_INT_2= RULE_INT )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA9_0==24) ) {
-                alt9=1;
+            if ( (LA10_0==24) ) {
+                alt10=1;
             }
-            switch (alt9) {
+            switch (alt10) {
                 case 1 :
-                    // InternalArduinoDSL.g:691:4: kw= '.' this_INT_2= RULE_INT
+                    // InternalArduinoDSL.g:745:4: kw= '.' this_INT_2= RULE_INT
                     {
                     kw=(Token)match(input,24,FOLLOW_13); 
 
@@ -1859,8 +2014,142 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleNUMBER"
 
 
+    // $ANTLR start "entryRuleState"
+    // InternalArduinoDSL.g:762:1: entryRuleState returns [EObject current=null] : iv_ruleState= ruleState EOF ;
+    public final EObject entryRuleState() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleState = null;
+
+
+        try {
+            // InternalArduinoDSL.g:762:46: (iv_ruleState= ruleState EOF )
+            // InternalArduinoDSL.g:763:2: iv_ruleState= ruleState EOF
+            {
+             newCompositeNode(grammarAccess.getStateRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleState=ruleState();
+
+            state._fsp--;
+
+             current =iv_ruleState; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleState"
+
+
+    // $ANTLR start "ruleState"
+    // InternalArduinoDSL.g:769:1: ruleState returns [EObject current=null] : ( ( (lv_value_0_1= 'on' | lv_value_0_2= 'off' ) ) ) ;
+    public final EObject ruleState() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_value_0_1=null;
+        Token lv_value_0_2=null;
+
+
+        	enterRule();
+
+        try {
+            // InternalArduinoDSL.g:775:2: ( ( ( (lv_value_0_1= 'on' | lv_value_0_2= 'off' ) ) ) )
+            // InternalArduinoDSL.g:776:2: ( ( (lv_value_0_1= 'on' | lv_value_0_2= 'off' ) ) )
+            {
+            // InternalArduinoDSL.g:776:2: ( ( (lv_value_0_1= 'on' | lv_value_0_2= 'off' ) ) )
+            // InternalArduinoDSL.g:777:3: ( (lv_value_0_1= 'on' | lv_value_0_2= 'off' ) )
+            {
+            // InternalArduinoDSL.g:777:3: ( (lv_value_0_1= 'on' | lv_value_0_2= 'off' ) )
+            // InternalArduinoDSL.g:778:4: (lv_value_0_1= 'on' | lv_value_0_2= 'off' )
+            {
+            // InternalArduinoDSL.g:778:4: (lv_value_0_1= 'on' | lv_value_0_2= 'off' )
+            int alt11=2;
+            int LA11_0 = input.LA(1);
+
+            if ( (LA11_0==25) ) {
+                alt11=1;
+            }
+            else if ( (LA11_0==26) ) {
+                alt11=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 11, 0, input);
+
+                throw nvae;
+            }
+            switch (alt11) {
+                case 1 :
+                    // InternalArduinoDSL.g:779:5: lv_value_0_1= 'on'
+                    {
+                    lv_value_0_1=(Token)match(input,25,FOLLOW_2); 
+
+                    					newLeafNode(lv_value_0_1, grammarAccess.getStateAccess().getValueOnKeyword_0_0());
+                    				
+
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getStateRule());
+                    					}
+                    					setWithLastConsumed(current, "value", lv_value_0_1, null);
+                    				
+
+                    }
+                    break;
+                case 2 :
+                    // InternalArduinoDSL.g:790:5: lv_value_0_2= 'off'
+                    {
+                    lv_value_0_2=(Token)match(input,26,FOLLOW_2); 
+
+                    					newLeafNode(lv_value_0_2, grammarAccess.getStateAccess().getValueOffKeyword_0_1());
+                    				
+
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getStateRule());
+                    					}
+                    					setWithLastConsumed(current, "value", lv_value_0_2, null);
+                    				
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleState"
+
+
     // $ANTLR start "entryRuleRuleBody"
-    // InternalArduinoDSL.g:708:1: entryRuleRuleBody returns [EObject current=null] : iv_ruleRuleBody= ruleRuleBody EOF ;
+    // InternalArduinoDSL.g:806:1: entryRuleRuleBody returns [EObject current=null] : iv_ruleRuleBody= ruleRuleBody EOF ;
     public final EObject entryRuleRuleBody() throws RecognitionException {
         EObject current = null;
 
@@ -1868,8 +2157,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:708:49: (iv_ruleRuleBody= ruleRuleBody EOF )
-            // InternalArduinoDSL.g:709:2: iv_ruleRuleBody= ruleRuleBody EOF
+            // InternalArduinoDSL.g:806:49: (iv_ruleRuleBody= ruleRuleBody EOF )
+            // InternalArduinoDSL.g:807:2: iv_ruleRuleBody= ruleRuleBody EOF
             {
              newCompositeNode(grammarAccess.getRuleBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -1896,7 +2185,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRuleBody"
-    // InternalArduinoDSL.g:715:1: ruleRuleBody returns [EObject current=null] : ( (lv_assignment_0_0= ruleAssignment ) )+ ;
+    // InternalArduinoDSL.g:813:1: ruleRuleBody returns [EObject current=null] : ( (lv_assignment_0_0= ruleAssignment ) )+ ;
     public final EObject ruleRuleBody() throws RecognitionException {
         EObject current = null;
 
@@ -1907,27 +2196,27 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:721:2: ( ( (lv_assignment_0_0= ruleAssignment ) )+ )
-            // InternalArduinoDSL.g:722:2: ( (lv_assignment_0_0= ruleAssignment ) )+
+            // InternalArduinoDSL.g:819:2: ( ( (lv_assignment_0_0= ruleAssignment ) )+ )
+            // InternalArduinoDSL.g:820:2: ( (lv_assignment_0_0= ruleAssignment ) )+
             {
-            // InternalArduinoDSL.g:722:2: ( (lv_assignment_0_0= ruleAssignment ) )+
-            int cnt10=0;
-            loop10:
+            // InternalArduinoDSL.g:820:2: ( (lv_assignment_0_0= ruleAssignment ) )+
+            int cnt12=0;
+            loop12:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( (LA10_0==RULE_ID) ) {
-                    alt10=1;
+                if ( (LA12_0==RULE_ID) ) {
+                    alt12=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt12) {
             	case 1 :
-            	    // InternalArduinoDSL.g:723:3: (lv_assignment_0_0= ruleAssignment )
+            	    // InternalArduinoDSL.g:821:3: (lv_assignment_0_0= ruleAssignment )
             	    {
-            	    // InternalArduinoDSL.g:723:3: (lv_assignment_0_0= ruleAssignment )
-            	    // InternalArduinoDSL.g:724:4: lv_assignment_0_0= ruleAssignment
+            	    // InternalArduinoDSL.g:821:3: (lv_assignment_0_0= ruleAssignment )
+            	    // InternalArduinoDSL.g:822:4: lv_assignment_0_0= ruleAssignment
             	    {
 
             	    				newCompositeNode(grammarAccess.getRuleBodyAccess().getAssignmentAssignmentParserRuleCall_0());
@@ -1956,12 +2245,12 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt10 >= 1 ) break loop10;
+            	    if ( cnt12 >= 1 ) break loop12;
                         EarlyExitException eee =
-                            new EarlyExitException(10, input);
+                            new EarlyExitException(12, input);
                         throw eee;
                 }
-                cnt10++;
+                cnt12++;
             } while (true);
 
 
@@ -1984,7 +2273,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAssignment"
-    // InternalArduinoDSL.g:744:1: entryRuleAssignment returns [EObject current=null] : iv_ruleAssignment= ruleAssignment EOF ;
+    // InternalArduinoDSL.g:842:1: entryRuleAssignment returns [EObject current=null] : iv_ruleAssignment= ruleAssignment EOF ;
     public final EObject entryRuleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -1992,8 +2281,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:744:51: (iv_ruleAssignment= ruleAssignment EOF )
-            // InternalArduinoDSL.g:745:2: iv_ruleAssignment= ruleAssignment EOF
+            // InternalArduinoDSL.g:842:51: (iv_ruleAssignment= ruleAssignment EOF )
+            // InternalArduinoDSL.g:843:2: iv_ruleAssignment= ruleAssignment EOF
             {
              newCompositeNode(grammarAccess.getAssignmentRule()); 
             pushFollow(FOLLOW_1);
@@ -2020,7 +2309,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAssignment"
-    // InternalArduinoDSL.g:751:1: ruleAssignment returns [EObject current=null] : ( ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) ) ) ;
+    // InternalArduinoDSL.g:849:1: ruleAssignment returns [EObject current=null] : ( ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) ) ) ;
     public final EObject ruleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -2034,17 +2323,17 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:757:2: ( ( ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) ) ) )
-            // InternalArduinoDSL.g:758:2: ( ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) ) )
+            // InternalArduinoDSL.g:855:2: ( ( ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) ) ) )
+            // InternalArduinoDSL.g:856:2: ( ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) ) )
             {
-            // InternalArduinoDSL.g:758:2: ( ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) ) )
-            // InternalArduinoDSL.g:759:3: ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) )
+            // InternalArduinoDSL.g:856:2: ( ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) ) )
+            // InternalArduinoDSL.g:857:3: ( (lv_attribute_0_0= ruleAttribute ) ) otherlv_1= '=' ( (lv_value_2_0= ruleExp ) )
             {
-            // InternalArduinoDSL.g:759:3: ( (lv_attribute_0_0= ruleAttribute ) )
-            // InternalArduinoDSL.g:760:4: (lv_attribute_0_0= ruleAttribute )
+            // InternalArduinoDSL.g:857:3: ( (lv_attribute_0_0= ruleAttribute ) )
+            // InternalArduinoDSL.g:858:4: (lv_attribute_0_0= ruleAttribute )
             {
-            // InternalArduinoDSL.g:760:4: (lv_attribute_0_0= ruleAttribute )
-            // InternalArduinoDSL.g:761:5: lv_attribute_0_0= ruleAttribute
+            // InternalArduinoDSL.g:858:4: (lv_attribute_0_0= ruleAttribute )
+            // InternalArduinoDSL.g:859:5: lv_attribute_0_0= ruleAttribute
             {
 
             					newCompositeNode(grammarAccess.getAssignmentAccess().getAttributeAttributeParserRuleCall_0_0());
@@ -2071,15 +2360,15 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,25,FOLLOW_4); 
+            otherlv_1=(Token)match(input,27,FOLLOW_4); 
 
             			newLeafNode(otherlv_1, grammarAccess.getAssignmentAccess().getEqualsSignKeyword_1());
             		
-            // InternalArduinoDSL.g:782:3: ( (lv_value_2_0= ruleExp ) )
-            // InternalArduinoDSL.g:783:4: (lv_value_2_0= ruleExp )
+            // InternalArduinoDSL.g:880:3: ( (lv_value_2_0= ruleExp ) )
+            // InternalArduinoDSL.g:881:4: (lv_value_2_0= ruleExp )
             {
-            // InternalArduinoDSL.g:783:4: (lv_value_2_0= ruleExp )
-            // InternalArduinoDSL.g:784:5: lv_value_2_0= ruleExp
+            // InternalArduinoDSL.g:881:4: (lv_value_2_0= ruleExp )
+            // InternalArduinoDSL.g:882:5: lv_value_2_0= ruleExp
             {
 
             					newCompositeNode(grammarAccess.getAssignmentAccess().getValueExpParserRuleCall_2_0());
@@ -2129,7 +2418,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNode"
-    // InternalArduinoDSL.g:805:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
+    // InternalArduinoDSL.g:903:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
     public final EObject entryRuleNode() throws RecognitionException {
         EObject current = null;
 
@@ -2137,8 +2426,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:805:45: (iv_ruleNode= ruleNode EOF )
-            // InternalArduinoDSL.g:806:2: iv_ruleNode= ruleNode EOF
+            // InternalArduinoDSL.g:903:45: (iv_ruleNode= ruleNode EOF )
+            // InternalArduinoDSL.g:904:2: iv_ruleNode= ruleNode EOF
             {
              newCompositeNode(grammarAccess.getNodeRule()); 
             pushFollow(FOLLOW_1);
@@ -2165,7 +2454,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNode"
-    // InternalArduinoDSL.g:812:1: ruleNode returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}' ) ;
+    // InternalArduinoDSL.g:910:1: ruleNode returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}' ) ;
     public final EObject ruleNode() throws RecognitionException {
         EObject current = null;
 
@@ -2179,17 +2468,17 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:818:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}' ) )
-            // InternalArduinoDSL.g:819:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}' )
+            // InternalArduinoDSL.g:916:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}' ) )
+            // InternalArduinoDSL.g:917:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}' )
             {
-            // InternalArduinoDSL.g:819:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}' )
-            // InternalArduinoDSL.g:820:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}'
+            // InternalArduinoDSL.g:917:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}' )
+            // InternalArduinoDSL.g:918:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= '{' ( (lv_components_2_0= ruleComponent ) )+ otherlv_3= '}'
             {
-            // InternalArduinoDSL.g:820:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalArduinoDSL.g:821:4: (lv_name_0_0= RULE_ID )
+            // InternalArduinoDSL.g:918:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalArduinoDSL.g:919:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalArduinoDSL.g:821:4: (lv_name_0_0= RULE_ID )
-            // InternalArduinoDSL.g:822:5: lv_name_0_0= RULE_ID
+            // InternalArduinoDSL.g:919:4: (lv_name_0_0= RULE_ID )
+            // InternalArduinoDSL.g:920:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_5); 
 
@@ -2215,24 +2504,24 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_1, grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_1());
             		
-            // InternalArduinoDSL.g:842:3: ( (lv_components_2_0= ruleComponent ) )+
-            int cnt11=0;
-            loop11:
+            // InternalArduinoDSL.g:940:3: ( (lv_components_2_0= ruleComponent ) )+
+            int cnt13=0;
+            loop13:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt13=2;
+                int LA13_0 = input.LA(1);
 
-                if ( (LA11_0==RULE_ID) ) {
-                    alt11=1;
+                if ( (LA13_0==RULE_ID) ) {
+                    alt13=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt13) {
             	case 1 :
-            	    // InternalArduinoDSL.g:843:4: (lv_components_2_0= ruleComponent )
+            	    // InternalArduinoDSL.g:941:4: (lv_components_2_0= ruleComponent )
             	    {
-            	    // InternalArduinoDSL.g:843:4: (lv_components_2_0= ruleComponent )
-            	    // InternalArduinoDSL.g:844:5: lv_components_2_0= ruleComponent
+            	    // InternalArduinoDSL.g:941:4: (lv_components_2_0= ruleComponent )
+            	    // InternalArduinoDSL.g:942:5: lv_components_2_0= ruleComponent
             	    {
 
             	    					newCompositeNode(grammarAccess.getNodeAccess().getComponentsComponentParserRuleCall_2_0());
@@ -2261,12 +2550,12 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt11 >= 1 ) break loop11;
+            	    if ( cnt13 >= 1 ) break loop13;
                         EarlyExitException eee =
-                            new EarlyExitException(11, input);
+                            new EarlyExitException(13, input);
                         throw eee;
                 }
-                cnt11++;
+                cnt13++;
             } while (true);
 
             otherlv_3=(Token)match(input,18,FOLLOW_2); 
@@ -2296,7 +2585,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleComponent"
-    // InternalArduinoDSL.g:869:1: entryRuleComponent returns [EObject current=null] : iv_ruleComponent= ruleComponent EOF ;
+    // InternalArduinoDSL.g:967:1: entryRuleComponent returns [EObject current=null] : iv_ruleComponent= ruleComponent EOF ;
     public final EObject entryRuleComponent() throws RecognitionException {
         EObject current = null;
 
@@ -2304,8 +2593,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:869:50: (iv_ruleComponent= ruleComponent EOF )
-            // InternalArduinoDSL.g:870:2: iv_ruleComponent= ruleComponent EOF
+            // InternalArduinoDSL.g:967:50: (iv_ruleComponent= ruleComponent EOF )
+            // InternalArduinoDSL.g:968:2: iv_ruleComponent= ruleComponent EOF
             {
              newCompositeNode(grammarAccess.getComponentRule()); 
             pushFollow(FOLLOW_1);
@@ -2332,7 +2621,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleComponent"
-    // InternalArduinoDSL.g:876:1: ruleComponent returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) ) ) ;
+    // InternalArduinoDSL.g:974:1: ruleComponent returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) ) ) ;
     public final EObject ruleComponent() throws RecognitionException {
         EObject current = null;
 
@@ -2344,17 +2633,17 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:882:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) ) ) )
-            // InternalArduinoDSL.g:883:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) ) )
+            // InternalArduinoDSL.g:980:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) ) ) )
+            // InternalArduinoDSL.g:981:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) ) )
             {
-            // InternalArduinoDSL.g:883:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) ) )
-            // InternalArduinoDSL.g:884:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) )
+            // InternalArduinoDSL.g:981:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) ) )
+            // InternalArduinoDSL.g:982:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_properties_1_0= ruleComponentBody ) )
             {
-            // InternalArduinoDSL.g:884:3: ( (lv_name_0_0= RULE_ID ) )
-            // InternalArduinoDSL.g:885:4: (lv_name_0_0= RULE_ID )
+            // InternalArduinoDSL.g:982:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalArduinoDSL.g:983:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalArduinoDSL.g:885:4: (lv_name_0_0= RULE_ID )
-            // InternalArduinoDSL.g:886:5: lv_name_0_0= RULE_ID
+            // InternalArduinoDSL.g:983:4: (lv_name_0_0= RULE_ID )
+            // InternalArduinoDSL.g:984:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_17); 
 
@@ -2376,11 +2665,11 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalArduinoDSL.g:902:3: ( (lv_properties_1_0= ruleComponentBody ) )
-            // InternalArduinoDSL.g:903:4: (lv_properties_1_0= ruleComponentBody )
+            // InternalArduinoDSL.g:1000:3: ( (lv_properties_1_0= ruleComponentBody ) )
+            // InternalArduinoDSL.g:1001:4: (lv_properties_1_0= ruleComponentBody )
             {
-            // InternalArduinoDSL.g:903:4: (lv_properties_1_0= ruleComponentBody )
-            // InternalArduinoDSL.g:904:5: lv_properties_1_0= ruleComponentBody
+            // InternalArduinoDSL.g:1001:4: (lv_properties_1_0= ruleComponentBody )
+            // InternalArduinoDSL.g:1002:5: lv_properties_1_0= ruleComponentBody
             {
 
             					newCompositeNode(grammarAccess.getComponentAccess().getPropertiesComponentBodyParserRuleCall_1_0());
@@ -2430,7 +2719,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleComponentBody"
-    // InternalArduinoDSL.g:925:1: entryRuleComponentBody returns [EObject current=null] : iv_ruleComponentBody= ruleComponentBody EOF ;
+    // InternalArduinoDSL.g:1023:1: entryRuleComponentBody returns [EObject current=null] : iv_ruleComponentBody= ruleComponentBody EOF ;
     public final EObject entryRuleComponentBody() throws RecognitionException {
         EObject current = null;
 
@@ -2438,8 +2727,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:925:54: (iv_ruleComponentBody= ruleComponentBody EOF )
-            // InternalArduinoDSL.g:926:2: iv_ruleComponentBody= ruleComponentBody EOF
+            // InternalArduinoDSL.g:1023:54: (iv_ruleComponentBody= ruleComponentBody EOF )
+            // InternalArduinoDSL.g:1024:2: iv_ruleComponentBody= ruleComponentBody EOF
             {
              newCompositeNode(grammarAccess.getComponentBodyRule()); 
             pushFollow(FOLLOW_1);
@@ -2466,7 +2755,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleComponentBody"
-    // InternalArduinoDSL.g:932:1: ruleComponentBody returns [EObject current=null] : ( ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )? ) ;
+    // InternalArduinoDSL.g:1030:1: ruleComponentBody returns [EObject current=null] : ( ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )? ) ;
     public final EObject ruleComponentBody() throws RecognitionException {
         EObject current = null;
 
@@ -2485,17 +2774,17 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:938:2: ( ( ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )? ) )
-            // InternalArduinoDSL.g:939:2: ( ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )? )
+            // InternalArduinoDSL.g:1036:2: ( ( ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )? ) )
+            // InternalArduinoDSL.g:1037:2: ( ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )? )
             {
-            // InternalArduinoDSL.g:939:2: ( ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )? )
-            // InternalArduinoDSL.g:940:3: ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )?
+            // InternalArduinoDSL.g:1037:2: ( ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )? )
+            // InternalArduinoDSL.g:1038:3: ( (lv_io_0_0= RULE_IO ) ) ( (lv_type_1_0= RULE_TYPE ) ) otherlv_2= 'pin' ( (lv_pin_3_0= RULE_INT ) ) ( (lv_map_4_0= ruleMap ) )? ( (lv_rate_5_0= ruleRate ) )? ( (lv_smoothing_6_0= ruleSmoothing ) )?
             {
-            // InternalArduinoDSL.g:940:3: ( (lv_io_0_0= RULE_IO ) )
-            // InternalArduinoDSL.g:941:4: (lv_io_0_0= RULE_IO )
+            // InternalArduinoDSL.g:1038:3: ( (lv_io_0_0= RULE_IO ) )
+            // InternalArduinoDSL.g:1039:4: (lv_io_0_0= RULE_IO )
             {
-            // InternalArduinoDSL.g:941:4: (lv_io_0_0= RULE_IO )
-            // InternalArduinoDSL.g:942:5: lv_io_0_0= RULE_IO
+            // InternalArduinoDSL.g:1039:4: (lv_io_0_0= RULE_IO )
+            // InternalArduinoDSL.g:1040:5: lv_io_0_0= RULE_IO
             {
             lv_io_0_0=(Token)match(input,RULE_IO,FOLLOW_18); 
 
@@ -2517,11 +2806,11 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalArduinoDSL.g:958:3: ( (lv_type_1_0= RULE_TYPE ) )
-            // InternalArduinoDSL.g:959:4: (lv_type_1_0= RULE_TYPE )
+            // InternalArduinoDSL.g:1056:3: ( (lv_type_1_0= RULE_TYPE ) )
+            // InternalArduinoDSL.g:1057:4: (lv_type_1_0= RULE_TYPE )
             {
-            // InternalArduinoDSL.g:959:4: (lv_type_1_0= RULE_TYPE )
-            // InternalArduinoDSL.g:960:5: lv_type_1_0= RULE_TYPE
+            // InternalArduinoDSL.g:1057:4: (lv_type_1_0= RULE_TYPE )
+            // InternalArduinoDSL.g:1058:5: lv_type_1_0= RULE_TYPE
             {
             lv_type_1_0=(Token)match(input,RULE_TYPE,FOLLOW_19); 
 
@@ -2543,15 +2832,15 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,26,FOLLOW_13); 
+            otherlv_2=(Token)match(input,28,FOLLOW_13); 
 
             			newLeafNode(otherlv_2, grammarAccess.getComponentBodyAccess().getPinKeyword_2());
             		
-            // InternalArduinoDSL.g:980:3: ( (lv_pin_3_0= RULE_INT ) )
-            // InternalArduinoDSL.g:981:4: (lv_pin_3_0= RULE_INT )
+            // InternalArduinoDSL.g:1078:3: ( (lv_pin_3_0= RULE_INT ) )
+            // InternalArduinoDSL.g:1079:4: (lv_pin_3_0= RULE_INT )
             {
-            // InternalArduinoDSL.g:981:4: (lv_pin_3_0= RULE_INT )
-            // InternalArduinoDSL.g:982:5: lv_pin_3_0= RULE_INT
+            // InternalArduinoDSL.g:1079:4: (lv_pin_3_0= RULE_INT )
+            // InternalArduinoDSL.g:1080:5: lv_pin_3_0= RULE_INT
             {
             lv_pin_3_0=(Token)match(input,RULE_INT,FOLLOW_20); 
 
@@ -2573,19 +2862,19 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalArduinoDSL.g:998:3: ( (lv_map_4_0= ruleMap ) )?
-            int alt12=2;
-            int LA12_0 = input.LA(1);
+            // InternalArduinoDSL.g:1096:3: ( (lv_map_4_0= ruleMap ) )?
+            int alt14=2;
+            int LA14_0 = input.LA(1);
 
-            if ( (LA12_0==27) ) {
-                alt12=1;
+            if ( (LA14_0==29) ) {
+                alt14=1;
             }
-            switch (alt12) {
+            switch (alt14) {
                 case 1 :
-                    // InternalArduinoDSL.g:999:4: (lv_map_4_0= ruleMap )
+                    // InternalArduinoDSL.g:1097:4: (lv_map_4_0= ruleMap )
                     {
-                    // InternalArduinoDSL.g:999:4: (lv_map_4_0= ruleMap )
-                    // InternalArduinoDSL.g:1000:5: lv_map_4_0= ruleMap
+                    // InternalArduinoDSL.g:1097:4: (lv_map_4_0= ruleMap )
+                    // InternalArduinoDSL.g:1098:5: lv_map_4_0= ruleMap
                     {
 
                     					newCompositeNode(grammarAccess.getComponentBodyAccess().getMapMapParserRuleCall_4_0());
@@ -2615,19 +2904,19 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalArduinoDSL.g:1017:3: ( (lv_rate_5_0= ruleRate ) )?
-            int alt13=2;
-            int LA13_0 = input.LA(1);
+            // InternalArduinoDSL.g:1115:3: ( (lv_rate_5_0= ruleRate ) )?
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA13_0==30) ) {
-                alt13=1;
+            if ( (LA15_0==32) ) {
+                alt15=1;
             }
-            switch (alt13) {
+            switch (alt15) {
                 case 1 :
-                    // InternalArduinoDSL.g:1018:4: (lv_rate_5_0= ruleRate )
+                    // InternalArduinoDSL.g:1116:4: (lv_rate_5_0= ruleRate )
                     {
-                    // InternalArduinoDSL.g:1018:4: (lv_rate_5_0= ruleRate )
-                    // InternalArduinoDSL.g:1019:5: lv_rate_5_0= ruleRate
+                    // InternalArduinoDSL.g:1116:4: (lv_rate_5_0= ruleRate )
+                    // InternalArduinoDSL.g:1117:5: lv_rate_5_0= ruleRate
                     {
 
                     					newCompositeNode(grammarAccess.getComponentBodyAccess().getRateRateParserRuleCall_5_0());
@@ -2657,19 +2946,19 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalArduinoDSL.g:1036:3: ( (lv_smoothing_6_0= ruleSmoothing ) )?
-            int alt14=2;
-            int LA14_0 = input.LA(1);
+            // InternalArduinoDSL.g:1134:3: ( (lv_smoothing_6_0= ruleSmoothing ) )?
+            int alt16=2;
+            int LA16_0 = input.LA(1);
 
-            if ( (LA14_0==31) ) {
-                alt14=1;
+            if ( (LA16_0==33) ) {
+                alt16=1;
             }
-            switch (alt14) {
+            switch (alt16) {
                 case 1 :
-                    // InternalArduinoDSL.g:1037:4: (lv_smoothing_6_0= ruleSmoothing )
+                    // InternalArduinoDSL.g:1135:4: (lv_smoothing_6_0= ruleSmoothing )
                     {
-                    // InternalArduinoDSL.g:1037:4: (lv_smoothing_6_0= ruleSmoothing )
-                    // InternalArduinoDSL.g:1038:5: lv_smoothing_6_0= ruleSmoothing
+                    // InternalArduinoDSL.g:1135:4: (lv_smoothing_6_0= ruleSmoothing )
+                    // InternalArduinoDSL.g:1136:5: lv_smoothing_6_0= ruleSmoothing
                     {
 
                     					newCompositeNode(grammarAccess.getComponentBodyAccess().getSmoothingSmoothingParserRuleCall_6_0());
@@ -2722,7 +3011,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleMap"
-    // InternalArduinoDSL.g:1059:1: entryRuleMap returns [EObject current=null] : iv_ruleMap= ruleMap EOF ;
+    // InternalArduinoDSL.g:1157:1: entryRuleMap returns [EObject current=null] : iv_ruleMap= ruleMap EOF ;
     public final EObject entryRuleMap() throws RecognitionException {
         EObject current = null;
 
@@ -2730,8 +3019,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:1059:44: (iv_ruleMap= ruleMap EOF )
-            // InternalArduinoDSL.g:1060:2: iv_ruleMap= ruleMap EOF
+            // InternalArduinoDSL.g:1157:44: (iv_ruleMap= ruleMap EOF )
+            // InternalArduinoDSL.g:1158:2: iv_ruleMap= ruleMap EOF
             {
              newCompositeNode(grammarAccess.getMapRule()); 
             pushFollow(FOLLOW_1);
@@ -2758,7 +3047,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMap"
-    // InternalArduinoDSL.g:1066:1: ruleMap returns [EObject current=null] : (otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) ) ) ;
+    // InternalArduinoDSL.g:1164:1: ruleMap returns [EObject current=null] : (otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) ) ) ;
     public final EObject ruleMap() throws RecognitionException {
         EObject current = null;
 
@@ -2773,21 +3062,21 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:1072:2: ( (otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) ) ) )
-            // InternalArduinoDSL.g:1073:2: (otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) ) )
+            // InternalArduinoDSL.g:1170:2: ( (otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) ) ) )
+            // InternalArduinoDSL.g:1171:2: (otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) ) )
             {
-            // InternalArduinoDSL.g:1073:2: (otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) ) )
-            // InternalArduinoDSL.g:1074:3: otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) )
+            // InternalArduinoDSL.g:1171:2: (otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) ) )
+            // InternalArduinoDSL.g:1172:3: otherlv_0= 'map' ( (lv_in_1_0= ruleRange ) ) otherlv_2= '=>' ( (lv_out_3_0= ruleRange ) )
             {
-            otherlv_0=(Token)match(input,27,FOLLOW_13); 
+            otherlv_0=(Token)match(input,29,FOLLOW_13); 
 
             			newLeafNode(otherlv_0, grammarAccess.getMapAccess().getMapKeyword_0());
             		
-            // InternalArduinoDSL.g:1078:3: ( (lv_in_1_0= ruleRange ) )
-            // InternalArduinoDSL.g:1079:4: (lv_in_1_0= ruleRange )
+            // InternalArduinoDSL.g:1176:3: ( (lv_in_1_0= ruleRange ) )
+            // InternalArduinoDSL.g:1177:4: (lv_in_1_0= ruleRange )
             {
-            // InternalArduinoDSL.g:1079:4: (lv_in_1_0= ruleRange )
-            // InternalArduinoDSL.g:1080:5: lv_in_1_0= ruleRange
+            // InternalArduinoDSL.g:1177:4: (lv_in_1_0= ruleRange )
+            // InternalArduinoDSL.g:1178:5: lv_in_1_0= ruleRange
             {
 
             					newCompositeNode(grammarAccess.getMapAccess().getInRangeParserRuleCall_1_0());
@@ -2814,15 +3103,15 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,28,FOLLOW_13); 
+            otherlv_2=(Token)match(input,30,FOLLOW_13); 
 
             			newLeafNode(otherlv_2, grammarAccess.getMapAccess().getEqualsSignGreaterThanSignKeyword_2());
             		
-            // InternalArduinoDSL.g:1101:3: ( (lv_out_3_0= ruleRange ) )
-            // InternalArduinoDSL.g:1102:4: (lv_out_3_0= ruleRange )
+            // InternalArduinoDSL.g:1199:3: ( (lv_out_3_0= ruleRange ) )
+            // InternalArduinoDSL.g:1200:4: (lv_out_3_0= ruleRange )
             {
-            // InternalArduinoDSL.g:1102:4: (lv_out_3_0= ruleRange )
-            // InternalArduinoDSL.g:1103:5: lv_out_3_0= ruleRange
+            // InternalArduinoDSL.g:1200:4: (lv_out_3_0= ruleRange )
+            // InternalArduinoDSL.g:1201:5: lv_out_3_0= ruleRange
             {
 
             					newCompositeNode(grammarAccess.getMapAccess().getOutRangeParserRuleCall_3_0());
@@ -2872,7 +3161,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRange"
-    // InternalArduinoDSL.g:1124:1: entryRuleRange returns [EObject current=null] : iv_ruleRange= ruleRange EOF ;
+    // InternalArduinoDSL.g:1222:1: entryRuleRange returns [EObject current=null] : iv_ruleRange= ruleRange EOF ;
     public final EObject entryRuleRange() throws RecognitionException {
         EObject current = null;
 
@@ -2880,8 +3169,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:1124:46: (iv_ruleRange= ruleRange EOF )
-            // InternalArduinoDSL.g:1125:2: iv_ruleRange= ruleRange EOF
+            // InternalArduinoDSL.g:1222:46: (iv_ruleRange= ruleRange EOF )
+            // InternalArduinoDSL.g:1223:2: iv_ruleRange= ruleRange EOF
             {
              newCompositeNode(grammarAccess.getRangeRule()); 
             pushFollow(FOLLOW_1);
@@ -2908,7 +3197,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRange"
-    // InternalArduinoDSL.g:1131:1: ruleRange returns [EObject current=null] : ( ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) ) ) ;
+    // InternalArduinoDSL.g:1229:1: ruleRange returns [EObject current=null] : ( ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) ) ) ;
     public final EObject ruleRange() throws RecognitionException {
         EObject current = null;
 
@@ -2922,17 +3211,17 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:1137:2: ( ( ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) ) ) )
-            // InternalArduinoDSL.g:1138:2: ( ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) ) )
+            // InternalArduinoDSL.g:1235:2: ( ( ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) ) ) )
+            // InternalArduinoDSL.g:1236:2: ( ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) ) )
             {
-            // InternalArduinoDSL.g:1138:2: ( ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) ) )
-            // InternalArduinoDSL.g:1139:3: ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) )
+            // InternalArduinoDSL.g:1236:2: ( ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) ) )
+            // InternalArduinoDSL.g:1237:3: ( (lv_low_0_0= ruleNUMBER ) ) otherlv_1= ':' ( (lv_high_2_0= ruleNUMBER ) )
             {
-            // InternalArduinoDSL.g:1139:3: ( (lv_low_0_0= ruleNUMBER ) )
-            // InternalArduinoDSL.g:1140:4: (lv_low_0_0= ruleNUMBER )
+            // InternalArduinoDSL.g:1237:3: ( (lv_low_0_0= ruleNUMBER ) )
+            // InternalArduinoDSL.g:1238:4: (lv_low_0_0= ruleNUMBER )
             {
-            // InternalArduinoDSL.g:1140:4: (lv_low_0_0= ruleNUMBER )
-            // InternalArduinoDSL.g:1141:5: lv_low_0_0= ruleNUMBER
+            // InternalArduinoDSL.g:1238:4: (lv_low_0_0= ruleNUMBER )
+            // InternalArduinoDSL.g:1239:5: lv_low_0_0= ruleNUMBER
             {
 
             					newCompositeNode(grammarAccess.getRangeAccess().getLowNUMBERParserRuleCall_0_0());
@@ -2959,15 +3248,15 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,29,FOLLOW_13); 
+            otherlv_1=(Token)match(input,31,FOLLOW_13); 
 
             			newLeafNode(otherlv_1, grammarAccess.getRangeAccess().getColonKeyword_1());
             		
-            // InternalArduinoDSL.g:1162:3: ( (lv_high_2_0= ruleNUMBER ) )
-            // InternalArduinoDSL.g:1163:4: (lv_high_2_0= ruleNUMBER )
+            // InternalArduinoDSL.g:1260:3: ( (lv_high_2_0= ruleNUMBER ) )
+            // InternalArduinoDSL.g:1261:4: (lv_high_2_0= ruleNUMBER )
             {
-            // InternalArduinoDSL.g:1163:4: (lv_high_2_0= ruleNUMBER )
-            // InternalArduinoDSL.g:1164:5: lv_high_2_0= ruleNUMBER
+            // InternalArduinoDSL.g:1261:4: (lv_high_2_0= ruleNUMBER )
+            // InternalArduinoDSL.g:1262:5: lv_high_2_0= ruleNUMBER
             {
 
             					newCompositeNode(grammarAccess.getRangeAccess().getHighNUMBERParserRuleCall_2_0());
@@ -3017,7 +3306,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRate"
-    // InternalArduinoDSL.g:1185:1: entryRuleRate returns [EObject current=null] : iv_ruleRate= ruleRate EOF ;
+    // InternalArduinoDSL.g:1283:1: entryRuleRate returns [EObject current=null] : iv_ruleRate= ruleRate EOF ;
     public final EObject entryRuleRate() throws RecognitionException {
         EObject current = null;
 
@@ -3025,8 +3314,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:1185:45: (iv_ruleRate= ruleRate EOF )
-            // InternalArduinoDSL.g:1186:2: iv_ruleRate= ruleRate EOF
+            // InternalArduinoDSL.g:1283:45: (iv_ruleRate= ruleRate EOF )
+            // InternalArduinoDSL.g:1284:2: iv_ruleRate= ruleRate EOF
             {
              newCompositeNode(grammarAccess.getRateRule()); 
             pushFollow(FOLLOW_1);
@@ -3053,7 +3342,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRate"
-    // InternalArduinoDSL.g:1192:1: ruleRate returns [EObject current=null] : (otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) ) ) ;
+    // InternalArduinoDSL.g:1290:1: ruleRate returns [EObject current=null] : (otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) ) ) ;
     public final EObject ruleRate() throws RecognitionException {
         EObject current = null;
 
@@ -3064,21 +3353,21 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:1198:2: ( (otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) ) ) )
-            // InternalArduinoDSL.g:1199:2: (otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) ) )
+            // InternalArduinoDSL.g:1296:2: ( (otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) ) ) )
+            // InternalArduinoDSL.g:1297:2: (otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) ) )
             {
-            // InternalArduinoDSL.g:1199:2: (otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) ) )
-            // InternalArduinoDSL.g:1200:3: otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) )
+            // InternalArduinoDSL.g:1297:2: (otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) ) )
+            // InternalArduinoDSL.g:1298:3: otherlv_0= 'rate' ( (lv_value_1_0= RULE_INT ) )
             {
-            otherlv_0=(Token)match(input,30,FOLLOW_13); 
+            otherlv_0=(Token)match(input,32,FOLLOW_13); 
 
             			newLeafNode(otherlv_0, grammarAccess.getRateAccess().getRateKeyword_0());
             		
-            // InternalArduinoDSL.g:1204:3: ( (lv_value_1_0= RULE_INT ) )
-            // InternalArduinoDSL.g:1205:4: (lv_value_1_0= RULE_INT )
+            // InternalArduinoDSL.g:1302:3: ( (lv_value_1_0= RULE_INT ) )
+            // InternalArduinoDSL.g:1303:4: (lv_value_1_0= RULE_INT )
             {
-            // InternalArduinoDSL.g:1205:4: (lv_value_1_0= RULE_INT )
-            // InternalArduinoDSL.g:1206:5: lv_value_1_0= RULE_INT
+            // InternalArduinoDSL.g:1303:4: (lv_value_1_0= RULE_INT )
+            // InternalArduinoDSL.g:1304:5: lv_value_1_0= RULE_INT
             {
             lv_value_1_0=(Token)match(input,RULE_INT,FOLLOW_2); 
 
@@ -3123,7 +3412,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSmoothing"
-    // InternalArduinoDSL.g:1226:1: entryRuleSmoothing returns [EObject current=null] : iv_ruleSmoothing= ruleSmoothing EOF ;
+    // InternalArduinoDSL.g:1324:1: entryRuleSmoothing returns [EObject current=null] : iv_ruleSmoothing= ruleSmoothing EOF ;
     public final EObject entryRuleSmoothing() throws RecognitionException {
         EObject current = null;
 
@@ -3131,8 +3420,8 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalArduinoDSL.g:1226:50: (iv_ruleSmoothing= ruleSmoothing EOF )
-            // InternalArduinoDSL.g:1227:2: iv_ruleSmoothing= ruleSmoothing EOF
+            // InternalArduinoDSL.g:1324:50: (iv_ruleSmoothing= ruleSmoothing EOF )
+            // InternalArduinoDSL.g:1325:2: iv_ruleSmoothing= ruleSmoothing EOF
             {
              newCompositeNode(grammarAccess.getSmoothingRule()); 
             pushFollow(FOLLOW_1);
@@ -3159,7 +3448,7 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSmoothing"
-    // InternalArduinoDSL.g:1233:1: ruleSmoothing returns [EObject current=null] : (otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) ) ) ;
+    // InternalArduinoDSL.g:1331:1: ruleSmoothing returns [EObject current=null] : (otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) ) ) ;
     public final EObject ruleSmoothing() throws RecognitionException {
         EObject current = null;
 
@@ -3171,21 +3460,21 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalArduinoDSL.g:1239:2: ( (otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) ) ) )
-            // InternalArduinoDSL.g:1240:2: (otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) ) )
+            // InternalArduinoDSL.g:1337:2: ( (otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) ) ) )
+            // InternalArduinoDSL.g:1338:2: (otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) ) )
             {
-            // InternalArduinoDSL.g:1240:2: (otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) ) )
-            // InternalArduinoDSL.g:1241:3: otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) )
+            // InternalArduinoDSL.g:1338:2: (otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) ) )
+            // InternalArduinoDSL.g:1339:3: otherlv_0= 'smoothing' ( (lv_value_1_0= ruleNUMBER ) )
             {
-            otherlv_0=(Token)match(input,31,FOLLOW_13); 
+            otherlv_0=(Token)match(input,33,FOLLOW_13); 
 
             			newLeafNode(otherlv_0, grammarAccess.getSmoothingAccess().getSmoothingKeyword_0());
             		
-            // InternalArduinoDSL.g:1245:3: ( (lv_value_1_0= ruleNUMBER ) )
-            // InternalArduinoDSL.g:1246:4: (lv_value_1_0= ruleNUMBER )
+            // InternalArduinoDSL.g:1343:3: ( (lv_value_1_0= ruleNUMBER ) )
+            // InternalArduinoDSL.g:1344:4: (lv_value_1_0= ruleNUMBER )
             {
-            // InternalArduinoDSL.g:1246:4: (lv_value_1_0= ruleNUMBER )
-            // InternalArduinoDSL.g:1247:5: lv_value_1_0= ruleNUMBER
+            // InternalArduinoDSL.g:1344:4: (lv_value_1_0= ruleNUMBER )
+            // InternalArduinoDSL.g:1345:5: lv_value_1_0= ruleNUMBER
             {
 
             					newCompositeNode(grammarAccess.getSmoothingAccess().getValueNUMBERParserRuleCall_1_0());
@@ -3240,10 +3529,10 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000018042L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x00000000000000E0L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000018022L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x00000000060000E0L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000180002L});
@@ -3251,16 +3540,16 @@ public class InternalArduinoDSLParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000800000L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000001000002L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000042L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000040040L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000040020L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x00000000C8000002L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x00000000C0000002L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000320000002L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000300000002L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000080000000L});
 
 }

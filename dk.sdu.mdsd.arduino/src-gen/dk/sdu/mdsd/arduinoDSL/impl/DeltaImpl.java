@@ -4,19 +4,42 @@
 package dk.sdu.mdsd.arduinoDSL.impl;
 
 import dk.sdu.mdsd.arduinoDSL.ArduinoDSLPackage;
+import dk.sdu.mdsd.arduinoDSL.Attribute;
 import dk.sdu.mdsd.arduinoDSL.Delta;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Delta</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link dk.sdu.mdsd.arduinoDSL.impl.DeltaImpl#getAttr <em>Attr</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class DeltaImpl extends ValueImpl implements Delta
 {
+  /**
+   * The cached value of the '{@link #getAttr() <em>Attr</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAttr()
+   * @generated
+   * @ordered
+   */
+  protected Attribute attr;
+
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -36,6 +59,138 @@ public class DeltaImpl extends ValueImpl implements Delta
   protected EClass eStaticClass()
   {
     return ArduinoDSLPackage.Literals.DELTA;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Attribute getAttr()
+  {
+    return attr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAttr(Attribute newAttr, NotificationChain msgs)
+  {
+    Attribute oldAttr = attr;
+    attr = newAttr;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ArduinoDSLPackage.DELTA__ATTR, oldAttr, newAttr);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAttr(Attribute newAttr)
+  {
+    if (newAttr != attr)
+    {
+      NotificationChain msgs = null;
+      if (attr != null)
+        msgs = ((InternalEObject)attr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ArduinoDSLPackage.DELTA__ATTR, null, msgs);
+      if (newAttr != null)
+        msgs = ((InternalEObject)newAttr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ArduinoDSLPackage.DELTA__ATTR, null, msgs);
+      msgs = basicSetAttr(newAttr, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ArduinoDSLPackage.DELTA__ATTR, newAttr, newAttr));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case ArduinoDSLPackage.DELTA__ATTR:
+        return basicSetAttr(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType)
+  {
+    switch (featureID)
+    {
+      case ArduinoDSLPackage.DELTA__ATTR:
+        return getAttr();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void eSet(int featureID, Object newValue)
+  {
+    switch (featureID)
+    {
+      case ArduinoDSLPackage.DELTA__ATTR:
+        setAttr((Attribute)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID)
+  {
+    switch (featureID)
+    {
+      case ArduinoDSLPackage.DELTA__ATTR:
+        setAttr((Attribute)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID)
+  {
+    switch (featureID)
+    {
+      case ArduinoDSLPackage.DELTA__ATTR:
+        return attr != null;
+    }
+    return super.eIsSet(featureID);
   }
 
 } //DeltaImpl

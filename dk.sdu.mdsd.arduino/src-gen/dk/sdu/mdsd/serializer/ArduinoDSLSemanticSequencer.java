@@ -10,6 +10,7 @@ import dk.sdu.mdsd.arduinoDSL.Attribute;
 import dk.sdu.mdsd.arduinoDSL.Component;
 import dk.sdu.mdsd.arduinoDSL.ComponentBody;
 import dk.sdu.mdsd.arduinoDSL.Condition;
+import dk.sdu.mdsd.arduinoDSL.Delta;
 import dk.sdu.mdsd.arduinoDSL.Div;
 import dk.sdu.mdsd.arduinoDSL.Exp;
 import dk.sdu.mdsd.arduinoDSL.Factor;
@@ -17,6 +18,7 @@ import dk.sdu.mdsd.arduinoDSL.Map;
 import dk.sdu.mdsd.arduinoDSL.Minus;
 import dk.sdu.mdsd.arduinoDSL.Mult;
 import dk.sdu.mdsd.arduinoDSL.Node;
+import dk.sdu.mdsd.arduinoDSL.NumberLiteral;
 import dk.sdu.mdsd.arduinoDSL.Plus;
 import dk.sdu.mdsd.arduinoDSL.Program;
 import dk.sdu.mdsd.arduinoDSL.Range;
@@ -24,7 +26,7 @@ import dk.sdu.mdsd.arduinoDSL.Rate;
 import dk.sdu.mdsd.arduinoDSL.Rule;
 import dk.sdu.mdsd.arduinoDSL.RuleBody;
 import dk.sdu.mdsd.arduinoDSL.Smoothing;
-import dk.sdu.mdsd.arduinoDSL.Value;
+import dk.sdu.mdsd.arduinoDSL.State;
 import dk.sdu.mdsd.services.ArduinoDSLGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -66,6 +68,9 @@ public class ArduinoDSLSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case ArduinoDSLPackage.CONDITION:
 				sequence_Condition(context, (Condition) semanticObject); 
 				return; 
+			case ArduinoDSLPackage.DELTA:
+				sequence_Delta(context, (Delta) semanticObject); 
+				return; 
 			case ArduinoDSLPackage.DIV:
 				sequence_ExpStrongOp(context, (Div) semanticObject); 
 				return; 
@@ -86,6 +91,9 @@ public class ArduinoDSLSemanticSequencer extends AbstractDelegatingSemanticSeque
 				return; 
 			case ArduinoDSLPackage.NODE:
 				sequence_Node(context, (Node) semanticObject); 
+				return; 
+			case ArduinoDSLPackage.NUMBER_LITERAL:
+				sequence_NumberLiteral(context, (NumberLiteral) semanticObject); 
 				return; 
 			case ArduinoDSLPackage.PLUS:
 				sequence_ExpWeakOp(context, (Plus) semanticObject); 
@@ -108,8 +116,8 @@ public class ArduinoDSLSemanticSequencer extends AbstractDelegatingSemanticSeque
 			case ArduinoDSLPackage.SMOOTHING:
 				sequence_Smoothing(context, (Smoothing) semanticObject); 
 				return; 
-			case ArduinoDSLPackage.VALUE:
-				sequence_Value(context, (Value) semanticObject); 
+			case ArduinoDSLPackage.STATE:
+				sequence_State(context, (State) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -145,7 +153,6 @@ public class ArduinoDSLSemanticSequencer extends AbstractDelegatingSemanticSeque
 	 *     Factor.Factor_1_0 returns Attribute
 	 *     Value returns Attribute
 	 *     Attribute returns Attribute
-	 *     Delta returns Attribute
 	 *
 	 * Constraint:
 	 *     (name=[Node|ID] component=[Component|ID])
@@ -224,6 +231,29 @@ public class ArduinoDSLSemanticSequencer extends AbstractDelegatingSemanticSeque
 		feeder.accept(grammarAccess.getConditionAccess().getLeftExpParserRuleCall_0_0(), semanticObject.getLeft());
 		feeder.accept(grammarAccess.getConditionAccess().getOperatorBOOLEAN_OPERATORTerminalRuleCall_1_0(), semanticObject.getOperator());
 		feeder.accept(grammarAccess.getConditionAccess().getRightExpParserRuleCall_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Exp returns Delta
+	 *     Exp.Exp_1_0 returns Delta
+	 *     Factor returns Delta
+	 *     Factor.Factor_1_0 returns Delta
+	 *     Value returns Delta
+	 *     Delta returns Delta
+	 *
+	 * Constraint:
+	 *     attr=Attribute
+	 */
+	protected void sequence_Delta(ISerializationContext context, Delta semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ArduinoDSLPackage.Literals.DELTA__ATTR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ArduinoDSLPackage.Literals.DELTA__ATTR));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDeltaAccess().getAttrAttributeParserRuleCall_0_0(), semanticObject.getAttr());
 		feeder.finish();
 	}
 	
@@ -363,6 +393,23 @@ public class ArduinoDSLSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
+	 *     Exp returns NumberLiteral
+	 *     Exp.Exp_1_0 returns NumberLiteral
+	 *     Factor returns NumberLiteral
+	 *     Factor.Factor_1_0 returns NumberLiteral
+	 *     Value returns NumberLiteral
+	 *     NumberLiteral returns NumberLiteral
+	 *
+	 * Constraint:
+	 *     (float=DECIMAL | int=INT)
+	 */
+	protected void sequence_NumberLiteral(ISerializationContext context, NumberLiteral semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Program returns Program
 	 *
 	 * Constraint:
@@ -456,16 +503,17 @@ public class ArduinoDSLSemanticSequencer extends AbstractDelegatingSemanticSeque
 	
 	/**
 	 * Contexts:
-	 *     Exp returns Value
-	 *     Exp.Exp_1_0 returns Value
-	 *     Factor returns Value
-	 *     Factor.Factor_1_0 returns Value
-	 *     Value returns Value
+	 *     Exp returns State
+	 *     Exp.Exp_1_0 returns State
+	 *     Factor returns State
+	 *     Factor.Factor_1_0 returns State
+	 *     Value returns State
+	 *     State returns State
 	 *
 	 * Constraint:
-	 *     {Value}
+	 *     (value='on' | value='off')
 	 */
-	protected void sequence_Value(ISerializationContext context, Value semanticObject) {
+	protected void sequence_State(ISerializationContext context, State semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -34,7 +34,7 @@ terminal BOOLEAN_OPERATOR:
 ;
 
 Value:
-    {Value} NUMBER | Attribute | Delta | {Value} STATE
+     NumberLiteral | Attribute | Delta | State
 ;
 
 Attribute:
@@ -42,13 +42,19 @@ Attribute:
 ;
 
 Delta:
-    Attribute 'delta'
+    attr=Attribute 'delta'
 ;
+
+NumberLiteral:
+	float=DECIMAL | int=INT
+;
+
+terminal DECIMAL: INT '.' INT;
 
 NUMBER returns ecore::EFloat: INT ('.' INT)?;
 
-terminal STATE:
-    'on' | 'off'
+State:
+    value=('on' | 'off')
 ;
 
 RuleBody:
