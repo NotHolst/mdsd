@@ -55,3 +55,5 @@ local.properties
 .worksheet 
 *._trace
 *.xtendbin
+
+dk\.sdu\.mdsd\.arduino/bin/dk/sdu/mdsd/generator/ArduinoDSLGenerator\.class
