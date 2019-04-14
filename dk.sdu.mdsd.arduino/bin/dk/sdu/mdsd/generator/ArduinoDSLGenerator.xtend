@@ -213,11 +213,14 @@ while (network.available()) {
 					«ENDIF»
 				«ENDIF»
 				writeBuffer(value, buff);
+				
 				«FOR rule : input.allContents.filter(Rule).filter[(it.condition.left as Attribute)?.component == component].toIterable»
-					«FOR attribute : rule.body.assignment.map[it.attribute]»
+					«val exist = new HashSet<Node>»
+					«FOR attribute : rule.body.assignment.map[it.attribute].filter[exist.add(it.name)]»
 						forceSend(«nodeIDs.get(attribute.name.name)», buff, sizeof(buff));
 					«ENDFOR»
 				«ENDFOR»
+				
 				«component.name»LastTransfer = millis();	
 			}
 		«ENDFOR»

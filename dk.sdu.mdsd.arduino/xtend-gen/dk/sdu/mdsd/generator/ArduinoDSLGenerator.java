@@ -669,6 +669,9 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.append("writeBuffer(value, buff);");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.newLine();
         {
           final Function1<Rule, Boolean> _function_6 = (Rule it) -> {
             Expression _left_12 = it.getCondition().getLeft();
@@ -680,12 +683,19 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
           };
           Iterable<Rule> _iterable_3 = IteratorExtensions.<Rule>toIterable(IteratorExtensions.<Rule>filter(Iterators.<Rule>filter(input.getAllContents(), Rule.class), _function_6));
           for(final Rule rule_3 : _iterable_3) {
+            _builder.append("\t");
+            _builder.append("\t");
+            final HashSet<Node> exist = new HashSet<Node>();
+            _builder.newLineIfNotEmpty();
             {
               final Function1<Assignment, Attribute> _function_7 = (Assignment it) -> {
                 return it.getAttribute();
               };
-              List<Attribute> _map_1 = ListExtensions.<Assignment, Attribute>map(rule_3.getBody().getAssignment(), _function_7);
-              for(final Attribute attribute : _map_1) {
+              final Function1<Attribute, Boolean> _function_8 = (Attribute it) -> {
+                return Boolean.valueOf(exist.add(it.getName()));
+              };
+              Iterable<Attribute> _filter_2 = IterableExtensions.<Attribute>filter(ListExtensions.<Assignment, Attribute>map(rule_3.getBody().getAssignment(), _function_7), _function_8);
+              for(final Attribute attribute : _filter_2) {
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("forceSend(");
@@ -697,6 +707,9 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
             }
           }
         }
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.newLine();
         _builder.append("\t");
         _builder.append("\t");
         String _name_19 = component_1.getName();
