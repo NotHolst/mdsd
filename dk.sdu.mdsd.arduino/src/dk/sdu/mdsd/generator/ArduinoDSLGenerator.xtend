@@ -23,7 +23,7 @@ import java.util.HashSet
 
 class ArduinoDSLGenerator extends AbstractGenerator  {
 	
-	val nodeIDs = new HashMap<String, Integer>();
+	val nodeIDs = new HashMap<String, String>();
 	val componentIDs = new HashMap<String, Integer>();
 	
 	val componentValueNameSet = new HashSet<String>();
@@ -34,7 +34,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val nodes = input.allContents.filter(Node).toList();
 		for(var i = 0; i < nodes.size(); i++) {
-			nodeIDs.put(nodes.get(i).name, i+1);
+			nodeIDs.put(nodes.get(i).name,  createID(i));
 		}
 		
 		input.allContents.filter(Node).forEach[components.addAll(it.components)]
@@ -48,6 +48,23 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 		input.allContents.filter(Node).forEach[createFileAndClean(it, input, fsa)];
 	}
 	
+	def createID(int i) {
+		if(i == 0){
+			return "00";
+		} else if(i < 6) {
+			var first = i % 6;
+			return "0" + first;
+		} else if(i < 156){
+			var id = "0" + ((((i - 6)/25)<<0) ) + (((i-1)%5) +1) + (((((i-1)/5 << 0)-1)%5) +1)
+			if(id.charAt(1) == '0'.charAt(0)){
+				return id.substring(1);
+			}
+			return id
+		} else {
+			throw new Exception("Input out of range, more than 156 nodes are not supported");
+		}
+	}
+	
 	def createFileAndClean(Node node, Resource input, IFileSystemAccess2 fsa) {
 		fsa.generateFile(node.name + ".ino", generateNodeFile(node, input, fsa))
 		this.componentValueNameSet.clear
@@ -59,7 +76,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	// Generated file, do not edit
 	// «node.name»
 	#include <SPI.h>
-	#include <nRF24L01.h>
+	#include <RF24Network.h>
 	#include <RF24.h>
 	
 	typedef union {
@@ -89,9 +106,19 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	 return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 	}
 	
+	//Radio variables
+	RF24 radio(7,8);
+	RF24Network network(radio);
+	const uint16_t this_node = «nodeIDs.get(node.name)»;
+	
 	//local outputComponents
 	«FOR component : node.components»
-	int «component.name»Pin = A«component.properties.pin»
+	int «component.name»Pin = «IF component.properties.type.equals('analog')»A«ENDIF»«component.properties.pin»;
+	«IF component.properties.io == "input"»
+		const long «component.name»Rate = «component.properties.rate?.value»;
+		long «component.name»LastTransfer = 0;
+	«ENDIF»
+	
 	«ENDFOR»
 	
 	//Incoming components
@@ -104,29 +131,34 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 		«ENDIF»
 	«ENDFOR»
 	«FOR variable : componentValueNameSet»
-		Float «variable»
+		float «variable»;
 	«ENDFOR»
 	
 	void setup() {
+		//Radio
+		radio.begin();
+		network.begin(90, this_node);
 	}
 	
 	void loop() {
+		network.update();
 		«IF input.allContents.filter(Rule).toIterable.exists[it.body.assignment.findFirst[it.attribute.name.name == node.name] !== null]»
 		
 		««« READ INCOMING RADIO
-		if (radio.available()) {
-			char text[32] = "";
-			radio.read(&text, sizeof(text));
+while (network.available()) {
+			RF24NetworkHeader header;
+			char buff[6];
+			network.read(header, &buff, sizeof(buff));
 			
 			IntByte id;
-			id.byteval[0] = text[0];
-		    id.byteval[1] = text[1];
+			id.byteval[0] = buff[0];
+		    id.byteval[1] = buff[1];
 		    
 		    FloatByte value;
-		    value.byteval[0] = text[2];
-		    value.byteval[1] = text[3];
-		    value.byteval[2] = text[4];
-		    value.byteval[3] = text[5];
+		    value.byteval[0] = buff[2];
+		    value.byteval[1] = buff[3];
+		    value.byteval[2] = buff[4];
+		    value.byteval[3] = buff[5];
 		    
 		««« Determine which incoming component and set its value
 			«FOR rule : input.allContents.filter(Rule).toIterable»
@@ -138,7 +170,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 			«ENDFOR»
 			«FOR variable : componentValueNameUpdateSet.entrySet»
 				if(id.intval == «variable.value») {
-					«variable.key» = value.floatval
+					«variable.key» = value.floatval;
 				}
 			«ENDFOR»
 			
@@ -149,7 +181,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 				«IF (rule.condition.left instanceof Attribute)»if (id.intval == «componentIDs.get((rule.condition.left as Attribute).name.name + (rule.condition.left as Attribute).component.name)») {«ENDIF»
 					if («valueOf(rule.condition.left)»«IF(rule.condition.left instanceof Attribute)»«componentIDs.get((rule.condition.left as Attribute).name.name + valueOf(rule.condition.left))»«ENDIF»«IF(rule.condition.left instanceof Attribute)»Value «ENDIF» «rule.condition.operator» «valueOf(rule.condition.right)») {
 						«FOR myAssignment : rule.body.assignment.filter[it.attribute.name.name == node.name]»
-							digitalWrite(«myAssignment.attribute.component.name»Pin, «valueOf(myAssignment.value)»)
+							digitalWrite(«myAssignment.attribute.component.name»Pin, «valueOf(myAssignment.value)»);
 						«ENDFOR»
 					}
 				«IF (rule.condition.left instanceof Attribute)»}«ENDIF»
@@ -158,6 +190,45 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 		
 		}
 		«ENDIF»
+		//Sample and Transmit sensor data
+		«FOR component : node.components.filter[it.properties.io == "input"]»
+			if(millis() > «component.name»LastTransfer + «component.name»Rate){
+				char buff[6];
+				IntByte id;
+				id.intval = «componentIDs.get(node.name + component.name)»;
+				writeBuffer(id, buff);
+				
+				FloatByte value;
+				«IF component.properties.map !== null»
+					«IF component.properties.type == "analog"»
+						value.floatval = mapfloat(analogRead(«component.name»Pin), «component.properties.map.in.low», «component.properties.map.in.high», «component.properties.map.out.low», «component.properties.map.out.high»);
+					«ELSE»
+						value.floatval = mapfloat(digitalRead(«component.name»Pin), «component.properties.map.in.low», «component.properties.map.in.high», «component.properties.map.out.low», «component.properties.map.out.high»);
+					«ENDIF»
+				«ELSE»
+					«IF component.properties.type == "analog"»
+						value.floatval = analogRead(«component.name»Pin);
+					«ELSE»
+						value.floatval = digitalRead(«component.name»Pin);
+					«ENDIF»
+				«ENDIF»
+				writeBuffer(value, buff);
+				«FOR rule : input.allContents.filter(Rule).filter[(it.condition.left as Attribute)?.component == component].toIterable»
+					«FOR attribute : rule.body.assignment.map[it.attribute]»
+						forceSend(«nodeIDs.get(attribute.name.name)», buff, sizeof(buff));
+					«ENDFOR»
+				«ENDFOR»
+				«component.name»LastTransfer = millis();	
+			}
+		«ENDFOR»
+	}
+	
+	void forceSend(uint16_t addressOfReceiver, char buff[], int bufferLength){
+		RF24NetworkHeader header(addressOfReceiver);
+		bool ok = false;
+		while(!ok){
+			ok = network.write(header, buff, sizeof(buff));
+		}
 	}
 	'''
 	
