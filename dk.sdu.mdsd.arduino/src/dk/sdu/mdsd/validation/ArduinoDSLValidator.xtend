@@ -50,17 +50,15 @@ class ArduinoDSLValidator extends AbstractArduinoDSLValidator {
 	}
 
 	@Check
-	def void checkDuplicateComponentNames(Component component) {
-		
-		var componentNames = new HashSet<String>();
-		val nodeComponents = component.eContainer.eContents.toList;
+	def void checkDuplicateComponentNames(Node node) {
 
-		for (c : nodeComponents) {
-			val name = (c as Component).name;
+		var componentNames = new HashSet<String>();
+
+		for (component : node.components) {
+			val name = component.name;
 			if (componentNames.contains(name)) {
 				error("Name is already used", ArduinoDSLPackage.eINSTANCE.component_Name)
-			} else
-				componentNames.add(name)
+			}
 		}
 	}
 
