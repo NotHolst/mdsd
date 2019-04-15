@@ -57,5 +57,6 @@ local.properties
 *.xtendbin
 
 bin/
+test-bin/
 src-gen/
 xtend-gen/

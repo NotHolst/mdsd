@@ -237,6 +237,9 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 		//Radio
 		radio.begin();
 		network.begin(90, this_node);
+		«FOR component : node.components.filter[it.properties.type == "digital" || it.properties.io == "output"]»
+			 pinMode(«component.name»Pin, «component.properties.io.toUpperCase»);
+		«ENDFOR»
 	}
 	
 	void loop() {
@@ -336,7 +339,7 @@ while (network.available()) {
 		RF24NetworkHeader header(addressOfReceiver);
 		bool ok = false;
 		while(!ok){
-			ok = network.write(header, buff, sizeof(buff));
+			ok = network.write(header, buff, bufferLength);
 		}
 	}
 	
@@ -348,7 +351,7 @@ while (network.available()) {
 		switch x {
 			State: {
 				var out = assignment.attribute.component.properties.map?.out
-				if(out === null) return if (x == "on") "1" else "0"
+				if(out === null) return if (x.value == "on") "1" else "0"
 				return if (x == "on") ""+out.high+"" else ""+out.low+""
 			}
 			Exp: {
