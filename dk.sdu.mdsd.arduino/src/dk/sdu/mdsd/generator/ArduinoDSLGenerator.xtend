@@ -25,10 +25,12 @@ import dk.sdu.mdsd.arduinoDSL.Exp
 import dk.sdu.mdsd.arduinoDSL.Factor
 import dk.sdu.mdsd.arduinoDSL.Operator
 import dk.sdu.mdsd.arduinoDSL.Condition
+import org.eclipse.emf.ecore.EObject
+import dk.sdu.mdsd.arduinoDSL.Assignment
 
 class ArduinoDSLGenerator extends AbstractGenerator  {
 	
-	val nodeIDs = new HashMap<String, String>();
+	val nodeRadioIDs = new HashMap<String, String>();
 	val componentIDs = new HashMap<String, Integer>();
 	
 	val componentValueNameSet = new HashSet<String>();
@@ -37,9 +39,14 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	
 	
 	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		nodeRadioIDs.clear();
+		componentIDs.clear();
+		componentValueNameSet.clear();
+		componentValueNameUpdateSet.clear();
+		
 		val nodes = input.allContents.filter(Node).toList();
 		for(var i = 0; i < nodes.size(); i++) {
-			nodeIDs.put(nodes.get(i).name,  createID(i));
+			nodeRadioIDs.put(nodes.get(i).name,  createID(i));
 		}
 		
 		input.allContents.filter(Node).forEach[components.addAll(it.components)]
@@ -49,9 +56,8 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 				componentIDs.put(node.name + node.components.get(i).name, id++);
 			}
 		}
-		fsa.generateFile("ids.ino", nodeIDs.toString + "\n" + componentIDs.toString());
-        input.allContents.filter(Node).forEach[createFileAndClean(it, input, fsa)];
-		
+		fsa.generateFile("ids.txt", nodeRadioIDs.toString + "\n" + componentIDs.toString());
+		input.allContents.filter(Node).forEach[createFileAndClean(it, input, fsa)];
 	}
 	
 	def String generateExpressions(Expression exp) {
@@ -200,7 +206,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	//Radio variables
 	RF24 radio(7,8);
 	RF24Network network(radio);
-	const uint16_t this_node = «nodeIDs.get(node.name)»;
+	const uint16_t this_node = «nodeRadioIDs.get(node.name)»;
 	
 	//local outputComponents
 	«FOR component : node.components»
@@ -279,7 +285,7 @@ while (network.available()) {
 				«IF getAttributes(rule.condition).length > 0»if («generateAttributeComponentIdConditions(getAttributes(rule.condition))») {«ENDIF»
 					if («generateExpressions(rule.condition.left)» «rule.condition.operator» «generateExpressions(rule.condition.right)») {
 						«FOR myAssignment : rule.body.assignment.filter[it.attribute.name.name == node.name]»
-							«myAssignment.attribute.component.properties.type»Write(«myAssignment.attribute.component.name»Pin, «valueOf(myAssignment.value)»);
+							«myAssignment.attribute.component.properties.type»Write(«myAssignment.attribute.component.name»Pin, «valueToString(myAssignment)»);
 						«ENDFOR»
 					}
 				«IF getAttributes(rule.condition).length > 0»}«ENDIF»
@@ -306,8 +312,18 @@ while (network.available()) {
 				
 				«FOR rule : input.allContents.filter(Rule).filter[getAttributes(it.condition).map[it.component].contains(component)].toIterable»
 					«val exist = new HashSet<Node>»
-					«FOR attribute : rule.body.assignment.map[it.attribute].filter[exist.add(it.name)]»
-						forceSend(«nodeIDs.get(attribute.name.name)», buff, sizeof(buff));
+					«FOR assignment : rule.body.assignment» ««« .map[it.attribute].filter[exist.add(it.name)]»
+						«IF exist.add(assignment.attribute.name)»
+							«IF !assignment.attribute.name.name.equals(node.name)»
+								forceSend(«nodeRadioIDs.get(assignment.attribute.name.name)», buff, sizeof(buff));
+							«ELSE»
+								«IF assignment.attribute.component.properties.type == "analog"»
+									analogWrite(«assignment.attribute.component.name»Pin, «valueToString(assignment)»);
+								«ELSE»
+									digitalWrite(«assignment.attribute.component.name»Pin, «valueToString(assignment)»);
+								«ENDIF»
+							«ENDIF»
+						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»
 				
@@ -323,25 +339,25 @@ while (network.available()) {
 			ok = network.write(header, buff, sizeof(buff));
 		}
 	}
+	
 	'''
 	
-	def valueOf(Object x) {
-		System.out.println(x)
+	def String valueToString(Assignment assignment) {
+		
+		var x = assignment.value
 		switch x {
-			Attribute: x.component.name
-			NumberLiteral: if (x.float !== null) {
-				x.float
-			} else {
-				x.int
+			State: {
+				var out = assignment.attribute.component.properties.map?.out
+				if(out === null) return if (x == "on") "1" else "0"
+				return if (x == "on") ""+out.high+"" else ""+out.low+""
 			}
-			State: if(x.value == 'on') {
-				1
-			} else {
-				0
+			Exp: {
+				return generateExpressions(x)
 			}
-			//Delta: TO be determined
 		}
 	}
+	
+
 	
 	
 }
