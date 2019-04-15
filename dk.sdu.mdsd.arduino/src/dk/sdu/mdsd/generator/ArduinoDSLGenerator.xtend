@@ -79,7 +79,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 				generateExpressionString(x.right, sb)
 			}
 			Operator: {
-				sb.append(x.operator)
+				 sb.append(" " + x.operator + " ")
 			}
 			NumberLiteral: {
 				if (x.float !== null) {
@@ -278,13 +278,10 @@ while (network.available()) {
 					«variable.key» = value.floatval;
 				}
 			«ENDFOR»
-			
-			
-			
-			
+
 		««« RULES
 		«FOR rule : input.allContents.filter(Rule).toIterable»
-		«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
+			«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
 				«IF getAttributes(rule.condition).length > 0»if («generateAttributeComponentIdConditions(getAttributes(rule.condition))») {«ENDIF»
 					if («generateExpressions(rule.condition.left)» «rule.condition.operator» «generateExpressions(rule.condition.right)») {
 						«FOR myAssignment : rule.body.assignment.filter[it.attribute.name.name == node.name]»
@@ -313,8 +310,8 @@ while (network.available()) {
 				«ENDIF»
 				writeBuffer(value, buff);
 				
+				«val exist = new HashSet<Node>»
 				«FOR rule : input.allContents.filter(Rule).filter[getAttributes(it.condition).map[it.component].contains(component)].toIterable»
-					«val exist = new HashSet<Node>»
 					«FOR assignment : rule.body.assignment» ««« .map[it.attribute].filter[exist.add(it.name)]»
 						«IF exist.add(assignment.attribute.name)»
 							«IF !assignment.attribute.name.name.equals(node.name)»
