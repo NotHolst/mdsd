@@ -20,6 +20,11 @@ import dk.sdu.mdsd.arduinoDSL.State
 import dk.sdu.mdsd.arduinoDSL.Delta
 import java.util.Set
 import java.util.HashSet
+import dk.sdu.mdsd.arduinoDSL.Expression
+import dk.sdu.mdsd.arduinoDSL.Exp
+import dk.sdu.mdsd.arduinoDSL.Factor
+import dk.sdu.mdsd.arduinoDSL.Operator
+import dk.sdu.mdsd.arduinoDSL.Condition
 
 class ArduinoDSLGenerator extends AbstractGenerator  {
 	
@@ -45,7 +50,93 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 			}
 		}
 		fsa.generateFile("ids.ino", nodeIDs.toString + "\n" + componentIDs.toString());
-		input.allContents.filter(Node).forEach[createFileAndClean(it, input, fsa)];
+        input.allContents.filter(Node).forEach[createFileAndClean(it, input, fsa)];
+		
+	}
+	
+	def String generateExpressions(Expression exp) {
+		val sb = new StringBuilder()
+		generateExpressionString(exp, sb)
+		return sb.toString();
+	}
+	
+	def void generateExpressionString(Object x, StringBuilder sb){
+		switch x {
+			Exp: {
+				generateExpressionString(x.left, sb)
+				generateExpressionString(x.operator, sb)
+				generateExpressionString(x.right, sb)
+			}
+			Factor:{
+				generateExpressionString(x.left,sb )
+				generateExpressionString(x.operator, sb)
+				generateExpressionString(x.right, sb)
+			}
+			Operator: {
+				sb.append(x.operator)
+			}
+			NumberLiteral: {
+				if (x.float !== null) {
+					sb.append(x.float)
+				} else {
+					sb.append(x.int)
+				}
+			}
+			Attribute: {
+				var variableName = x.component.name +componentIDs.get(x.name.name + x.component.name) + "Value"
+				sb.append(variableName)
+			}
+			Delta: {
+				var variableName = x.attr.component.name +componentIDs.get(x.attr.name.name + x.attr.component.name) + "Value"
+				sb.append(variableName)
+			}
+		}
+	}
+	
+	def Attribute[] getAttributes(Condition condition){
+		
+		val attributes = new ArrayList<Attribute>()
+		
+		getAttributeRecursive(condition.left, attributes)
+		getAttributeRecursive(condition.right, attributes)
+		
+		return attributes
+	}
+	
+	def getAttributeRecursive(Object x, ArrayList<Attribute> list){
+		switch x {
+			Exp: {
+				getAttributeRecursive(x.left, list)
+				getAttributeRecursive(x.right, list)
+			}
+			Factor:{
+				getAttributeRecursive(x.left, list)
+				getAttributeRecursive(x.right, list)
+			}
+			Attribute: {
+				list.add(x)
+			}
+			Delta: {
+				list.add(x.attr)
+			}
+			default: {
+				// do nathing
+			}
+		}
+	}
+	
+	
+	def String generateAttributeComponentIdConditions(Attribute[] attributes){
+		val sb = new StringBuilder()
+		
+		
+		var i = 0
+		for (attribute : attributes) {
+			sb.append('''id.intval == «componentIDs.get(attribute.name.name + attribute.component.name)»«if (i != attributes.length-1) " || " else "" »''')
+			i++
+		}
+		
+		return sb.toString()
 	}
 	
 	def createID(int i) {
@@ -124,9 +215,11 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	//Incoming components
 	«FOR rule : input.allContents.filter(Rule).toIterable»
 		«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
-			«IF rule.condition.left instanceof Attribute»
-				««« The IF statement below is because we don't want to write anything. Otherwise it would write true/false in the file
-				«IF componentValueNameSet.add(valueOf(rule.condition.left).toString() + componentIDs.get((rule.condition.left as Attribute).name.name + valueOf(rule.condition.left)) + 'Value')»«ENDIF»
+			«IF getAttributes(rule.condition).length > 0 »
+				«FOR attribute : getAttributes(rule.condition)»
+					««« The IF statement below is because we don't want to write anything. Otherwise it would write true/false in the file
+					«IF componentValueNameSet.add(attribute.component.name + componentIDs.get(attribute.name.name + attribute.component.name) + 'Value')»«ENDIF»				
+				«ENDFOR»
 			«ENDIF»
 		«ENDIF»
 	«ENDFOR»
@@ -163,9 +256,12 @@ while (network.available()) {
 		««« Determine which incoming component and set its value
 			«FOR rule : input.allContents.filter(Rule).toIterable»
 				«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
-				«IF rule.condition.left instanceof Attribute»
-					«IF componentValueNameUpdateSet.put(valueOf(rule.condition.left).toString() + componentIDs.get((rule.condition.left as Attribute).name.name + valueOf(rule.condition.left)) + 'Value',componentIDs.get((rule.condition.left as Attribute).name.name + valueOf(rule.condition.left))) === null»«ENDIF»
-				«ENDIF»
+					«IF getAttributes(rule.condition).length > 0 »
+						«FOR attribute : getAttributes(rule.condition)»
+							««« The IF statement below is because we don't want to write anything. Otherwise it would write true/false in the file
+							«IF componentValueNameUpdateSet.put(attribute.component.name + componentIDs.get(attribute.name.name + attribute.component.name) + 'Value', componentIDs.get(attribute.name.name + attribute.component.name)) === null»«ENDIF»				
+						«ENDFOR»
+					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
 			«FOR variable : componentValueNameUpdateSet.entrySet»
@@ -175,16 +271,18 @@ while (network.available()) {
 			«ENDFOR»
 			
 			
+			
+			
 		««« RULES
 		«FOR rule : input.allContents.filter(Rule).toIterable»
 		«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
-				«IF (rule.condition.left instanceof Attribute)»if (id.intval == «componentIDs.get((rule.condition.left as Attribute).name.name + (rule.condition.left as Attribute).component.name)») {«ENDIF»
-					if («valueOf(rule.condition.left)»«IF(rule.condition.left instanceof Attribute)»«componentIDs.get((rule.condition.left as Attribute).name.name + valueOf(rule.condition.left))»«ENDIF»«IF(rule.condition.left instanceof Attribute)»Value «ENDIF» «rule.condition.operator» «valueOf(rule.condition.right)») {
+				«IF getAttributes(rule.condition).length > 0»if («generateAttributeComponentIdConditions(getAttributes(rule.condition))») {«ENDIF»
+					if («generateExpressions(rule.condition.left)» «rule.condition.operator» «generateExpressions(rule.condition.right)») {
 						«FOR myAssignment : rule.body.assignment.filter[it.attribute.name.name == node.name]»
-							digitalWrite(«myAssignment.attribute.component.name»Pin, «valueOf(myAssignment.value)»);
+							«myAssignment.attribute.component.properties.type»Write(«myAssignment.attribute.component.name»Pin, «valueOf(myAssignment.value)»);
 						«ENDFOR»
 					}
-				«IF (rule.condition.left instanceof Attribute)»}«ENDIF»
+				«IF getAttributes(rule.condition).length > 0»}«ENDIF»
 			«ENDIF»
 		«ENDFOR»
 		
@@ -200,28 +298,20 @@ while (network.available()) {
 				
 				FloatByte value;
 				«IF component.properties.map !== null»
-					«IF component.properties.type == "analog"»
-						value.floatval = mapfloat(analogRead(«component.name»Pin), «component.properties.map.in.low», «component.properties.map.in.high», «component.properties.map.out.low», «component.properties.map.out.high»);
-					«ELSE»
-						value.floatval = mapfloat(digitalRead(«component.name»Pin), «component.properties.map.in.low», «component.properties.map.in.high», «component.properties.map.out.low», «component.properties.map.out.high»);
-					«ENDIF»
+					value.floatval = mapfloat(«component.properties.type»Read(«component.name»Pin), «component.properties.map.in.low», «component.properties.map.in.high», «component.properties.map.out.low», «component.properties.map.out.high»);
 				«ELSE»
-					«IF component.properties.type == "analog"»
-						value.floatval = analogRead(«component.name»Pin);
-					«ELSE»
-						value.floatval = digitalRead(«component.name»Pin);
-					«ENDIF»
+					value.floatval = «component.properties.type»Read(«component.name»Pin);
 				«ENDIF»
 				writeBuffer(value, buff);
 				
-				«FOR rule : input.allContents.filter(Rule).filter[(it.condition.left as Attribute)?.component == component].toIterable»
+				«FOR rule : input.allContents.filter(Rule).filter[getAttributes(it.condition).map[it.component].contains(component)].toIterable»
 					«val exist = new HashSet<Node>»
 					«FOR attribute : rule.body.assignment.map[it.attribute].filter[exist.add(it.name)]»
 						forceSend(«nodeIDs.get(attribute.name.name)», buff, sizeof(buff));
 					«ENDFOR»
 				«ENDFOR»
 				
-				«component.name»LastTransfer = millis();	
+				«component.name»LastTransfer = millis();			 	  		 
 			}
 		«ENDFOR»
 	}

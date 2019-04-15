@@ -21,12 +21,12 @@ Factor returns Expression:
     Value ({Factor.left=current} operator=ExpStrongOp right=Value)*
 ;
 
-ExpWeakOp:
-    {Plus} '+' | {Minus} '-'    
+ExpWeakOp returns Operator:
+    operator = ('+' | '-')    
 ;
 
-ExpStrongOp:
-    {Mult} '*' | {Div} '/'
+ExpStrongOp returns Operator:
+    operator = ('*' | '/')
 ;
 
 terminal BOOLEAN_OPERATOR:
@@ -34,7 +34,7 @@ terminal BOOLEAN_OPERATOR:
 ;
 
 Value:
-     NumberLiteral | Attribute | Delta | State
+     NumberLiteral | Attribute | Delta
 ;
 
 Attribute:
@@ -62,7 +62,7 @@ RuleBody:
 ;
 
 Assignment:
-    attribute=Attribute "=" value=Exp
+    attribute=Attribute "=" value=(Exp | State)
 ;
 
 Node:

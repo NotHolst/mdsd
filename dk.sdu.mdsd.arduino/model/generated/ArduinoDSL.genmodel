@@ -20,8 +20,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Condition/right"/>
     </genClasses>
     <genClasses ecoreClass="ArduinoDSL.ecore#//Expression"/>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//ExpWeakOp"/>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//ExpStrongOp"/>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//Operator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//Operator/operator"/>
+    </genClasses>
     <genClasses ecoreClass="ArduinoDSL.ecore#//Value"/>
     <genClasses ecoreClass="ArduinoDSL.ecore#//Attribute">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Attribute/name"/>
@@ -84,9 +85,5 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Factor/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Factor/right"/>
     </genClasses>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Plus"/>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Minus"/>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Mult"/>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Div"/>
   </genPackages>
 </genmodel:GenModel>
