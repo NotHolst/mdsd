@@ -26,12 +26,11 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class ArduinoDSLGenerator extends AbstractGenerator {
-  private final HashMap<String, String> nodeIDs = new HashMap<String, String>();
+  private final HashMap<String, String> nodeRadioIDs = new HashMap<String, String>();
   
   private final HashMap<String, Integer> componentIDs = new HashMap<String, Integer>();
   
@@ -41,9 +40,13 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
   
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    this.nodeRadioIDs.clear();
+    this.componentIDs.clear();
+    this.componentValueNameSet.clear();
+    this.componentValueNameUpdateSet.clear();
     final List<Node> nodes = IteratorExtensions.<Node>toList(Iterators.<Node>filter(input.getAllContents(), Node.class));
     for (int i = 0; (i < nodes.size()); i++) {
-      this.nodeIDs.put(nodes.get(i).getName(), this.createID(i));
+      this.nodeRadioIDs.put(nodes.get(i).getName(), this.createID(i));
     }
     final Procedure1<Node> _function = (Node it) -> {
       it.getComponents().addAll(it.getComponents());
@@ -60,11 +63,11 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
         this.componentIDs.put(_plus, Integer.valueOf(_plusPlus));
       }
     }
-    String _string = this.nodeIDs.toString();
+    String _string = this.nodeRadioIDs.toString();
     String _plus = (_string + "\n");
     String _string_1 = this.componentIDs.toString();
     String _plus_1 = (_plus + _string_1);
-    fsa.generateFile("ids.ino", _plus_1);
+    fsa.generateFile("ids.txt", _plus_1);
     final Procedure1<Node> _function_1 = (Node it) -> {
       this.createFileAndClean(it, input, fsa);
     };
@@ -190,7 +193,7 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
     _builder.append("RF24Network network(radio);");
     _builder.newLine();
     _builder.append("const uint16_t this_node = ");
-    String _get = this.nodeIDs.get(node.getName());
+    String _get = this.nodeRadioIDs.get(node.getName());
     _builder.append(_get);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -672,6 +675,10 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
         _builder.append("\t");
         _builder.append("\t");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("//Send data ");
+        _builder.newLine();
         {
           final Function1<Rule, Boolean> _function_6 = (Rule it) -> {
             Expression _left_12 = it.getCondition().getLeft();
@@ -688,21 +695,54 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
             final HashSet<Node> exist = new HashSet<Node>();
             _builder.newLineIfNotEmpty();
             {
-              final Function1<Assignment, Attribute> _function_7 = (Assignment it) -> {
-                return it.getAttribute();
-              };
-              final Function1<Attribute, Boolean> _function_8 = (Attribute it) -> {
-                return Boolean.valueOf(exist.add(it.getName()));
-              };
-              Iterable<Attribute> _filter_2 = IterableExtensions.<Attribute>filter(ListExtensions.<Assignment, Attribute>map(rule_3.getBody().getAssignment(), _function_7), _function_8);
-              for(final Attribute attribute : _filter_2) {
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("forceSend(");
-                String _get_6 = this.nodeIDs.get(attribute.getName().getName());
-                _builder.append(_get_6, "\t\t");
-                _builder.append(", buff, sizeof(buff));");
-                _builder.newLineIfNotEmpty();
+              EList<Assignment> _assignment = rule_3.getBody().getAssignment();
+              for(final Assignment assignment : _assignment) {
+                {
+                  boolean _add_1 = exist.add(assignment.getAttribute().getName());
+                  if (_add_1) {
+                    {
+                      boolean _equals_4 = assignment.getAttribute().getName().getName().equals(node.getName());
+                      boolean _not = (!_equals_4);
+                      if (_not) {
+                        _builder.append("\t");
+                        _builder.append("\t");
+                        _builder.append("forceSend(");
+                        String _get_6 = this.nodeRadioIDs.get(assignment.getAttribute().getName().getName());
+                        _builder.append(_get_6, "\t\t");
+                        _builder.append(", buff, sizeof(buff));");
+                        _builder.newLineIfNotEmpty();
+                      } else {
+                        {
+                          String _type_2 = assignment.getAttribute().getComponent().getProperties().getType();
+                          boolean _equals_5 = Objects.equal(_type_2, "analog");
+                          if (_equals_5) {
+                            _builder.append("\t");
+                            _builder.append("\t");
+                            _builder.append("analogWrite(");
+                            String _name_19 = assignment.getAttribute().getComponent().getName();
+                            _builder.append(_name_19, "\t\t");
+                            _builder.append("Pin, ");
+                            Object _valueOf_7 = this.valueOf(assignment.getValue());
+                            _builder.append(_valueOf_7, "\t\t");
+                            _builder.append(");");
+                            _builder.newLineIfNotEmpty();
+                          } else {
+                            _builder.append("\t");
+                            _builder.append("\t");
+                            _builder.append("digitalWrite(");
+                            String _name_20 = assignment.getAttribute().getComponent().getName();
+                            _builder.append(_name_20, "\t\t");
+                            _builder.append("Pin, ");
+                            Object _valueOf_8 = this.valueOf(assignment.getValue());
+                            _builder.append(_valueOf_8, "\t\t");
+                            _builder.append(");");
+                            _builder.newLineIfNotEmpty();
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -712,8 +752,8 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("\t");
-        String _name_19 = component_1.getName();
-        _builder.append(_name_19, "\t\t");
+        String _name_21 = component_1.getName();
+        _builder.append(_name_21, "\t\t");
         _builder.append("LastTransfer = millis();\t");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -742,6 +782,7 @@ public class ArduinoDSLGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
     _builder.newLine();
     return _builder;
   }

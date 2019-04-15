@@ -23,7 +23,7 @@ import java.util.HashSet
 
 class ArduinoDSLGenerator extends AbstractGenerator  {
 	
-	val nodeIDs = new HashMap<String, String>();
+	val nodeRadioIDs = new HashMap<String, String>();
 	val componentIDs = new HashMap<String, Integer>();
 	
 	val componentValueNameSet = new HashSet<String>();
@@ -32,9 +32,14 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	
 	
 	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		nodeRadioIDs.clear();
+		componentIDs.clear();
+		componentValueNameSet.clear();
+		componentValueNameUpdateSet.clear();
+		
 		val nodes = input.allContents.filter(Node).toList();
 		for(var i = 0; i < nodes.size(); i++) {
-			nodeIDs.put(nodes.get(i).name,  createID(i));
+			nodeRadioIDs.put(nodes.get(i).name,  createID(i));
 		}
 		
 		input.allContents.filter(Node).forEach[components.addAll(it.components)]
@@ -44,7 +49,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 				componentIDs.put(node.name + node.components.get(i).name, id++);
 			}
 		}
-		fsa.generateFile("ids.ino", nodeIDs.toString + "\n" + componentIDs.toString());
+		fsa.generateFile("ids.txt", nodeRadioIDs.toString + "\n" + componentIDs.toString());
 		input.allContents.filter(Node).forEach[createFileAndClean(it, input, fsa)];
 	}
 	
@@ -109,7 +114,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	//Radio variables
 	RF24 radio(7,8);
 	RF24Network network(radio);
-	const uint16_t this_node = «nodeIDs.get(node.name)»;
+	const uint16_t this_node = «nodeRadioIDs.get(node.name)»;
 	
 	//local outputComponents
 	«FOR component : node.components»
@@ -124,7 +129,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	//Incoming components
 	«FOR rule : input.allContents.filter(Rule).toIterable»
 		«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
-			«IF rule.condition.left instanceof Attribute»
+			«IF rule.condition.left instanceof Attribute» ««« !!!!Nested expression resolver needed!!!!
 				««« The IF statement below is because we don't want to write anything. Otherwise it would write true/false in the file
 				«IF componentValueNameSet.add(valueOf(rule.condition.left).toString() + componentIDs.get((rule.condition.left as Attribute).name.name + valueOf(rule.condition.left)) + 'Value')»«ENDIF»
 			«ENDIF»
@@ -214,10 +219,22 @@ while (network.available()) {
 				«ENDIF»
 				writeBuffer(value, buff);
 				
+				««« !!!!Nested expression resolver needed!!!!
+//Send data 
 				«FOR rule : input.allContents.filter(Rule).filter[(it.condition.left as Attribute)?.component == component].toIterable»
 					«val exist = new HashSet<Node>»
-					«FOR attribute : rule.body.assignment.map[it.attribute].filter[exist.add(it.name)]»
-						forceSend(«nodeIDs.get(attribute.name.name)», buff, sizeof(buff));
+					«FOR assignment : rule.body.assignment» ««« .map[it.attribute].filter[exist.add(it.name)]»
+						«IF exist.add(assignment.attribute.name)»
+							«IF !assignment.attribute.name.name.equals(node.name)»
+								forceSend(«nodeRadioIDs.get(assignment.attribute.name.name)», buff, sizeof(buff));
+							«ELSE»
+								«IF assignment.attribute.component.properties.type == "analog"»
+									analogWrite(«assignment.attribute.component.name»Pin, «valueOf(assignment.value)»);
+								«ELSE»
+									digitalWrite(«assignment.attribute.component.name»Pin, «valueOf(assignment.value)»);
+								«ENDIF»
+							«ENDIF»
+						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»
 				
@@ -233,6 +250,7 @@ while (network.available()) {
 			ok = network.write(header, buff, sizeof(buff));
 		}
 	}
+	
 	'''
 	
 	def valueOf(Object x) {
