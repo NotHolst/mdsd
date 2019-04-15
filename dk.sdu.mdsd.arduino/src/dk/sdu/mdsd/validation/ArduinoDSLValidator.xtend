@@ -3,23 +3,65 @@
  */
 package dk.sdu.mdsd.validation
 
+import org.eclipse.xtext.validation.Check
+import dk.sdu.mdsd.arduinoDSL.Node
+import java.util.HashSet
+import dk.sdu.mdsd.arduinoDSL.ArduinoDSLPackage
+
+import static extension java.lang.Character.*
+import dk.sdu.mdsd.arduinoDSL.ComponentBody
+import org.eclipse.xtext.EcoreUtil2
+import dk.sdu.mdsd.arduinoDSL.Component
 
 /**
  * This class contains custom validation rules. 
- *
+ * 
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class ArduinoDSLValidator extends AbstractArduinoDSLValidator {
-	
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					ArduinoDSLPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
-	
+
+	@Check
+	def void checkPinIsNotUsed(ComponentBody body) {
+
+		val nodeComponents = body.eContainer.eContainer.eContents.toList;
+
+		var analogPins = new HashSet<String>();
+		var digitalPins = new HashSet<String>();
+
+		for (component : nodeComponents) {
+			val type = (component as Component).properties.type;
+			val pin = (component as Component).properties.pin;
+
+			if (type.equals('analog')) {
+				if (analogPins.contains(type + pin)) {
+					error("Pin is already in use", ArduinoDSLPackage.eINSTANCE.componentBody_Pin)
+				} else {
+					analogPins.add(type + pin)
+				}
+			}
+			if (type.equals('digital')) {
+				if (digitalPins.contains(type + pin)) {
+					error("Pin is already in use", ArduinoDSLPackage.eINSTANCE.componentBody_Pin)
+				} else {
+					digitalPins.add(type + pin)
+				}
+			}
+		}
+	}
+
+	@Check
+	def void checkDuplicateComponentNames(Component component) {
+		
+		var componentNames = new HashSet<String>();
+		val nodeComponents = component.eContainer.eContents.toList;
+
+		for (c : nodeComponents) {
+			val name = (c as Component).name;
+			if (componentNames.contains(name)) {
+				error("Name is already used", ArduinoDSLPackage.eINSTANCE.component_Name)
+			} else
+				componentNames.add(name)
+		}
+	}
+
 }

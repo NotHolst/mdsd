@@ -74,7 +74,7 @@ Component:
 ;
 
 ComponentBody:
-    io=IO type=TYPE 'pin' pin=INT map=Map? rate=Rate? smoothing=Smoothing?
+    io=IO type=TYPE 'pin' pin=INT rate=Rate map=Map? smoothing=Smoothing?
 ;
 
 terminal IO:
