@@ -57,8 +57,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//ComponentBody/io"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//ComponentBody/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//ComponentBody/pin"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ComponentBody/map"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ComponentBody/rate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ComponentBody/map"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ComponentBody/smoothing"/>
     </genClasses>
     <genClasses ecoreClass="ArduinoDSL.ecore#//Map">

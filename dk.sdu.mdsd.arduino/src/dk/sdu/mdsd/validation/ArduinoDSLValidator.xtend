@@ -62,5 +62,12 @@ class ArduinoDSLValidator extends AbstractArduinoDSLValidator {
 				componentNames.add(name)
 		}
 	}
+	
+	@Check
+	def void checkRateOnInputComponents(ComponentBody body) {
+		if(body.io == "input" && body.rate === null) {
+			error("Rate is required on input components", ArduinoDSLPackage.eINSTANCE.componentBody_Rate)
+		}
+	}
 
 }

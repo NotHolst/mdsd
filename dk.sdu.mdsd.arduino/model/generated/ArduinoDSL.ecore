@@ -63,8 +63,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="io" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="map" eType="#//Map" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rate" eType="#//Rate" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="map" eType="#//Map" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="smoothing" eType="#//Smoothing"
         containment="true"/>
   </eClassifiers>
