@@ -354,6 +354,9 @@ while (network.available()) {
 			Exp: {
 				return generateExpressions(x)
 			}
+			NumberLiteral: {
+				return generateExpressions(x)
+			}
 		}
 	}
 	
