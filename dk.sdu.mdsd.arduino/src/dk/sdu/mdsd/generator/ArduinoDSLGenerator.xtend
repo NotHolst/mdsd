@@ -129,7 +129,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 		return attributes
 	}
 	
-	def getAttributeRecursive(Object x, ArrayList<Attribute> list){
+	def void getAttributeRecursive(Object x, ArrayList<Attribute> list){
 		switch x {
 			ExpAdd: {
 				getAttributeRecursive(x.left, list)
