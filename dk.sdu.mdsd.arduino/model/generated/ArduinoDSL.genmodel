@@ -19,9 +19,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//Condition/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Condition/right"/>
     </genClasses>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Expression"/>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Operator">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//Operator/operator"/>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//Exp"/>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//ExpParentheses">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpParentheses/sub"/>
     </genClasses>
     <genClasses ecoreClass="ArduinoDSL.ecore#//Value"/>
     <genClasses ecoreClass="ArduinoDSL.ecore#//Attribute">
@@ -75,15 +75,25 @@
     <genClasses ecoreClass="ArduinoDSL.ecore#//Smoothing">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//Smoothing/value"/>
     </genClasses>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Exp">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Exp/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Exp/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Exp/right"/>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//ExpAdd">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpAdd/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpAdd/right"/>
     </genClasses>
-    <genClasses ecoreClass="ArduinoDSL.ecore#//Factor">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Factor/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Factor/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Factor/right"/>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//ExpSub">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpSub/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpSub/right"/>
+    </genClasses>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//ExpMul">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpMul/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpMul/right"/>
+    </genClasses>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//ExpDiv">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpDiv/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpDiv/right"/>
+    </genClasses>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//ExpMod">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpMod/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//ExpMod/right"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -13,21 +13,38 @@ Rule:
 Condition:
     left=Exp operator=BOOLEAN_OPERATOR right=Exp;
 
-Exp returns Expression:
-    Factor ({Exp.left=current} operator=ExpWeakOp right=Factor)*
+Exp: ExpWeakOperator;
+
+ExpWeakOperator returns Exp:
+	ExpStrongOperator
+	(
+		({ExpAdd.left=current}"+"right=ExpStrongOperator)
+		|
+		({ExpSub.left=current}"-"right=ExpStrongOperator)
+	)*
 ;
 
-Factor returns Expression:
-    Value ({Factor.left=current} operator=ExpStrongOp right=Value)*
+ExpStrongOperator returns Exp:
+	ExpGroups
+	(
+		({ExpMul.left=current}"*"right=ExpGroups)
+		|
+		({ExpDiv.left=current}"/"right=ExpGroups)
+		|
+		({ExpMod.left=current}"%"right=ExpGroups)
+	)*
 ;
 
-ExpWeakOp returns Operator:
-    operator = ('+' | '-')    
+ExpGroups returns Exp:
+	Value
+	|
+	ExpParentheses
 ;
 
-ExpStrongOp returns Operator:
-    operator = ('*' | '/')
+ExpParentheses:
+	'(' sub=Exp ')'
 ;
+
 
 terminal BOOLEAN_OPERATOR:
     '<' | '>' | '>=' | '<=' | '==' | '!='

@@ -20,13 +20,16 @@ import dk.sdu.mdsd.arduinoDSL.State
 import dk.sdu.mdsd.arduinoDSL.Delta
 import java.util.Set
 import java.util.HashSet
-import dk.sdu.mdsd.arduinoDSL.Expression
 import dk.sdu.mdsd.arduinoDSL.Exp
-import dk.sdu.mdsd.arduinoDSL.Factor
-import dk.sdu.mdsd.arduinoDSL.Operator
 import dk.sdu.mdsd.arduinoDSL.Condition
 import org.eclipse.emf.ecore.EObject
 import dk.sdu.mdsd.arduinoDSL.Assignment
+import dk.sdu.mdsd.arduinoDSL.ExpAdd
+import dk.sdu.mdsd.arduinoDSL.ExpSub
+import dk.sdu.mdsd.arduinoDSL.ExpMul
+import dk.sdu.mdsd.arduinoDSL.ExpMod
+import dk.sdu.mdsd.arduinoDSL.ExpParentheses
+import dk.sdu.mdsd.arduinoDSL.ExpDiv
 
 class ArduinoDSLGenerator extends AbstractGenerator  {
 	
@@ -60,7 +63,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 		input.allContents.filter(Node).forEach[createFileAndClean(it, input, fsa)];
 	}
 	
-	def String generateExpressions(Expression exp) {
+	def String generateExpressions(Exp exp) {
 		val sb = new StringBuilder()
 		generateExpressionString(exp, sb)
 		return sb.toString();
@@ -68,18 +71,35 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	
 	def void generateExpressionString(Object x, StringBuilder sb){
 		switch x {
-			Exp: {
-				generateExpressionString(x.left, sb)
-				generateExpressionString(x.operator, sb)
-				generateExpressionString(x.right, sb)
+			ExpAdd: {
+				generateExpressionString(x.left, sb);
+				sb.append(' + ');
+				generateExpressionString(x.right, sb);
 			}
-			Factor:{
-				generateExpressionString(x.left,sb )
-				generateExpressionString(x.operator, sb)
-				generateExpressionString(x.right, sb)
+			ExpSub: {
+				generateExpressionString(x.left, sb);
+				sb.append(' - ');
+				generateExpressionString(x.right, sb);
 			}
-			Operator: {
-				 sb.append(" " + x.operator + " ")
+			ExpMul: {
+				generateExpressionString(x.left, sb);
+				sb.append(' * ');
+				generateExpressionString(x.right, sb);
+			}
+			ExpDiv: {
+				generateExpressionString(x.left, sb);
+				sb.append(' / ');
+				generateExpressionString(x.right, sb);
+			}
+			ExpMod: {
+				generateExpressionString(x.left, sb);
+				sb.append(' % ');
+				generateExpressionString(x.right, sb);
+			}
+			ExpParentheses: {
+				sb.append('( ');
+				generateExpressionString(x.sub, sb);
+				sb.append(' )');
 			}
 			NumberLiteral: {
 				if (x.float !== null) {
@@ -111,11 +131,23 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	
 	def getAttributeRecursive(Object x, ArrayList<Attribute> list){
 		switch x {
-			Exp: {
+			ExpAdd: {
 				getAttributeRecursive(x.left, list)
 				getAttributeRecursive(x.right, list)
 			}
-			Factor:{
+			ExpSub: {
+				getAttributeRecursive(x.left, list)
+				getAttributeRecursive(x.right, list)
+			}
+			ExpMul: {
+				getAttributeRecursive(x.left, list)
+				getAttributeRecursive(x.right, list)
+			}
+			ExpDiv: {
+				getAttributeRecursive(x.left, list)
+				getAttributeRecursive(x.right, list)
+			}
+			ExpMod: {
 				getAttributeRecursive(x.left, list)
 				getAttributeRecursive(x.right, list)
 			}
@@ -354,9 +386,9 @@ while (network.available()) {
 			Exp: {
 				return generateExpressions(x)
 			}
-			NumberLiteral: {
-				return generateExpressions(x)
-			}
+//			NumberLiteral: {
+//				return generateExpressions(x)
+//			}
 		}
 	}
 	
