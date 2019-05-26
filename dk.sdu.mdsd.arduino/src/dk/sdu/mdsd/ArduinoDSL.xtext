@@ -9,7 +9,6 @@ Rule:
     type=('when' | 'once') condition=Condition '{' body=RuleBody '}'
 ;
 
-
 Condition:
     left=Exp operator=BOOLEAN_OPERATOR right=Exp;
 
@@ -36,9 +35,7 @@ ExpStrongOperator returns Exp:
 ;
 
 ExpGroups returns Exp:
-	Value
-	|
-	ExpParentheses
+	Value |	ExpParentheses
 ;
 
 ExpParentheses:
@@ -51,12 +48,13 @@ terminal BOOLEAN_OPERATOR:
 ;
 
 Value:
-     NumberLiteral | Attribute | Delta
+     NumberLiteral | Attribute  | Delta
 ;
 
 Attribute:
-    name=[Node]  component=[Component]
+    name=[Node] component=[Component]
 ;
+
 
 Delta:
     attr=Attribute 'delta'
@@ -75,7 +73,13 @@ State:
 ;
 
 RuleBody:
-    assignment+= Assignment+
+	{RuleBody} statements+=Statement*
+;
+
+Statement: Assignment | IfStatement;
+
+IfStatement:
+	'if' '(' condition=Condition ')' '{' statements+=Statement* '}' (=>'else' '{' elseStatements+=Statement* '}')?
 ;
 
 Assignment:
@@ -83,7 +87,13 @@ Assignment:
 ;
 
 Node:
-    name=ID '{' components+=Component+ '}'
+    name=ID '{'
+		components+=Component+
+    '}'
+;
+
+Variable:
+	type=('bool'|'int'|'float') name=ID
 ;
 
 Component:
@@ -101,6 +111,7 @@ terminal IO:
 terminal TYPE:
     'analog' | 'digital'
 ;
+
 
 Map:
     'map' in=Range '=>' out=Range

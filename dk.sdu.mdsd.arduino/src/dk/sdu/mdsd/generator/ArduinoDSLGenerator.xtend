@@ -30,6 +30,7 @@ import dk.sdu.mdsd.arduinoDSL.ExpMul
 import dk.sdu.mdsd.arduinoDSL.ExpMod
 import dk.sdu.mdsd.arduinoDSL.ExpParentheses
 import dk.sdu.mdsd.arduinoDSL.ExpDiv
+import dk.sdu.mdsd.arduinoDSL.IfStatement
 
 class ArduinoDSLGenerator extends AbstractGenerator  {
 	
@@ -252,7 +253,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	
 	//Incoming components
 	«FOR rule : input.allContents.filter(Rule).toIterable»
-		«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
+		«IF rule.body.statements.findFirst[it instanceof Assignment && (it as Assignment).attribute.name.name == node.name] !== null»
 			«IF getAttributes(rule.condition).length > 0 »
 				«FOR attribute : getAttributes(rule.condition)»
 					««« The IF statement below is because we don't want to write anything. Otherwise it would write true/false in the file
@@ -276,7 +277,7 @@ class ArduinoDSLGenerator extends AbstractGenerator  {
 	
 	void loop() {
 		network.update();
-		«IF input.allContents.filter(Rule).toIterable.exists[it.body.assignment.findFirst[it.attribute.name.name == node.name] !== null]»
+		«IF input.allContents.filter(Rule).toIterable.exists[it.body.statements.findFirst[it instanceof Assignment && (it as Assignment).attribute.name.name == node.name] !== null]»
 		
 		««« READ INCOMING RADIO
 while (network.available()) {
@@ -296,7 +297,7 @@ while (network.available()) {
 		    
 		««« Determine which incoming component and set its value
 			«FOR rule : input.allContents.filter(Rule).toIterable»
-				«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
+				«IF rule.body.statements.findFirst[it instanceof Assignment && (it as Assignment).attribute.name.name == node.name] !== null»
 					«IF getAttributes(rule.condition).length > 0 »
 						«FOR attribute : getAttributes(rule.condition)»
 							««« The IF statement below is because we don't want to write anything. Otherwise it would write true/false in the file
@@ -313,12 +314,19 @@ while (network.available()) {
 
 		««« RULES
 		«FOR rule : input.allContents.filter(Rule).toIterable»
-			«IF rule.body.assignment.findFirst[it.attribute.name.name == node.name] !== null»
+			«IF rule.body.statements.findFirst[it instanceof Assignment && (it as Assignment).attribute.name.name == node.name] !== null»
 				«IF getAttributes(rule.condition).length > 0»if («generateAttributeComponentIdConditions(getAttributes(rule.condition))») {«ENDIF»
 					if («generateExpressions(rule.condition.left)» «rule.condition.operator» «generateExpressions(rule.condition.right)») {
-						«FOR myAssignment : rule.body.assignment.filter[it.attribute.name.name == node.name]»
-							«myAssignment.attribute.component.properties.type»Write(«myAssignment.attribute.component.name»Pin, «valueToString(myAssignment)»);
+						«FOR statement : rule.body.statements»
+							«IF statement instanceof Assignment»
+								«generateAssigment(statement)»
+							«ELSEIF statement instanceof IfStatement»
+								«generateNestedIfStatements(statement)»
+							«ENDIF»
 						«ENDFOR»
+«««						«FOR myAssignment : rule.body.statements.filter[it instanceof Assignment && (it as Assignment).attribute.name.name == node.name] as List<Assignment>»
+«««							«myAssignment.attribute.component.properties.type»Write(«myAssignment.attribute.component.name»Pin, «valueToString(myAssignment)»);
+«««						«ENDFOR»
 					}
 				«IF getAttributes(rule.condition).length > 0»}«ENDIF»
 			«ENDIF»
@@ -342,22 +350,24 @@ while (network.available()) {
 				«ENDIF»
 				writeBuffer(value, buff);
 				
-				«val exist = new HashSet<Node>»
-				«FOR rule : input.allContents.filter(Rule).filter[getAttributes(it.condition).map[it.component].contains(component)].toIterable»
-					«FOR assignment : rule.body.assignment» ««« .map[it.attribute].filter[exist.add(it.name)]»
-						«IF exist.add(assignment.attribute.name)»
-							«IF !assignment.attribute.name.name.equals(node.name)»
-								forceSend(«nodeRadioIDs.get(assignment.attribute.name.name)», buff, sizeof(buff));
-							«ELSE»
-								«IF assignment.attribute.component.properties.type == "analog"»
-									analogWrite(«assignment.attribute.component.name»Pin, «valueToString(assignment)»);
-								«ELSE»
-									digitalWrite(«assignment.attribute.component.name»Pin, «valueToString(assignment)»);
-								«ENDIF»
-							«ENDIF»
-						«ENDIF»
-					«ENDFOR»
-				«ENDFOR»
+				
+				TRANSTMIT DATA HERE
+«««				«val exist = new HashSet<Node>»
+«««				«FOR rule : input.allContents.filter(Rule).filter[getAttributes(it.condition).map[it.component].contains(component)].toIterable»
+«««					«FOR assignment : rule.body.statements.filter[it instanceof ]»
+«««						«IF exist.add(assignment.attribute.name)»
+«««							«IF !assignment.attribute.name.name.equals(node.name)»
+«««								forceSend(«nodeRadioIDs.get(assignment.attribute.name.name)», buff, sizeof(buff));
+«««							«ELSE»
+«««								«IF assignment.attribute.component.properties.type == "analog"»
+«««									analogWrite(«assignment.attribute.component.name»Pin, «valueToString(assignment)»);
+«««								«ELSE»
+«««									digitalWrite(«assignment.attribute.component.name»Pin, «valueToString(assignment)»);
+«««								«ENDIF»
+«««							«ENDIF»
+«««						«ENDIF»
+«««					«ENDFOR»
+«««				«ENDFOR»
 				
 				«component.name»LastTransfer = millis();			 	  		 
 			}
@@ -386,10 +396,42 @@ while (network.available()) {
 			Exp: {
 				return generateExpressions(x)
 			}
-//			NumberLiteral: {
-//				return generateExpressions(x)
-//			}
 		}
+	}
+	
+	
+	def String generateAssigment(Assignment asg){
+		return '''«asg.attribute.component.properties.type»Write(«asg.attribute.component.name»Pin, «valueToString(asg)»);'''
+	}
+	
+	def String generateStatement(IfStatement ifStatement){
+		
+	}
+	
+	def String generateNestedIfStatements(IfStatement root){
+		var next = root
+		'''if(test == test)
+{
+			«FOR statement : root.statements»
+				«IF statement instanceof Assignment»
+					«generateAssigment(statement)»
+				«ENDIF»
+				«IF statement instanceof IfStatement»
+					«generateNestedIfStatements(statement)»
+				«ENDIF»
+			«ENDFOR»
+}«IF root.elseStatements.length > 0»
+else
+{
+			«FOR statement : root.elseStatements»
+				«IF statement instanceof Assignment»
+					«generateAssigment(statement)»
+				«ENDIF»
+				«IF statement instanceof IfStatement»
+					«generateNestedIfStatements(statement)»
+				«ENDIF»
+			«ENDFOR»
+}«ENDIF»'''
 	}
 	
 

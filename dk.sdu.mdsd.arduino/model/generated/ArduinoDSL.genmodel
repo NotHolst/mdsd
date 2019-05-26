@@ -39,7 +39,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//State/value"/>
     </genClasses>
     <genClasses ecoreClass="ArduinoDSL.ecore#//RuleBody">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//RuleBody/assignment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//RuleBody/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//Statement"/>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//IfStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//IfStatement/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//IfStatement/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//IfStatement/elseStatements"/>
     </genClasses>
     <genClasses ecoreClass="ArduinoDSL.ecore#//Assignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Assignment/attribute"/>
@@ -48,6 +54,10 @@
     <genClasses ecoreClass="ArduinoDSL.ecore#//Node">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//Node/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ArduinoDSL.ecore#//Node/components"/>
+    </genClasses>
+    <genClasses ecoreClass="ArduinoDSL.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//Variable/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//Variable/name"/>
     </genClasses>
     <genClasses ecoreClass="ArduinoDSL.ecore#//Component">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ArduinoDSL.ecore#//Component/name"/>
